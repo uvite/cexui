@@ -1,108 +1,93 @@
-import { db } from '@/lib/db';
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { compare } from 'bcrypt';
-import NextAuth from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import DiscordProvider from 'next-auth/providers/discord';
-import GitHubProvider from 'next-auth/providers/github';
+import NextAuth, { NextAuthOptions } from "next-auth"
+import GoogleProvider from "next-auth/providers/google"
+import FacebookProvider from "next-auth/providers/facebook"
+import GithubProvider from "next-auth/providers/github"
+import TwitterProvider from "next-auth/providers/twitter"
+import Auth0Provider from "next-auth/providers/auth0"
+import CredentialsProvider from "next-auth/providers/credentials"
 
-import type { NextApiRequest, NextApiResponse } from 'next';
-import type { User } from 'next-auth';
+// import AppleProvider from "next-auth/providers/apple"
+// import EmailProvider from "next-auth/providers/email"
 
-/**
- * For more information on each option (and a full list of options) go to
- * https://next-auth.js.org/configuration/options
- */
-export default async function auth(req: NextApiRequest, res: NextApiResponse) {
-  // Do whatever you want here, before the request is passed down to `NextAuth`
-  return await NextAuth(req, res, {
-    adapter: PrismaAdapter(db),
-    providers: [
-      GitHubProvider({
-        clientId: process.env.GITHUB_ID,
-        clientSecret: process.env.GITHUB_SECRET,
-      }),
-      DiscordProvider({
-        clientId: process.env.DISCORD_CLIENT_ID,
-        clientSecret: process.env.DISCORD_CLIENT_SECRET,
-        authorization: { params: { scope: 'identify email' } },
-      }),
-      CredentialsProvider({
-        name: 'Credentials',
-        credentials: {
-          email: {
-            label: 'Email',
-            type: 'email',
-          },
-          password: {
-            label: 'Password',
-            type: 'password',
-          },
-        },
-        async authorize(credentials, _req) {
-          if (!credentials?.email || !credentials?.password) return null;
-
-          const user = await db.user.findUnique({
-            select: {
-              id: true,
-              role: true,
-              name: true,
-              email: true,
-              image: true,
-              hashedPassword: true,
-            },
-            where: {
-              email: credentials.email,
-            },
-          });
-
-          if (!user?.hashedPassword) return null;
-
-          const passwordCorrect = await compare(credentials.password, user.hashedPassword);
-
-          if (user && passwordCorrect) {
-            /** Any object returned will be saved in `user` property of the JWT */
-            const { hashedPassword, ...userToReturn } = user;
-            return userToReturn as User;
-          } else {
-            /** If you return null then an error will be displayed advising the user to check their details. */
-            return null;
-            /** You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter */
-          }
-        },
-      }),
-    ],
-    session: {
-      strategy: 'jwt',
-    },
-    pages: {
-      signIn: '/auth/signin', // Displays signin buttons
-      // signOut: "/auth/signout", // Displays form with sign out button
-      // error: "/auth/signin", // Error code passed in query string as ?error=
-      // verifyRequest: "/auth/verify-request", // Used for check email page
-      // newUser: null // If set, new users will be directed here on first sign in
-    },
-    callbacks: {
-      // async signIn({ user, account, profile, email, credentials }) { return true },
-      // async redirect({ url, baseUrl }) { return baseUrl },
-      async session({ session, token }) {
-        session.user = {
-          ...session.user,
-          id: token.sub,
-          name: token.name,
-        };
-        return session;
+// For more information on each option (and a full list of options) go to
+// https://next-auth.js.org/configuration/options
+export const authOptions: NextAuthOptions = {
+  // https://next-auth.js.org/configuration/providers/oauth
+  providers: [
+    CredentialsProvider({
+      // The name to display on the sign in form (e.g. "Sign in with...")
+      name: "Credentials",
+      // `credentials` is used to generate a form on the sign in page.
+      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
+      // e.g. domain, username, password, 2FA token, etc.
+      // You can pass any HTML attribute to the <input> tag through the object.
+      credentials: {
+        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        password: { label: "Password", type: "password" }
       },
-      async jwt({ token }) {
-        if (req.url === '/api/auth/session?update') {
-          const { name } = await db.user.findFirstOrThrow({
-            select: { name: true },
-            where: { id: token.sub },
-          });
-          token.name = name;
+      async authorize(credentials, req) {
+        // Add logic here to look up the user from the credentials supplied
+        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" }
+
+        if (user) {
+          // Any object returned will be saved in `user` property of the JWT
+          return user
+        } else {
+          // If you return null then an error will be displayed advising the user to check their details.
+          return null
+
+          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
         }
-        return token;
+      }
+    }),
+    /* EmailProvider({
+         server: process.env.EMAIL_SERVER,
+         from: process.env.EMAIL_FROM,
+       }),
+    // Temporarily removing the Apple provider from the demo site as the
+    // callback URL for it needs updating due to Vercel changing domains
+
+    Providers.Apple({
+      clientId: process.env.APPLE_ID,
+      clientSecret: {
+        appleId: process.env.APPLE_ID,
+        teamId: process.env.APPLE_TEAM_ID,
+        privateKey: process.env.APPLE_PRIVATE_KEY,
+        keyId: process.env.APPLE_KEY_ID,
       },
+    }),
+    */
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_ID,
+      clientSecret: process.env.FACEBOOK_SECRET,
+    }),
+    GithubProvider({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
+    }),
+    TwitterProvider({
+      clientId: process.env.TWITTER_ID,
+      clientSecret: process.env.TWITTER_SECRET,
+    }),
+    Auth0Provider({
+      clientId: process.env.AUTH0_ID,
+      clientSecret: process.env.AUTH0_SECRET,
+      issuer: process.env.AUTH0_ISSUER,
+    }),
+  ],
+  theme: {
+    colorScheme: "light",
+  },
+  callbacks: {
+    async jwt({ token }) {
+      token.userRole = "admin"
+      return token
     },
-  });
+  },
 }
+
+export default NextAuth(authOptions)

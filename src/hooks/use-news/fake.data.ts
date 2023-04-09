@@ -1,0 +1,108 @@
+export const fakeData = [
+  {
+    symbols: [],
+    news: {
+      title: 'ONT: Five Years in the Making: Continuing to Deliver Web3',
+      source: 'Blogs',
+      url: 'https://medium.com/ontologynetwork/five-years-in-the-making-continuing-to-deliver-web3-7a35a4dc24d7',
+      time: 1671104885337,
+      symbols: ['ONT_USDT', 'ONT_BTC'],
+      en: 'ONT: Five Years in the Making: Continuing to Deliver Web3',
+      firstPrice: { ONTUSDT: 0.1848, ONTBTC: 0.00001044 },
+      _id: '1671104885337OFYitMCtDW',
+      tweet: 'https://twitter.com/MadNews_io/status/1603356236765855746',
+      percent1m: { ONTBTC: 0, ONTUSDT: -0.1 },
+    },
+  },
+  {
+    symbols: [],
+    news: {
+      title:
+        'ADA: Cardano builder IOG and University of Edinburgh to create first ever index to provide industry standard metric for crypto decentralization',
+      source: 'Blogs',
+      url: 'https://iohk.io/en/blog/posts/2022/11/18/cardano-builder-iog-and-university-of-edinburgh-to-create-first-ever-index-to-provide-industry-standard-metric-for-crypto-decentralization/',
+      time: 1671103865086,
+      symbols: ['ADA_USDT', 'ADA_BTC'],
+      en: 'ADA: Cardano builder IOG and University of Edinburgh to create first ever index to provide industry standard metric for crypto decentralization',
+      firstPrice: { ADAUSDT: 0.3012, ADABTC: 0.00001703 },
+      _id: '1671103865086ACbIaUoEtcfeitpismfcd',
+      tweet: 'https://twitter.com/MadNews_io/status/1603351957564948482',
+      percent1m: { ADABTC: 0, ADAUSDT: 0 },
+      percent5m: { ADABTC: -0.1, ADAUSDT: 0 },
+    },
+  },
+  {
+    symbols: [],
+    news: {
+      title: 'Binance Futures Is Now Integrated with TradingView',
+      source: 'Binance EN',
+      url: 'https://www.binance.com/en/support/articles/9df2f6e6e7154f4680e0d1b84e1e60be',
+      time: 1671103789918,
+      symbols: [],
+      en: 'Binance Futures Is Now Integrated with TradingView',
+      _id: '1671103789918BFINIwT',
+      tweet: 'https://twitter.com/MadNews_io/status/1603351621261557761',
+      telegramMsgId: 6475,
+    },
+  },
+  {
+    symbols: [],
+    news: {
+      title:
+        'BINANCE.ORG BLOG: BNB Chain Launches Developer Education Initiative with Patika',
+      source: 'Blogs',
+      url: 'https://www.binance.org/en/blog/bnb-chain-launches-developer-education-initiative-with-patika/',
+      time: 1671103782024,
+      symbols: ['BNB_USDT', 'BNB_BTC'],
+      en: 'BINANCE.ORG BLOG: BNB Chain Launches Developer Education Initiative with Patika',
+      firstPrice: { BNBUSDT: 265.1, BNBBTC: 0.014987 },
+      _id: '1671103782024BBBCLDEIwP',
+      tweet: 'https://twitter.com/MadNews_io/status/1603351609219719170',
+      percent1m: { BNBBTC: -0.1, BNBUSDT: 0 },
+      percent5m: { BNBBTC: 0, BNBUSDT: 0.1 },
+    },
+  },
+  {
+    symbols: [],
+    news: {
+      title:
+        'COINTELEGRAPH: AnySwap announces official rebranding as Multichain',
+      source: 'Blogs',
+      url: 'https://cointelegraph.com/press-releases/anyswap-announces-official-rebranding-as-multichain',
+      time: 1671103690682,
+      symbols: [],
+      en: 'COINTELEGRAPH: AnySwap announces official rebranding as Multichain',
+      _id: '1671103690682CAaoraM',
+      tweet: 'https://twitter.com/MadNews_io/status/1603351225998639104',
+    },
+  },
+  {
+    symbols: [],
+    news: {
+      title:
+        'CoinsPaid Introduces Crypto Payments for Mirai Flights, Revenue Increases by 30% - PRN',
+      source: 'Terminal',
+      url: 'https://www.madnews.io/?v=1671103323973',
+      time: 1671103323975,
+      symbols: [],
+      en: 'CoinsPaid Introduces Crypto Payments for Mirai Flights, Revenue Increases by 30% - PRN',
+      _id: '1671103323975CICPfMFRIb3-P',
+    },
+  },
+  {
+    symbols: [],
+    news: {
+      title: 'OM: Introducing MANTRA Governance NFTs',
+      source: 'Blogs',
+      url: 'https://medium.com/mantraomniverse/introducing-mantra-governance-nfts-8695856c5a50',
+      time: 1671102965660,
+      symbols: ['OM_USDT', 'OM_BTC'],
+      en: 'OM: Introducing MANTRA Governance NFTs',
+      firstPrice: { OMUSDT: 0.0333, OMBTC: 0.00000187 },
+      _id: '1671102965660OIMGN',
+      tweet: 'https://twitter.com/MadNews_io/status/1603348185258262532',
+      percent1m: { OMBTC: 0.5, OMUSDT: 0 },
+      percent5m: { OMBTC: 0, OMUSDT: -0.4 },
+    },
+  },
+];

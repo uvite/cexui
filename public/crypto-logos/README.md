@@ -1,0 +1,2 @@
+# crypto-logos
+CryptoLogos is a library of cryptocurrency logos available in different sizes. It is useful when you need to display the logo of a particular cryptocurrency on your website or application. With constant URL and only a change in the cryptocurrency symbol, CryptoLogos provides an easy and convenient way to view the image from the web. This project is designed to save time and improve the user experience by providing high-quality, consistent logos for all major cryptocurrencies in different sizes.
