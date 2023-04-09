@@ -1,0 +1,314 @@
+input AddMemberInput {
+  email: String!
+}
+
+type Board {
+  createdAt: DateTime!
+  id: ID!
+  lists: [List!]!
+  title: String!
+  totalCards: Int!
+  totalLists: Int!
+  updatedAt: DateTime!
+  workspace: Workspace!
+  workspaceId: String!
+}
+
+type Card {
+  comments: [Comment!]!
+  createdAt: DateTime!
+  deadline: DateTime
+  description: String
+  id: ID!
+  list: List!
+  listId: String!
+  tags: [Tag!]!
+  title: String!
+  todos: [Todo!]!
+  updatedAt: DateTime!
+}
+
+type Comment {
+  card: Card!
+  cardId: String
+  comment: String!
+  createdAt: DateTime!
+  id: ID!
+  member: Member!
+  memberId: String
+  updatedAt: DateTime!
+}
+
+input CreateBoardInput {
+  title: String!
+}
+
+input CreateCardInput {
+  title: String!
+}
+
+input CreateListInput {
+  title: String!
+}
+
+input CreateUserInput {
+  email: String!
+  name: String!
+  password: String!
+}
+
+input CreateWorkspaceInput {
+  title: String!
+}
+
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+input EditBoardTitleInput {
+  title: String!
+}
+
+input EditCardDescriptionInput {
+  description: String!
+}
+
+input EditCardTitleInput {
+  title: String!
+}
+
+input EditMeNameInput {
+  name: String!
+}
+
+input EditWorkspaceTitleInput {
+  title: String!
+}
+
+interface Error {
+  message: String!
+}
+
+type Invite {
+  createdAt: DateTime!
+  id: ID!
+  member: Member!
+  memberId: String
+  updatedAt: DateTime!
+  user: User!
+  userId: String
+}
+
+type List {
+  board: Board!
+  boardId: String!
+  cards: [Card!]!
+  createdAt: DateTime!
+  id: ID!
+  title: String!
+  updatedAt: DateTime!
+}
+
+type Member {
+  comments: [Comment!]!
+  createdAt: DateTime!
+  id: ID!
+  invites: [Invite!]!
+  isOwner: Boolean!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+  workspace: Workspace!
+  workspaceId: String!
+}
+
+type Mutation {
+  addMember(input: AddMemberInput!, workspaceId: String!): MutationAddMemberResult!
+  createBoard(input: CreateBoardInput!, workspaceId: String!): MutationCreateBoardResult!
+  createCard(input: CreateCardInput!, listId: String!): MutationCreateCardResult!
+  createList(boardId: String!, input: CreateListInput!): MutationCreateListResult!
+  createUser(input: CreateUserInput!): MutationCreateUserResult!
+  createWorkspace(input: CreateWorkspaceInput!): MutationCreateWorkspaceResult!
+  deleteBoard(boardId: String!): Board!
+  deleteCard(id: String!): MutationDeleteCardResult!
+  deleteList(id: String!): List!
+  deleteMe: User!
+  deleteWorkspace(workspaceId: String!): Workspace!
+  editBoardTitle(boardId: String!, input: EditBoardTitleInput!): MutationEditBoardTitleResult!
+  editCardDescription(cardId: String!, input: EditCardDescriptionInput!): MutationEditCardDescriptionResult!
+  editCardTitle(cardId: String!, input: EditCardTitleInput!): MutationEditCardTitleResult!
+  editMeName(input: EditMeNameInput!): MutationEditMeNameResult!
+  editWorkspaceTitle(input: EditWorkspaceTitleInput!, workspaceId: String!): MutationEditWorkspaceTitleResult!
+  moveCard(destination: String!, id: String!): Card!
+  removeMember(memberId: String!): MutationRemoveMemberResult!
+  renameList(id: String!, input: RenameListInput!): MutationRenameListResult!
+  transferOwnership(memberId: String!): MutationTransferOwnershipResult!
+}
+
+union MutationAddMemberResult = MutationAddMemberSuccess | ZodError
+
+type MutationAddMemberSuccess {
+  data: Member!
+}
+
+union MutationCreateBoardResult = MutationCreateBoardSuccess | ZodError
+
+type MutationCreateBoardSuccess {
+  data: Board!
+}
+
+union MutationCreateCardResult = MutationCreateCardSuccess | ZodError
+
+type MutationCreateCardSuccess {
+  data: Card!
+}
+
+union MutationCreateListResult = MutationCreateListSuccess | ZodError
+
+type MutationCreateListSuccess {
+  data: List!
+}
+
+union MutationCreateUserResult = MutationCreateUserSuccess | ZodError
+
+type MutationCreateUserSuccess {
+  data: User!
+}
+
+union MutationCreateWorkspaceResult = MutationCreateWorkspaceSuccess | ZodError
+
+type MutationCreateWorkspaceSuccess {
+  data: Workspace!
+}
+
+union MutationDeleteCardResult = MutationDeleteCardSuccess | ZodError
+
+type MutationDeleteCardSuccess {
+  data: Card!
+}
+
+union MutationEditBoardTitleResult = MutationEditBoardTitleSuccess | ZodError
+
+type MutationEditBoardTitleSuccess {
+  data: Board!
+}
+
+union MutationEditCardDescriptionResult = MutationEditCardDescriptionSuccess | ZodError
+
+type MutationEditCardDescriptionSuccess {
+  data: Card!
+}
+
+union MutationEditCardTitleResult = MutationEditCardTitleSuccess | ZodError
+
+type MutationEditCardTitleSuccess {
+  data: Card!
+}
+
+union MutationEditMeNameResult = MutationEditMeNameSuccess | ZodError
+
+type MutationEditMeNameSuccess {
+  data: User!
+}
+
+union MutationEditWorkspaceTitleResult = MutationEditWorkspaceTitleSuccess | ZodError
+
+type MutationEditWorkspaceTitleSuccess {
+  data: Workspace!
+}
+
+union MutationRemoveMemberResult = MutationRemoveMemberSuccess | ZodError
+
+type MutationRemoveMemberSuccess {
+  data: Member!
+}
+
+union MutationRenameListResult = MutationRenameListSuccess | ZodError
+
+type MutationRenameListSuccess {
+  data: List!
+}
+
+union MutationTransferOwnershipResult = MutationTransferOwnershipSuccess | ZodError
+
+type MutationTransferOwnershipSuccess {
+  data: Member!
+}
+
+type Query {
+  board(id: String!): Board!
+  card(id: String!): Card!
+  list(id: String!): List!
+  me: User!
+  members(workspaceId: String!): [Member!]!
+  workspace(id: String!): Workspace!
+  workspaces: [Workspace!]
+}
+
+input RenameListInput {
+  title: String!
+}
+
+"""User roles"""
+enum Roles {
+  ADMIN
+  USER
+}
+
+type Tag {
+  card: Card!
+  cardId: String!
+  colorHex: String
+  createdAt: DateTime!
+  id: ID!
+  title: String!
+  updatedAt: DateTime!
+}
+
+type Todo {
+  card: Card!
+  cardId: String!
+  createdAt: DateTime!
+  description: String!
+  done: Boolean!
+  id: ID!
+  updatedAt: DateTime!
+}
+
+type User {
+  createdAt: DateTime!
+  email: String
+  emailVerified: DateTime
+  id: ID!
+  image: String
+  invites: [Invite!]!
+  name: String
+  role: Roles!
+  updatedAt: DateTime!
+  workspaces: [Member!]!
+}
+
+type Workspace {
+  boards: [Board!]!
+  createdAt: DateTime!
+  id: ID!
+  members: [Member!]!
+  title: String!
+  updatedAt: DateTime!
+}
+
+type ZodError implements Error {
+  fieldErrors: [ZodFieldError!]!
+  message: String!
+}
+
+type ZodFieldError {
+  message: String!
+  path: [String!]!
+}

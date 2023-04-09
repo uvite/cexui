@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "prisma.prisma",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "graphql.vscode-graphql",
+    "ms-azuretools.vscode-docker",
+    "redhat.vscode-yaml"
+  ]
+}
