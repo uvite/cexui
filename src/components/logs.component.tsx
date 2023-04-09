@@ -14,12 +14,12 @@ const LogMessageComponent = ({ log }: { log: Log }) => {
   const message = log.message.replace(topic || '', '').trim();
 
   return (
-    <div key={log.id} className="font-mono text-[13px] flex">
+    <div key={log.id} className="flex font-mono text-[13px]">
       <span className="text-dark-text-white/50 shrink-0">
         [{dayjs(log.timestamp).format('hh:mm:ss.SSS A')}]
       </span>
       {topic && (
-        <span className="ml-2 text-dark-text-white/30 shrink-0">
+        <span className="text-dark-text-white/30 ml-2 shrink-0">
           {topic.replace('[', '').replace(']', '')}
         </span>
       )}
@@ -39,8 +39,8 @@ export const LogsComponent = () => {
   const logs = useAtomValue(logsAtom);
 
   return (
-    <GridBlockComponent title={<div className="font-bold">Terminal logs</div>}>
-      <div className="bg-dark-bg/70 w-full h-full p-2">
+    <GridBlockComponent title={<div className="font-bold">日志</div>}>
+      <div className="bg-dark-bg/70 h-full w-full p-2">
         <Virtuoso
           data={logs}
           totalCount={logs.length}

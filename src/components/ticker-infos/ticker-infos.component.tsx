@@ -30,40 +30,33 @@ export const TickerInfosComponent = () => {
 
   if (!market || !ticker) {
     return (
-      <GridBlockComponent title={<div className="font-bold">Ticker infos</div>}>
+      <GridBlockComponent title={<div className="font-bold">信息</div>}>
         <LoadingComponent />
       </GridBlockComponent>
     );
   }
 
   const displayOi = market && ticker && account?.exchange !== Exchange.Binance;
-  const displayLeverage =
-    market && position && ticker && account?.exchange !== Exchange.Woo;
+  const displayLeverage = market && position && ticker && account?.exchange !== Exchange.Woo;
 
   return (
     <GridBlockComponent title={<div className="font-bold">Ticker infos</div>}>
-      <div className="px-2 py-3 h-full select-none">
+      <div className="h-full select-none px-2 py-3">
         <div className="flex items-center">
-          <div className="text-lg font-bold mr-2">
-            {ticker?.symbol.replace(/:.+/, '')}
-          </div>
+          <div className="mr-2 text-lg font-bold">{ticker?.symbol.replace(/:.+/, '')}</div>
           <span
             className="cursor-pointer"
             onClick={ticker ? () => toggleFav(ticker.symbol) : undefined}
           >
-            <AiFillStar
-              color={ticker && isFav(ticker.symbol) ? '#EAB308' : '#777E90'}
-            />
+            <AiFillStar color={ticker && isFav(ticker.symbol) ? '#EAB308' : '#777E90'} />
           </span>
         </div>
-        <table className="table-fixed w-full text-sm">
+        <table className="w-full table-fixed text-sm">
           <tbody>
             {displayOi && (
               <tr>
                 <td className="font-semibold">Open Interest</td>
-                <td className="text-right font-mono">
-                  ${abbreviateNumber(oi)}
-                </td>
+                <td className="text-right font-mono">${abbreviateNumber(oi)}</td>
               </tr>
             )}
             <tr>

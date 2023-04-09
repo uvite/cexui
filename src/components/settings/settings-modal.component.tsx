@@ -83,17 +83,15 @@ export const SettingsModalComponent = () => {
       shouldCloseOnOverlayClick={false}
       onRequestClose={account ? onRequestClose : () => {}}
     >
-      <div className="w-[80vw] max-w-[800px] bg-dark-bg">
-        <div className="border-2 border-dark-bg">
-          <div className="bg-dark-bg-2 border-b border-b-sky-300 py-2 px-3">
-            <span className="font-bold font-mono text-sm">Settings</span>
+      <div className="bg-dark-bg w-[80vw] max-w-[800px]">
+        <div className="border-dark-bg border-2">
+          <div className="bg-dark-bg-2 border-b border-b-sky-300 px-3 py-2">
+            <span className="font-mono text-sm font-bold">Settings</span>
             <span className="mx-2">-</span>
-            <span className="font-bold text-sm text-dark-text-gray">
-              {capitalize(activeTab)}
-            </span>
+            <span className="text-dark-text-gray text-sm font-bold">{capitalize(activeTab)}</span>
           </div>
           <div className="flex">
-            <div className="relative min-w-[150px] border-r border-r-dark-bg-2 px-2 py-3">
+            <div className="border-r-dark-bg-2 relative min-w-[150px] border-r px-2 py-3">
               {displayedTabs.map((tab) => (
                 <div key={tab} className="mb-2 last:mb-0">
                   <ButtonComponent
@@ -107,16 +105,12 @@ export const SettingsModalComponent = () => {
                 </div>
               ))}
               <div className="absolute bottom-2 w-full pr-4">
-                <ButtonComponent
-                  size="small"
-                  className="w-full"
-                  onClick={handleSignOut}
-                >
+                <ButtonComponent size="small" className="w-full" onClick={handleSignOut}>
                   Logout
                 </ButtonComponent>
               </div>
             </div>
-            <div className="flex-1 min-h-[400px] max-h-[calc(100vh/1.5)] overflow-y-auto">
+            <div className="max-h-[calc(100vh/1.5)] min-h-[400px] flex-1 overflow-y-auto">
               {activeTab === 'general' && <GeneralSettingsComponent />}
               {activeTab === 'accounts' && <AccountsComponent />}
               {activeTab === 'shortcuts' && <ShortcutsComponent />}
@@ -126,13 +120,9 @@ export const SettingsModalComponent = () => {
               {activeTab === 'debug' && <DebugComponent />}
             </div>
           </div>
-          <div className="bg-dark-bg-2 border-t border-t-sky-300 py-2 px-3 text-right h-[45px]">
+          <div className="bg-dark-bg-2 h-[45px] border-t border-t-sky-300 px-3 py-2 text-right">
             {account && (
-              <ButtonComponent
-                size="xsmall"
-                className="bg-dark-bg"
-                onClick={onRequestClose}
-              >
+              <ButtonComponent size="xsmall" className="bg-dark-bg" onClick={onRequestClose}>
                 Close
               </ButtonComponent>
             )}

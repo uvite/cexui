@@ -21,9 +21,9 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 const ChartComponent = dynamic(
   () =>
     import(/* webpackChunkName: "chart" */ './chart/chart.component').then(
-      (mod) => mod.ChartComponent
+      (mod) => mod.ChartComponent,
     ),
-  { ssr: false }
+  { ssr: false },
 );
 
 const blocks: Record<AppBlock, React.ComponentType> = {
@@ -49,7 +49,7 @@ export const GridComponent = ({ layouts }: { layouts: Layouts }) => {
       lg: layouts.lg.filter((l) => !hiddenBlocks.includes(l.i as AppBlock)),
       xs: layouts.xs.filter((l) => !hiddenBlocks.includes(l.i as AppBlock)),
     }),
-    [hiddenBlocks, layouts.lg, layouts.xs]
+    [hiddenBlocks, layouts.lg, layouts.xs],
   );
 
   const updateLayouts = useCallback(
@@ -58,22 +58,15 @@ export const GridComponent = ({ layouts }: { layouts: Layouts }) => {
       const xs = [...update.xs];
 
       if (hiddenBlocks.length > 0) {
-        lg.push(
-          ...layouts.lg.filter((l) => hiddenBlocks.includes(l.i as AppBlock))
-        );
-        xs.push(
-          ...layouts.xs.filter((l) => hiddenBlocks.includes(l.i as AppBlock))
-        );
+        lg.push(...layouts.lg.filter((l) => hiddenBlocks.includes(l.i as AppBlock)));
+        xs.push(...layouts.xs.filter((l) => hiddenBlocks.includes(l.i as AppBlock)));
       }
 
       const lgHasChanged = layouts.lg.some((l) => {
         const updated = lg.find((u) => u.i === l.i);
         return (
           updated &&
-          (updated.h !== l.h ||
-            updated.w !== l.w ||
-            updated.x !== l.x ||
-            updated.y !== l.y)
+          (updated.h !== l.h || updated.w !== l.w || updated.x !== l.x || updated.y !== l.y)
         );
       });
 
@@ -81,10 +74,7 @@ export const GridComponent = ({ layouts }: { layouts: Layouts }) => {
         const updated = xs.find((u) => u.i === l.i);
         return (
           updated &&
-          (updated.h !== l.h ||
-            updated.w !== l.w ||
-            updated.x !== l.x ||
-            updated.y !== l.y)
+          (updated.h !== l.h || updated.w !== l.w || updated.x !== l.x || updated.y !== l.y)
         );
       });
 
@@ -93,7 +83,7 @@ export const GridComponent = ({ layouts }: { layouts: Layouts }) => {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [hiddenBlocks, layouts.lg, layouts.xs]
+    [hiddenBlocks, layouts.lg, layouts.xs],
   );
 
   return (

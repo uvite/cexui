@@ -2,11 +2,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import React, { useState } from 'react';
 import { FiDelete } from 'react-icons/fi';
 
-import {
-  accountsAtom,
-  exchangesLogo,
-  removeAccountAtom,
-} from '../../hooks/use-accounts.hooks';
+import { accountsAtom, exchangesLogo, removeAccountAtom } from '../../hooks/use-accounts.hooks';
 import { EventName, useAnalytics } from '../../hooks/use-analytics.hooks';
 import { ButtonComponent } from '../ui/button.component';
 
@@ -30,38 +26,31 @@ export const AccountsComponent = () => {
   }
 
   return (
-    <div className="px-2 py-3 min-h-[300px]">
-      <table className="table-auto w-full">
+    <div className="min-h-[300px] px-2 py-3">
+      <table className="w-full table-auto">
         <thead>
-          <tr className="font-mono text-sm text-dark-text-gray">
-            <th className="text-left pb-4">Exchange</th>
-            <th className="text-left pb-4">Name</th>
+          <tr className="text-dark-text-gray font-mono text-sm">
+            <th className="pb-4 text-left">Exchange</th>
+            <th className="pb-4 text-left">Name</th>
             <th />
             <th />
           </tr>
         </thead>
         <tbody>
           {accounts.map((acc) => (
-            <tr
-              key={acc.name}
-              className="font-mono text-sm font-semibold hover:bg-dark-bg-2"
-            >
+            <tr key={acc.name} className="hover:bg-dark-bg-2 font-mono text-sm font-semibold">
               <td className="py-[10px]">
-                <img
-                  src={exchangesLogo[acc.exchange]}
-                  alt={acc.exchange}
-                  width={40}
-                />
+                <img src={exchangesLogo[acc.exchange]} alt={acc.exchange} width={40} />
               </td>
               <td>{acc.name}</td>
               <td>
                 {acc.testnet && (
-                  <span className="text-dark-text-gray text-xs font-semibold border border-dark-border-gray px-1 py-0.5 rounded-sm">
+                  <span className="text-dark-text-gray border-dark-border-gray rounded-sm border px-1 py-0.5 text-xs font-semibold">
                     testnet
                   </span>
                 )}
               </td>
-              <td className="text-xl text-red-500 cursor-pointer opacity-70 hover:opacity-100 transition-opacity">
+              <td className="cursor-pointer text-xl text-red-500 opacity-70 transition-opacity hover:opacity-100">
                 <FiDelete onClick={() => rm(acc.name)} />
               </td>
             </tr>
@@ -69,11 +58,7 @@ export const AccountsComponent = () => {
         </tbody>
       </table>
       <div className="mt-6">
-        <ButtonComponent
-          size="small"
-          className="w-full"
-          onClick={() => setShowAddAccount(true)}
-        >
+        <ButtonComponent size="small" className="w-full" onClick={() => setShowAddAccount(true)}>
           Add account
         </ButtonComponent>
       </div>

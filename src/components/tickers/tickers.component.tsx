@@ -27,7 +27,7 @@ const columns: Array<{ label: string; key?: keyof Ticker }> = [
 ];
 
 const TableComponent = memo((props) => (
-  <table {...props} className="table-auto w-full text-dark-text-white" />
+  <table {...props} className="text-dark-text-white w-full table-auto" />
 ));
 
 const TableRowComponent = memo(
@@ -37,20 +37,19 @@ const TableRowComponent = memo(
         selectedSymbol: string;
         setSelectedSymbol: (symbol: string) => void;
       };
-    }
+    },
   ) => (
     <tr
       {...props}
       className={cx(
-        'font-mono text-xs font-bold hover:bg-dark-border-gray transition-colors ease-out cursor-pointer',
+        'hover:bg-dark-border-gray cursor-pointer font-mono text-xs font-bold transition-colors ease-out',
         {
-          'bg-dark-border-gray':
-            props.item.symbol === props.context?.selectedSymbol,
-        }
+          'bg-dark-border-gray': props.item.symbol === props.context?.selectedSymbol,
+        },
       )}
       onClick={() => props.context?.setSelectedSymbol?.(props.item.symbol)}
     />
-  )
+  ),
 );
 
 export const TickersComponent = () => {
@@ -63,10 +62,7 @@ export const TickersComponent = () => {
   const [orderByAttr, orderByDirection] = useAtomValue(orderByTickersAtom);
   const orderTickers = useSetAtom(orderTickersFnAtom);
 
-  const handleKeyDown = ({
-    key,
-    currentTarget,
-  }: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = ({ key, currentTarget }: React.KeyboardEvent<HTMLInputElement>) => {
     if (key === 'Enter') {
       const [firstMatch] = displayedTickers;
       if (firstMatch) setSelectedSymbol(firstMatch.symbol);
@@ -79,31 +75,28 @@ export const TickersComponent = () => {
   };
 
   return (
-    <GridBlockComponent
-      newWindow="Tickers"
-      title={<div className="font-bold">Tickers</div>}
-    >
-      <div className="px-2 py-3 h-full overflow-hidden select-none">
-        <div className="mb-2 relative">
+    <GridBlockComponent newWindow="Tickers" title={<div className="font-bold">币种</div>}>
+      <div className="h-full select-none overflow-hidden px-2 py-3">
+        <div className="relative mb-2">
           <input
             id="tickers-search"
             type="text"
             placeholder="Search..."
-            className="w-full bg-dark-bg"
+            className="bg-dark-bg w-full"
             value={filter}
             onChange={({ target }) => setFilter(target.value)}
             onKeyDown={handleKeyDown}
           />
           <span
             className={cx(
-              'absolute cursor-pointer right-2 top-2 opacity-70 hover:opacity-100 transition-opacity',
-              { hidden: !filter }
+              'absolute right-2 top-2 cursor-pointer opacity-70 transition-opacity hover:opacity-100',
+              { hidden: !filter },
             )}
           >
             <TiDelete className="text-lg" onClick={() => setFilter('')} />
           </span>
         </div>
-        <div className="px-1 h-[calc(100%-30px)] overflow-hidden">
+        <div className="h-[calc(100%-30px)] overflow-hidden px-1">
           {!loaded ? (
             <LoadingComponent />
           ) : (
@@ -118,33 +111,23 @@ export const TickersComponent = () => {
                 TableRow: TableRowComponent,
               }}
               fixedHeaderContent={() => (
-                <tr className="font-mono text-xs text-dark-text-gray bg-dark-bg-2">
+                <tr className="text-dark-text-gray bg-dark-bg-2 font-mono text-xs">
                   <th />
                   {columns.map((column, idx) => (
                     <th
                       key={column.label}
-                      className={cx(
-                        idx === 0 ? 'text-left' : 'text-right',
-                        'pb-4 pt-2',
-                        {
-                          'text-dark-text-white/70': orderByAttr === column.key,
-                          'underline underline-offset-4 cursor-pointer decoration-dotted hover:text-dark-text-white':
-                            Boolean(column.key),
-                        }
-                      )}
-                      onClick={() =>
-                        column.key ? orderTickers(column.key) : undefined
-                      }
+                      className={cx(idx === 0 ? 'text-left' : 'text-right', 'pb-4 pt-2', {
+                        'text-dark-text-white/70': orderByAttr === column.key,
+                        'hover:text-dark-text-white cursor-pointer underline decoration-dotted underline-offset-4':
+                          Boolean(column.key),
+                      })}
+                      onClick={() => (column.key ? orderTickers(column.key) : undefined)}
                     >
                       <span className="inline-flex items-center">
                         <span>{column.label}</span>
                         {column.key === orderByAttr && (
                           <span className="ml-3">
-                            {orderByDirection === 'asc' ? (
-                              <RiSortAsc />
-                            ) : (
-                              <RiSortDesc />
-                            )}
+                            {orderByDirection === 'asc' ? <RiSortAsc /> : <RiSortDesc />}
                           </span>
                         )}
                       </span>
@@ -152,9 +135,7 @@ export const TickersComponent = () => {
                   ))}
                 </tr>
               )}
-              itemContent={(_index, ticker) => (
-                <TickerComponent ticker={ticker} />
-              )}
+              itemContent={(_index, ticker) => <TickerComponent ticker={ticker} />}
             />
           )}
         </div>

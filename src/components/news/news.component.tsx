@@ -51,10 +51,7 @@ const UnlockedNewsComponent = () => {
     setSelected(null);
   };
 
-  const handleKeyDown = ({
-    key,
-    currentTarget,
-  }: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = ({ key, currentTarget }: React.KeyboardEvent<HTMLInputElement>) => {
     if (key === 'Escape') {
       setSearch('');
       currentTarget.blur();
@@ -85,28 +82,28 @@ const UnlockedNewsComponent = () => {
 
   if (loaded && !search.trim() && messages.length === 0) {
     return (
-      <div className="w-full text-center animate-pulse mt-8 font-bold text-lg">
+      <div className="mt-8 w-full animate-pulse text-center text-lg font-bold">
         Waiting for news...
       </div>
     );
   }
 
   return (
-    <div className="w-full h-full relative">
-      <div className="p-1 relative">
+    <div className="relative h-full w-full">
+      <div className="relative p-1">
         <input
           id="news-search"
           type="text"
           placeholder="Search..."
-          className="w-full bg-dark-bg"
+          className="bg-dark-bg w-full"
           value={search}
           onKeyDown={handleKeyDown}
           onChange={(e) => setSearch(e.currentTarget.value)}
         />
         <span
           className={cx(
-            'absolute cursor-pointer right-2 top-3 opacity-70 hover:opacity-100 transition-opacity',
-            { hidden: !search }
+            'absolute right-2 top-3 cursor-pointer opacity-70 transition-opacity hover:opacity-100',
+            { hidden: !search },
           )}
         >
           <TiDelete className="text-lg" onClick={() => setSearch('')} />
@@ -115,7 +112,7 @@ const UnlockedNewsComponent = () => {
       {messages.length > 0 && (
         <button
           type="button"
-          className="absolute bottom-3 left-3 z-50 bg-dark-bg w-8 h-8 flex items-center justify-center rounded-full group cursor-pointer shadow-md shadow-dark-bg/70"
+          className="bg-dark-bg shadow-dark-bg/70 group absolute bottom-3 left-3 z-50 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full shadow-md"
           onClick={() => clear()}
         >
           <BiTrash className="text-dark-border-gray-2 group-hover:text-dark-text-white transition-colors" />
@@ -157,17 +154,14 @@ const LockedNewsComponent = () => {
 
   return (
     <>
-      <SubscribeModalComponent
-        isOpen={isOpen}
-        onRequestClose={onRequestClose}
-      />
-      <div className="h-full w-full absolute backdrop-blur-sm z-10" />
-      <div className="h-full w-full absolute flex flex-col items-center justify-center z-20">
+      <SubscribeModalComponent isOpen={isOpen} onRequestClose={onRequestClose} />
+      <div className="absolute z-10 h-full w-full backdrop-blur-sm" />
+      <div className="absolute z-20 flex h-full w-full flex-col items-center justify-center">
         <ButtonComponent
           className="bg-dark-bg flex items-center rounded-md"
           onClick={() => setIsOpen(true)}
         >
-          <FaLock className="text-xl mr-2" />
+          <FaLock className="mr-2 text-xl" />
           <div>UNLOCK NEWS TRADING</div>
         </ButtonComponent>
       </div>
@@ -222,12 +216,7 @@ export const NewsComponent = () => {
 
   return (
     <>
-      <Tooltip
-        anchorId="pro"
-        place="bottom"
-        variant="info"
-        className="z-50 font-bold"
-      />
+      <Tooltip anchorId="pro" place="bottom" variant="info" className="z-50 font-bold" />
       {!disabledSources.includes(NewsSources.NewsmakerPro) && (
         <NewsmakerComponent key={`${currentExchange}_newsmaker`} />
       )}
@@ -238,11 +227,11 @@ export const NewsComponent = () => {
         newWindow="News feed"
         title={
           <div className="flex items-center">
-            <div className="font-bold">News feed</div>
+            <div className="font-bold">新闻</div>
             <div className="ml-auto">
               <div
                 id="pro"
-                className="border-2 border-dark-border-gray-2 px-2 py-0.5 rounded-sm text-xs font-bold"
+                className="border-dark-border-gray-2 rounded-sm border-2 px-2 py-0.5 text-xs font-bold"
                 data-tooltip-content="This feature is free during beta"
               >
                 PRO
@@ -259,15 +248,11 @@ export const NewsComponent = () => {
               element.tagName === 'INPUT' ||
               element.tagName === 'SELECT' ||
               element.tagName === 'TEXTAREA' ||
-              ('contentEditable' in element &&
-                element.contentEditable === 'true')
+              ('contentEditable' in element && element.contentEditable === 'true')
             );
           };
 
-          const bind = (
-            key: string[],
-            callback: (e: Mousetrap.ExtendedKeyboardEvent) => void
-          ) => {
+          const bind = (key: string[], callback: (e: Mousetrap.ExtendedKeyboardEvent) => void) => {
             mousetrap.bind(joinKeys(key), (event) => {
               event.preventDefault();
               callback(event);
@@ -300,7 +285,7 @@ export const NewsComponent = () => {
           setIsOpen(false);
         }}
       >
-        <div className="h-full overflow-scroll no-scrollbar bg-dark-bg/70">
+        <div className="no-scrollbar bg-dark-bg/70 h-full overflow-scroll">
           {loading && <LoadingComponent />}
           {locked && <LockedNewsComponent />}
           {!locked && !loading && <UnlockedNewsComponent />}
