@@ -12,11 +12,7 @@ import type { CandleSeries } from '../../hooks/chart/chart.types';
 import { newsDisplayDotsAtom } from '../../hooks/trade/use-news-trade.hooks';
 import { timeToLocal } from '../../utils/time-local.utils';
 
-export const ChartNewsComponent = ({
-  candleSeries,
-}: {
-  candleSeries?: CandleSeries;
-}) => {
+export const ChartNewsComponent = ({ candleSeries }: { candleSeries?: CandleSeries }) => {
   const news = useAtomValue(selectedSymbolNewsAtom);
   const enabled = useAtomValue(newsDisplayDotsAtom);
 
@@ -28,7 +24,7 @@ export const ChartNewsComponent = ({
       shape: 'circle' as SeriesMarkerShape,
     })),
     ['time'],
-    ['asc']
+    ['asc'],
   );
 
   useEffect(() => {

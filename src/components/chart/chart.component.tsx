@@ -5,10 +5,7 @@ import { AiFillStar } from 'react-icons/ai';
 import { selectedSymbolAtom } from '../../atoms/trade.atoms';
 import { useChart } from '../../hooks/chart/use-chart.hooks';
 import { useFavorites } from '../../hooks/use-favorites.hooks';
-import {
-  selectedTimeframeAtom,
-  timeframes,
-} from '../../hooks/use-timeframe.hooks';
+import { selectedTimeframeAtom, timeframes } from '../../hooks/use-timeframe.hooks';
 import { ButtonComponent } from '../ui/button.component';
 import { GridBlockComponent } from '../ui/grid-block.component';
 
@@ -34,21 +31,18 @@ export const ChartComponent = ({ movable = true }: { movable?: boolean }) => {
       title={
         <div className="flex items-center">
           <div className="flex items-center">
-            <span className="font-bold mr-2">Chart</span>
-            <span
-              className="mr-1 cursor-pointer"
-              onClick={() => toggleFav(symbol)}
-            >
+            <span className="mr-2 font-bold">Chart</span>
+            <span className="mr-1 cursor-pointer" onClick={() => toggleFav(symbol)}>
               <AiFillStar color={isFav(symbol) ? '#EAB308' : '#777E90'} />
             </span>
             <span className="font-mono">{symbol.replace(/:.+/, '')}</span>
           </div>
-          <div className="flex items-center ml-auto">
+          <div className="ml-auto flex items-center">
             {timeframes.map((i) => (
               <ButtonComponent
                 key={i.value}
                 size="small"
-                className="font-mono text-xs mx-[2px] first:ml-0 last:mr-0"
+                className="mx-[2px] font-mono text-xs first:ml-0 last:mr-0"
                 selected={interval === i.value}
                 onClick={() => setInterval(i.value)}
               >
@@ -59,10 +53,10 @@ export const ChartComponent = ({ movable = true }: { movable?: boolean }) => {
         </div>
       }
     >
-      <div className="w-full h-full flex flex-col select-none">
-        <div className="flex-1 w-full h-full overflow-hidden no-scrollbar relative">
+      <div className="flex h-full w-full select-none flex-col">
+        <div className="no-scrollbar relative h-full w-full flex-1 overflow-hidden">
           <ChartOHLCComponent />
-          <div ref={chartContainerRef} className="w-full h-full" />
+          <div ref={chartContainerRef} className="h-full w-full" />
           <ChartPreviewTradeComponent candleSeries={candleSeries} />
           <ChartPositionsComponent candleSeries={candleSeries} />
           <ChartOrdersComponent candleSeries={candleSeries} />

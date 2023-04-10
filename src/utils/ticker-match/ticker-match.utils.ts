@@ -2,10 +2,7 @@ import { uniq } from 'lodash';
 
 import type { News } from '../../hooks/use-news/use-news.types';
 
-import type {
-  TickersWordsCommon,
-  TickersWordsMapping,
-} from './ticker-match.atoms';
+import type { TickersWordsCommon, TickersWordsMapping } from './ticker-match.atoms';
 
 export const tickerRegex = /10+|BUSD$|USDT$/g;
 
@@ -43,9 +40,7 @@ export const matchTickers =
     text = text.toUpperCase();
 
     let words = text
-      .split(
-        / |:|-|\(|\)|,|'|‘|’|#|\.|\$|\?|!|\/|@|\n|\t|»|–|\||\\|\[|\]|>|<|！/gm
-      ) // split message into words
+      .split(/ |:|-|\(|\)|,|'|‘|’|#|\.|\$|\?|!|\/|@|\n|\t|»|–|\||\\|\[|\]|>|<|！/gm) // split message into words
       .filter((w) => w.length > 0 && !/^-?\d+$/.test(w)); // remove empty words and numbers
 
     // check our mapping for matches
@@ -57,12 +52,12 @@ export const matchTickers =
           return match.map(
             (m) =>
               usdtTickers.find((t) => t.replace(tickerRegex, '') === m) ||
-              busdTickers.find((t) => t.replace(tickerRegex, '') === m)
+              busdTickers.find((t) => t.replace(tickerRegex, '') === m),
           );
         }
 
         return match;
-      })
+      }),
     );
 
     // remove common words
@@ -79,8 +74,8 @@ export const matchTickers =
       ...words.flatMap(
         (w) =>
           usdtTickers.find((t) => t.replace(tickerRegex, '') === w) ||
-          busdTickers.find((t) => t.replace(tickerRegex, '') === w)
-      )
+          busdTickers.find((t) => t.replace(tickerRegex, '') === w),
+      ),
     );
 
     // remove duplicates and filter out non-tickers

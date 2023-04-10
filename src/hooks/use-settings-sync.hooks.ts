@@ -25,7 +25,7 @@ export const useSettingsSync = () => {
           settings: data,
         });
       }, 300),
-    [supabase]
+    [supabase],
   );
 
   const updateSettings = () => {

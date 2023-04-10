@@ -103,11 +103,11 @@ export const AccountSummaryComponent = () => {
                   <td className="py-[6px]" />
                 </tr>
                 <tr>
-                  <td className="text-dark-text-gray font-bold">多头资金占用</td>
+                  <td className="text-dark-text-gray font-bold">多头仓位价值</td>
                   <td className="text-right font-mono font-semibold">{longExposureFormatted}</td>
                 </tr>
                 <tr>
-                  <td className="text-dark-text-gray font-bold">空头资金占用</td>
+                  <td className="text-dark-text-gray font-bold">空头仓位价值</td>
                   <td className="text-right font-mono font-semibold">{shortExposureFormatted}</td>
                 </tr>
                 <tr>

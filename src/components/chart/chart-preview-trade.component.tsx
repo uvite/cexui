@@ -23,8 +23,7 @@ const chartPreviewAtom = atom((get) => {
   const selectedTrade = get(selectedTradeAtom);
 
   if (selectedTrade === 'scale_in_size') {
-    const { orders, from, to, stopLoss, takeProfit, size } =
-      get(scaleInSizeAtom);
+    const { orders, from, to, stopLoss, takeProfit, size } = get(scaleInSizeAtom);
 
     if (!(from && to)) return [];
 
@@ -75,9 +74,7 @@ const chartPreviewAtom = atom((get) => {
     const entryPrice = get(tradeEntryOrCurrentPriceAtom);
     const stopLoss = get(tradeStopLossAtom);
 
-    const { orders, totalQty, entryQty, takeProfit } = get(
-      scaledInRiskTradeAtom
-    );
+    const { orders, totalQty, entryQty, takeProfit } = get(scaledInRiskTradeAtom);
 
     const isValid = entryPrice && totalQty && stopLoss;
     if (!isValid) return [];
@@ -221,11 +218,7 @@ const chartPreviewAtom = atom((get) => {
   return [];
 });
 
-export const ChartPreviewTradeComponent = ({
-  candleSeries,
-}: {
-  candleSeries?: CandleSeries;
-}) => {
+export const ChartPreviewTradeComponent = ({ candleSeries }: { candleSeries?: CandleSeries }) => {
   const displayPreview = useAtomValue(displayPreviewTradeAtom);
   const lines = useAtomValue(chartPreviewAtom);
 
@@ -235,11 +228,7 @@ export const ChartPreviewTradeComponent = ({
         lines
           .map((line, idx) => ({ ...line, idx }))
           .map((line) => (
-            <ChartLineComponent
-              key={line.idx}
-              candleSeries={candleSeries}
-              line={line}
-            />
+            <ChartLineComponent key={line.idx} candleSeries={candleSeries} line={line} />
           ))}
     </>
   );

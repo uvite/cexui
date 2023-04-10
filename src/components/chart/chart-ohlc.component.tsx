@@ -2,15 +2,9 @@ import { useAtomValue } from 'jotai';
 import React from 'react';
 
 import { selectedSymbolAtom } from '../../atoms/trade.atoms';
-import {
-  displayHOLCAtom,
-  displayVolumeAtom,
-} from '../../hooks/chart/use-ohlc.hooks';
+import { displayHOLCAtom, displayVolumeAtom } from '../../hooks/chart/use-ohlc.hooks';
 import { selectedAccountAtom } from '../../hooks/use-accounts.hooks';
-import {
-  selectedTimeframeAtom,
-  timeframes,
-} from '../../hooks/use-timeframe.hooks';
+import { selectedTimeframeAtom, timeframes } from '../../hooks/use-timeframe.hooks';
 
 export const ChartOHLCComponent = () => {
   const symbol = useAtomValue(selectedSymbolAtom);
@@ -22,8 +16,8 @@ export const ChartOHLCComponent = () => {
   const account = useAtomValue(selectedAccountAtom);
 
   return (
-    <div className="absolute top-2 left-3 z-10 flex items-end">
-      <div className="text-dark-text-gray font-mono text-xl flex items-end">
+    <div className="absolute left-3 top-2 z-10 flex items-end">
+      <div className="text-dark-text-gray flex items-end font-mono text-xl">
         <span>{account?.exchange?.toUpperCase()}</span>
         <span className="mx-1">·</span>
         <span>{symbol.replace(/:.+/, '')}</span>

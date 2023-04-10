@@ -9,32 +9,21 @@ import { favoriteSymbolsAtom } from './use-favorites.hooks';
 type OrderByTickers = keyof Ticker;
 type OrderDirectionTickers = 'asc' | 'desc';
 
-export const _orderByTickersAtom =
-  atom<`${OrderByTickers}:${OrderDirectionTickers}`>('symbol:asc');
+export const _orderByTickersAtom = atom<`${OrderByTickers}:${OrderDirectionTickers}`>('symbol:asc');
 
 export const orderByTickersAtom = atom(
-  (get) =>
-    get(_orderByTickersAtom).split(':') as [
-      OrderByTickers,
-      OrderDirectionTickers
-    ]
+  (get) => get(_orderByTickersAtom).split(':') as [OrderByTickers, OrderDirectionTickers],
 );
 
-export const orderTickersFnAtom = atom(
-  null,
-  (get, set, orderByAttr: OrderByTickers) => {
-    const [currOrderByAttr, orderDirection] = get(orderByTickersAtom);
+export const orderTickersFnAtom = atom(null, (get, set, orderByAttr: OrderByTickers) => {
+  const [currOrderByAttr, orderDirection] = get(orderByTickersAtom);
 
-    if (currOrderByAttr === orderByAttr) {
-      set(
-        _orderByTickersAtom,
-        `${currOrderByAttr}:${orderDirection === 'asc' ? 'desc' : 'asc'}`
-      );
-    } else {
-      set(_orderByTickersAtom, `${orderByAttr}:asc`);
-    }
+  if (currOrderByAttr === orderByAttr) {
+    set(_orderByTickersAtom, `${currOrderByAttr}:${orderDirection === 'asc' ? 'desc' : 'asc'}`);
+  } else {
+    set(_orderByTickersAtom, `${orderByAttr}:asc`);
   }
-);
+});
 
 export const orderedTickersAtom = atom((get) => {
   const tickers = get(tickersAtom);
@@ -61,17 +50,10 @@ export const displayedTickersAtom = atom((get) => {
   const favorites = get(favoriteSymbolsAtom);
 
   const filtered = tickers.filter((ticker) =>
-    ticker.symbol
-      .replace(/\/.+/, '')
-      .toLowerCase()
-      .includes(filter.toLowerCase())
+    ticker.symbol.replace(/\/.+/, '').toLowerCase().includes(filter.toLowerCase()),
   );
 
-  const ordered = orderBy(
-    filtered,
-    [(ticker) => favorites.includes(ticker.symbol)],
-    ['desc']
-  );
+  const ordered = orderBy(filtered, [(ticker) => favorites.includes(ticker.symbol)], ['desc']);
 
   return ordered;
 });

@@ -92,21 +92,21 @@ export const AddAccountComponent = ({ onBack }: { onBack: () => void }) => {
 
   return (
     <div className="px-2 py-3">
-      <div className="flex items-center justify-center mb-6 font-bold">
+      <div className="mb-6 flex items-center justify-center font-bold">
         {exchanges.map((exchange) => (
           <div
             key={exchange}
             className={cx(
-              'w-1/3 text-center border-b-2 transition-color uppercase py-2 font-mono cursor-pointer hover:bg-dark-bg-2',
+              'transition-color hover:bg-dark-bg-2 w-1/3 cursor-pointer border-b-2 py-2 text-center font-mono uppercase',
               {
                 'border-b-sky-300': exchange === selectedExchange,
                 'border-b-transparent': exchange !== selectedExchange,
-              }
+              },
             )}
             onClick={() => setExchange(exchange)}
           >
             {exchange === Exchange.Woo ? (
-              <span className="text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#40ff80] to-[#39e6d7]">
+              <span className="bg-gradient-to-r from-[#40ff80] to-[#39e6d7] bg-clip-text text-2xl text-transparent">
                 WOO X
               </span>
             ) : (
@@ -115,30 +115,27 @@ export const AddAccountComponent = ({ onBack }: { onBack: () => void }) => {
           </div>
         ))}
       </div>
-      <div className="w-1/3 mx-auto mb-6">
+      <div className="mx-auto mb-6 w-1/3">
         <div className="h-[50px]">
           <img
-            className="h-full w-auto mx-auto"
+            className="mx-auto h-full w-auto"
             src={exchangesLogo[selectedExchange]}
             alt={selectedExchange}
           />
         </div>
       </div>
-      <div className="text-center mb-5">
+      <div className="mb-5 text-center">
         <a
-          className="p-2 rounded-md border-dark-blue bg-dark-blue/30 border-2 text-sm font-bold inline-flex items-center underline underline-offset-4"
+          className="border-dark-blue bg-dark-blue/30 inline-flex items-center rounded-md border-2 p-2 text-sm font-bold underline underline-offset-4"
           href={exchangesRef[selectedExchange].help}
           target="_blank"
           rel="noreferrer"
         >
-          <BiInfoCircle className="text-2xl mr-2" /> How to get your API keys
+          <BiInfoCircle className="mr-2 text-2xl" /> How to get your API keys
         </a>
       </div>
-      <form
-        className="w-1/2 mx-auto font-mono"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <div className="w-full text-sm mb-2">
+      <form className="mx-auto w-1/2 font-mono" onSubmit={handleSubmit(onSubmit)}>
+        <div className="mb-2 w-full text-sm">
           <input
             type="text"
             placeholder="Account name (e.g. Main)"
@@ -146,14 +143,12 @@ export const AddAccountComponent = ({ onBack }: { onBack: () => void }) => {
             {...register('name', {
               required: 'Name is missing',
               validate: (v) =>
-                accounts.find((a) => a.name === v)
-                  ? 'Account name already exists'
-                  : true,
+                accounts.find((a) => a.name === v) ? 'Account name already exists' : true,
             })}
           />
         </div>
         {selectedExchange === Exchange.Woo && (
-          <div className="w-full text-sm mb-2">
+          <div className="mb-2 w-full text-sm">
             <input
               type="text"
               placeholder="Application ID (Exchange)"
@@ -170,7 +165,7 @@ export const AddAccountComponent = ({ onBack }: { onBack: () => void }) => {
             />
           </div>
         )}
-        <div className="w-full text-sm mb-2">
+        <div className="mb-2 w-full text-sm">
           <input
             type="text"
             placeholder="API Key (Exchange)"
@@ -178,13 +173,11 @@ export const AddAccountComponent = ({ onBack }: { onBack: () => void }) => {
             {...register('key', {
               required: 'Key is missing',
               validate: (v) =>
-                accounts.find((a) => a.key === v)
-                  ? 'Account key already exists'
-                  : true,
+                accounts.find((a) => a.key === v) ? 'Account key already exists' : true,
             })}
           />
         </div>
-        <div className="w-full text-sm mb-4">
+        <div className="mb-4 w-full text-sm">
           <input
             type="password"
             placeholder="Secret (Exchange)"
@@ -192,10 +185,8 @@ export const AddAccountComponent = ({ onBack }: { onBack: () => void }) => {
             {...register('secret', { required: 'Secret is missing' })}
           />
         </div>
-        <div className="w-full text-sm flex justify-center items-center">
-          <div className="mx-2 uppercase font-bold text-dark-border-gray-2 mb-[2px]">
-            Testnet
-          </div>
+        <div className="flex w-full items-center justify-center text-sm">
+          <div className="text-dark-border-gray-2 mx-2 mb-[2px] font-bold uppercase">Testnet</div>
           <div className="mx-2">
             <Controller
               name="testnet"
@@ -212,7 +203,7 @@ export const AddAccountComponent = ({ onBack }: { onBack: () => void }) => {
           </div>
         </div>
         {Object.keys(errors).length > 0 && (
-          <div className="text-red-500 font-medium text-xs mt-2">
+          <div className="mt-2 text-xs font-medium text-red-500">
             {Object.entries(errors).map(([, error]) => (
               <div key={error.message as string} className="flex items-start">
                 <span className="mr-2">
@@ -223,37 +214,27 @@ export const AddAccountComponent = ({ onBack }: { onBack: () => void }) => {
             ))}
           </div>
         )}
-        <div className="text-center mt-6 flex items-center justify-center">
+        <div className="mt-6 flex items-center justify-center text-center">
           {accounts.length > 0 && (
-            <ButtonComponent
-              size="small"
-              className="uppercase mx-2"
-              onClick={() => onBack()}
-            >
+            <ButtonComponent size="small" className="mx-2 uppercase" onClick={() => onBack()}>
               Back
             </ButtonComponent>
           )}
-          <ButtonComponent
-            size="small"
-            type="submit"
-            className="uppercase mx-2"
-          >
+          <ButtonComponent size="small" type="submit" className="mx-2 uppercase">
             Connect
           </ButtonComponent>
         </div>
         <div className="mt-6 text-center">
           <a
-            className="text-sm font-semibold border-b border-dotted"
+            className="border-b border-dotted text-sm font-semibold"
             href={exchangesRef[selectedExchange].link}
             target="_blank"
             rel="noreferrer"
           >
             Create an account on{' '}
-            <span className="capitalize">
-              {exchangesLabel[selectedExchange]}
-            </span>
+            <span className="capitalize">{exchangesLabel[selectedExchange]}</span>
           </a>
-          <div className="text-xs text-dark-text-gray mt-2">
+          <div className="text-dark-text-gray mt-2 text-xs">
             ({exchangesRef[selectedExchange].label})
           </div>
         </div>

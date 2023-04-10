@@ -58,9 +58,8 @@ export const ScaleRiskTradeComponent = () => {
   const entryOrCurrentPrice = entryTouched ? entry : currPrice;
 
   const scaleIn = useScaledInRiskTrade();
-  const { totalQty, entryQty, scaledInQty, avgPrice, riskInUSD } = useAtomValue(
-    scaledInRiskTradeAtom
-  );
+  const { totalQty, entryQty, scaledInQty, avgPrice, riskInUSD } =
+    useAtomValue(scaledInRiskTradeAtom);
 
   const placeOrder = async () => {
     setLoading(true);
@@ -87,34 +86,28 @@ export const ScaleRiskTradeComponent = () => {
   }, [selectedSymbol]);
 
   return (
-    <div className="px-2 py-3 text-sm h-full">
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">Risk</div>
-        <div className="flex flex-1 w-3/4">
+    <div className="h-full px-2 py-3 text-sm">
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Risk</div>
+        <div className="flex w-3/4 flex-1">
           <Range
             step={0.25}
             min={0.25}
             max={maxRisk}
             values={[risk]}
             renderTrack={({ props, children }) => (
-              <div
-                {...props}
-                className="bg-dark-border-gray-2 w-full h-[3px] rounded-lg"
-              >
+              <div {...props} className="bg-dark-border-gray-2 h-[3px] w-full rounded-lg">
                 {children}
               </div>
             )}
             renderThumb={({ props }) => (
-              <div
-                {...props}
-                className="bg-dark-border-gray-2 w-4 h-4 rounded-full"
-              />
+              <div {...props} className="bg-dark-border-gray-2 h-4 w-4 rounded-full" />
             )}
             onChange={(values) => setRisk(values[0])}
           />
         </div>
         <div
-          className={cx('ml-4 w-[70px] font-mono text-xs text-center', {
+          className={cx('ml-4 w-[70px] text-center font-mono text-xs', {
             'text-dark-green': risk < 5,
             'text-orange-500': risk >= 5 && risk < 20,
             'text-red-500': risk >= 20,
@@ -123,17 +116,16 @@ export const ScaleRiskTradeComponent = () => {
           ({risk.toFixed(2)}%)
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">Entry</div>
-        <div className="flex items-center flex-1 w-3/4">
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Entry</div>
+        <div className="flex w-3/4 flex-1 items-center">
           <div className="flex-1">
             <input
               type="text"
               value={entryOrCurrentPrice?.toString() || ''}
-              className={cx(
-                'text-right w-full bg-dark-bg font-semibold font-mono',
-                { 'border-blue-500': lastTouched === 'from' }
-              )}
+              className={cx('bg-dark-bg w-full text-right font-mono font-semibold', {
+                'border-blue-500': lastTouched === 'from',
+              })}
               onChange={({ target }) => {
                 setEntry(target.value);
               }}
@@ -147,11 +139,11 @@ export const ScaleRiskTradeComponent = () => {
             <button
               type="button"
               className={cx(
-                'flex items-center justify-center font-bold border-2 rounded-md text-xs px-2 h-[32px] bg-slate-500/50 border-slate-500',
+                'flex h-[32px] items-center justify-center rounded-md border-2 border-slate-500 bg-slate-500/50 px-2 text-xs font-bold',
                 {
-                  'opacity-30 cursor-not-allowed': !entryTouched,
+                  'cursor-not-allowed opacity-30': !entryTouched,
                   'cursor-pointer': entryTouched,
-                }
+                },
               )}
               onClick={() => {
                 setEntryTouched(false);
@@ -163,42 +155,40 @@ export const ScaleRiskTradeComponent = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">SL</div>
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">SL</div>
         <div className="w-3/4">
           <input
             type="text"
             value={stop}
-            className={cx(
-              'text-right w-full bg-dark-bg font-semibold font-mono',
-              { 'border-blue-500': lastTouched === 'to' }
-            )}
+            className={cx('bg-dark-bg w-full text-right font-mono font-semibold', {
+              'border-blue-500': lastTouched === 'to',
+            })}
             required={true}
             onChange={({ target }) => setStop(target.value)}
             onFocus={() => setLastTouched(LastTouchedInput.To)}
           />
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">TP</div>
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">TP</div>
         <div className="w-3/4">
           <input
             type="text"
             value={takeProfit}
-            className={cx(
-              'text-right w-full bg-dark-bg font-semibold font-mono',
-              { 'border-blue-500': lastTouched === 'takeProfit' }
-            )}
+            className={cx('bg-dark-bg w-full text-right font-mono font-semibold', {
+              'border-blue-500': lastTouched === 'takeProfit',
+            })}
             required={true}
             onChange={({ target }) => setTakeProfit(target.value)}
             onFocus={() => setLastTouched(LastTouchedInput.TakeProfit)}
           />
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">Side</div>
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Side</div>
         <div className="flex w-3/4">
-          <div className="w-1/2 mr-1">
+          <div className="mr-1 w-1/2">
             <OrderSideButton
               className="w-full"
               side={OrderSide.Buy}
@@ -206,7 +196,7 @@ export const ScaleRiskTradeComponent = () => {
               onClick={() => setSide(OrderSide.Buy)}
             />
           </div>
-          <div className="w-1/2 ml-1">
+          <div className="ml-1 w-1/2">
             <OrderSideButton
               className="w-full"
               side={OrderSide.Sell}
@@ -216,96 +206,78 @@ export const ScaleRiskTradeComponent = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">Scale ratio</div>
-        <div className="flex flex-1 w-3/4">
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Scale ratio</div>
+        <div className="flex w-3/4 flex-1">
           <Range
             step={0.01}
             min={0}
             max={1}
             values={[quantityScaled]}
             renderTrack={({ props, children }) => (
-              <div
-                {...props}
-                className="bg-dark-border-gray-2 w-full h-[3px] rounded-lg"
-              >
+              <div {...props} className="bg-dark-border-gray-2 h-[3px] w-full rounded-lg">
                 {children}
               </div>
             )}
             renderThumb={({ props }) => (
-              <div
-                {...props}
-                className="bg-dark-border-gray-2 w-4 h-4 rounded-full"
-              />
+              <div {...props} className="bg-dark-border-gray-2 h-4 w-4 rounded-full" />
             )}
             onChange={(values) => setQuantityScaled(values[0])}
           />
         </div>
-        <div className="ml-4 w-[60px] font-mono text-xs text-dark-text-gray text-center border border-dark-border-gray">
+        <div className="text-dark-text-gray border-dark-border-gray ml-4 w-[60px] border text-center font-mono text-xs">
           {Math.round(quantityScaled * 100)}%
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">Distribution</div>
-        <div className="flex flex-1 w-3/4">
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Distribution</div>
+        <div className="flex w-3/4 flex-1">
           <Range
             step={0.05}
             min={1}
             max={3}
             values={[priceScale]}
             renderTrack={({ props, children }) => (
-              <div
-                {...props}
-                className="bg-dark-border-gray-2 w-full h-[3px] rounded-lg"
-              >
+              <div {...props} className="bg-dark-border-gray-2 h-[3px] w-full rounded-lg">
                 {children}
               </div>
             )}
             renderThumb={({ props }) => (
-              <div
-                {...props}
-                className="bg-dark-border-gray-2 w-4 h-4 rounded-full"
-              />
+              <div {...props} className="bg-dark-border-gray-2 h-4 w-4 rounded-full" />
             )}
             onChange={(values) => setPriceScale(values[0])}
           />
         </div>
-        <div className="ml-4 w-[60px] font-mono text-xs text-dark-text-gray text-center border border-dark-border-gray">
+        <div className="text-dark-text-gray border-dark-border-gray ml-4 w-[60px] border text-center font-mono text-xs">
           {easeRatioToPercent(priceScale)}
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">Orders Count</div>
-        <div className="flex flex-1 w-3/4">
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Orders Count</div>
+        <div className="flex w-3/4 flex-1">
           <Range
             step={1}
             min={2}
             max={35}
             values={[nbOrders]}
             renderTrack={({ props, children }) => (
-              <div
-                {...props}
-                className="bg-dark-border-gray-2 w-full h-[3px] rounded-lg"
-              >
+              <div {...props} className="bg-dark-border-gray-2 h-[3px] w-full rounded-lg">
                 {children}
               </div>
             )}
             renderThumb={({ props }) => (
-              <div
-                {...props}
-                className="bg-dark-border-gray-2 w-4 h-4 rounded-full"
-              />
+              <div {...props} className="bg-dark-border-gray-2 h-4 w-4 rounded-full" />
             )}
             onChange={(values) => setNbOrders(values[0])}
           />
         </div>
-        <div className="ml-4 w-[60px] font-mono text-xs text-dark-text-gray text-center border border-dark-border-gray">
+        <div className="text-dark-text-gray border-dark-border-gray ml-4 w-[60px] border text-center font-mono text-xs">
           {nbOrders}
         </div>
       </div>
-      <div className="flex items-center my-6">
-        <div className="mr-4 text-right font-bold w-1/4" />
-        <div className="flex-1 w-3/4 pr-1 text-dark-text-gray">
+      <div className="my-6 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold" />
+        <div className="text-dark-text-gray w-3/4 flex-1 pr-1">
           <div className="flex items-center">
             <div className="font-semibold">Entry size</div>
             <div className="ml-auto font-mono text-xs">
@@ -313,8 +285,7 @@ export const ScaleRiskTradeComponent = () => {
                 <>****</>
               ) : (
                 <>
-                  {entryQty ? entryQty : 0} (
-                  {toUSD(entryQty * pFloat(entryOrCurrentPrice))})
+                  {entryQty ? entryQty : 0} ({toUSD(entryQty * pFloat(entryOrCurrentPrice))})
                 </>
               )}
             </div>
@@ -326,8 +297,7 @@ export const ScaleRiskTradeComponent = () => {
                 <>****</>
               ) : (
                 <>
-                  {scaledInQty ? scaledInQty : 0} (
-                  {toUSD(scaledInQty * pFloat(avgPrice))})
+                  {scaledInQty ? scaledInQty : 0} ({toUSD(scaledInQty * pFloat(avgPrice))})
                 </>
               )}
             </div>
@@ -344,7 +314,7 @@ export const ScaleRiskTradeComponent = () => {
               )}
             </div>
           </div>
-          <div className="flex items-center mt-1">
+          <div className="mt-1 flex items-center">
             <div className="font-semibold">Avg price</div>
             <div className="ml-auto font-mono text-xs">
               {formatCurrency(avgPrice ? avgPrice : 0, 'usd')}
@@ -353,16 +323,14 @@ export const ScaleRiskTradeComponent = () => {
           <div className="flex items-center">
             <div className="font-semibold">Est. loss</div>
             <div className="ml-auto font-mono text-xs">
-              {privacy
-                ? `${risk.toFixed(2)}%`
-                : formatCurrency(riskInUSD, 'usd')}
+              {privacy ? `${risk.toFixed(2)}%` : formatCurrency(riskInUSD, 'usd')}
             </div>
           </div>
         </div>
       </div>
-      <div className="flex mt-3 w-full">
+      <div className="mt-3 flex w-full">
         <ButtonComponent
-          className="w-full bg-dark-bg flex items-center justify-center uppercase rounded-md"
+          className="bg-dark-bg flex w-full items-center justify-center rounded-md uppercase"
           size="small"
           disabled={!totalQty}
           loading={loading}
@@ -370,7 +338,7 @@ export const ScaleRiskTradeComponent = () => {
         >
           {side}
           {totalQty > 0 && !privacy && (
-            <span className="font-mono text-xs ml-2">
+            <span className="ml-2 font-mono text-xs">
               ({totalQty} {selectedSymbol?.replace(/\/.+/, '')})
             </span>
           )}

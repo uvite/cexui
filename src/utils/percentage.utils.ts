@@ -24,9 +24,7 @@ export function formatPercentage(percent: number) {
   if (_percent > 10e8) return '100%';
 
   _percent =
-    _percent < 0.01
-      ? Math.round(_percent * 10e2) / 10e2
-      : Math.round(_percent * 100) / 100;
+    _percent < 0.01 ? Math.round(_percent * 10e2) / 10e2 : Math.round(_percent * 100) / 100;
 
   let _formatted = `${abbreviateNumber(_percent)}`;
   _formatted = `${_percent.toFixed(2)}%`;

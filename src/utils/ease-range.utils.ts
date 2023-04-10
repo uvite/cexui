@@ -21,8 +21,7 @@ export const easeRange = (range: number[], easeRatio: number) => {
   const max = easeRatio > 2 ? 3 : 1;
 
   const ratio = ((easeRatio - min) * (3 - 1)) / (max - min) + 1;
-  const ease =
-    easeRatio > 2 ? easePolyOut.exponent(ratio) : easePolyIn.exponent(ratio);
+  const ease = easeRatio > 2 ? easePolyOut.exponent(ratio) : easePolyIn.exponent(ratio);
 
   const rMin = Math.min(...range);
   const rMax = Math.max(...range);

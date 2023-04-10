@@ -27,9 +27,9 @@ export const ButtonComponent = ({
       // eslint-disable-next-line react/button-has-type
       type={type}
       className={cx(
-        'font-bold group outline-none border-2 border-dark-border-gray transition-colors duration-300 ease-in-out',
+        'border-dark-border-gray group border-2 font-bold outline-none transition-colors duration-300 ease-in-out',
         'hover:border-dark-blue hover:bg-dark-blue hover:cursor-pointer',
-        'disabled:opacity-80 disabled:cursor-not-allowed disabled:hover:border-dark-border-gray disabled:hover:bg-transparent',
+        'disabled:hover:border-dark-border-gray disabled:cursor-not-allowed disabled:opacity-80 disabled:hover:bg-transparent',
         {
           'px-3 py-2': size === 'base',
           'px-2 py-1 text-sm': size === 'small',
@@ -37,18 +37,13 @@ export const ButtonComponent = ({
           'animate-pulse': loading,
           'border-dark-blue bg-dark-blue': selected,
         },
-        className
+        className,
       )}
       disabled={loading || disabled}
       onClick={onClick}
     >
       {type === 'submit' ? (
-        <div
-          className={cx(
-            'flex items-center',
-            size === 'small' ? 'px-2' : 'px-3'
-          )}
-        >
+        <div className={cx('flex items-center', size === 'small' ? 'px-2' : 'px-3')}>
           {loading ? (
             <>
               <CgSpinnerTwoAlt className="animate-spin-slow mr-2" />
@@ -58,8 +53,8 @@ export const ButtonComponent = ({
             <>
               <AiOutlineDoubleRight
                 className={cx(
-                  'mr-2 group-hover:translate-x-[2px] transition-transform duration-300 ease-in-out will-change-transform',
-                  size === 'small' ? 'text-base' : 'text-lg'
+                  'mr-2 transition-transform duration-300 ease-in-out will-change-transform group-hover:translate-x-[2px]',
+                  size === 'small' ? 'text-base' : 'text-lg',
                 )}
               />
               <div>{children}</div>
@@ -87,10 +82,10 @@ export const ActionButtonComponent = ({
   return (
     <button
       className={cx(
-        'border-2 px-3 py-1 font-bold text-xs opacity-70 transition-opacity',
+        'border-2 px-3 py-1 text-xs font-bold opacity-70 transition-opacity',
         { 'cursor-not-allowed': disabled },
         { 'hover:opacity-100': !disabled },
-        className
+        className,
       )}
       type="button"
       disabled={disabled}
@@ -116,10 +111,10 @@ export const SmallActionButtonComponent = ({
     <button
       type="button"
       className={cx(
-        'border-2 px-2 py-[1px] font-semibold text-[11px] ml-auto opacity-70 transition-opacity',
+        'ml-auto border-2 px-2 py-[1px] text-[11px] font-semibold opacity-70 transition-opacity',
         { 'cursor-not-allowed': disabled },
         { 'hover:opacity-100': !disabled },
-        className
+        className,
       )}
       disabled={disabled}
       onClick={onClick}

@@ -13,10 +13,7 @@ const getServiceWorker = (register: ServiceWorkerRegistration) => {
   return register.installing || register.waiting || register.active;
 };
 
-const subscribePush = async (
-  register: ServiceWorkerRegistration,
-  userId: string
-) => {
+const subscribePush = async (register: ServiceWorkerRegistration, userId: string) => {
   try {
     const subscription = await register.pushManager.subscribe({
       userVisibleOnly: true,
@@ -36,15 +33,15 @@ const subscribePush = async (
     ) {
       errorToast(
         <div className="w-full px-1">
-          For Brave push notifications, you need to enable "Use Google services
-          for push messaging" in Brave privacy settings.
+          For Brave push notifications, you need to enable in Brave privacy settings.
         </div>,
-        { autoClose: false, type: 'warning' }
+        { autoClose: false, type: 'warning' },
       );
     }
 
     // only show error if it's not permission denied
     if (!err?.message?.includes('denied')) {
+      //alert(err.message);
       errorToast(err.message);
     }
   }
@@ -72,9 +69,9 @@ export const usePushNotifications = () => {
   };
 
   useEffect(() => {
-    if (!requested.current && session?.user?.id) {
+    if (!requested.current && session?.user?.name) {
       requested.current = true;
-      subscribe(session.user.id);
+      subscribe(session.user.name);
     }
   }, [session]);
 };

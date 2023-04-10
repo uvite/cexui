@@ -39,9 +39,9 @@ export const NavbarClockComponent = () => {
 
   return (
     <div className="ml-2">
-      <span className="border-2 border-dark-border-gray rounded-md px-2 py-2">
+      <span className="border-dark-border-gray rounded-md border-2 px-2 py-2">
         <span
-          className="font-mono text-sm font-bold cursor-pointer select-none"
+          className="cursor-pointer select-none font-mono text-sm font-bold"
           onClick={toggleUTC}
         >
           {displayed?.format('hh:mm:ss.SSS A')}{' '}

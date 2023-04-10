@@ -8,8 +8,8 @@ export const useServerTime = () => {
   const { data } = useSWR(
     'serverTime',
     async () => {
-      const { time: server } = await fetch('https://worldtimeapi.org/api/timezone/etc/utc').then((res) =>
-        res.json()
+      const { time: server } = await fetch('https://worldtimeapi.org/api/timezone/etc/utc').then(
+        (res) => res.json(),
       );
 
       return {
@@ -17,7 +17,7 @@ export const useServerTime = () => {
         client: dayjs().utc(),
       };
     },
-    { refreshInterval: 5000 }
+    { refreshInterval: 5000 },
   );
 
   return data;

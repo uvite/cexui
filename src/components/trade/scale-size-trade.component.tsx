@@ -67,16 +67,11 @@ export const ScaleSizeTradeComponent = () => {
   const fromOrCurrentyPrice = entryTouched ? from : currPrice;
 
   const scaleIn = useScaledInSizeTrade();
-  const { sizeInUSD, avgPrice, estLoss, estProfit } =
-    useAtomValue(scaleInSizeAtom);
+  const { sizeInUSD, avgPrice, estLoss, estProfit } = useAtomValue(scaleInSizeAtom);
 
   const displayedSizeInUSD = sizeUSDTouched ? sizeUSD : sizeInUSD.toFixed(2);
   const disabled =
-    !pFloat(to) ||
-    !pFloat(fromOrCurrentyPrice) ||
-    !pFloat(size) ||
-    !nbOrders ||
-    loading;
+    !pFloat(to) || !pFloat(fromOrCurrentyPrice) || !pFloat(size) || !nbOrders || loading;
 
   const placeOrder = async () => {
     setLoading(true);
@@ -137,48 +132,45 @@ export const ScaleSizeTradeComponent = () => {
   }, [avgPrice]);
 
   return (
-    <div className="px-2 py-3 text-sm h-full">
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">Quantity</div>
-        <div className="flex flex-1 w-3/4">
+    <div className="h-full px-2 py-3 text-sm">
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Quantity</div>
+        <div className="flex w-3/4 flex-1">
           <input
             type="text"
             value={size}
-            className={cx(
-              'text-right w-full bg-dark-bg font-semibold font-mono',
-              { 'border-pink-500/50': !sizeUSDTouched }
-            )}
+            className={cx('bg-dark-bg w-full text-right font-mono font-semibold', {
+              'border-pink-500/50': !sizeUSDTouched,
+            })}
             onChange={(e) => handleChangeQuantity(e.target.value)}
           />
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">Size in USD</div>
-        <div className="flex flex-1 w-3/4">
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Size in USD</div>
+        <div className="flex w-3/4 flex-1">
           <input
             type="text"
             value={displayedSizeInUSD || ''}
-            className={cx(
-              'text-right w-full bg-dark-bg font-semibold font-mono',
-              { 'border-pink-500/50': sizeUSDTouched }
-            )}
+            className={cx('bg-dark-bg w-full text-right font-mono font-semibold', {
+              'border-pink-500/50': sizeUSDTouched,
+            })}
             onChange={(e) => handleChangeSizeInUSD(e.target.value)}
           />
         </div>
       </div>
-      <div className="flex items-center mb-2">
+      <div className="mb-2 flex items-center">
         <div className="w-1/4 text-right font-bold">From</div>
-        <div className="w-3/4 ml-auto pl-4 flex items-center">
+        <div className="ml-auto flex w-3/4 items-center pl-4">
           <div className="w-1/2 pr-8">
             <div className="flex items-center">
               <div className="flex-1">
                 <input
                   type="text"
                   value={fromOrCurrentyPrice?.toString() || ''}
-                  className={cx(
-                    'text-right w-full bg-dark-bg font-semibold font-mono',
-                    { 'border-blue-500': lastTouched === 'from' }
-                  )}
+                  className={cx('bg-dark-bg w-full text-right font-mono font-semibold', {
+                    'border-blue-500': lastTouched === 'from',
+                  })}
                   onChange={(e) => setFrom(e.target.value)}
                   onFocus={() => {
                     setLastTouched(LastTouchedInput.From);
@@ -190,11 +182,11 @@ export const ScaleSizeTradeComponent = () => {
                 <button
                   type="button"
                   className={cx(
-                    'flex items-center justify-center font-bold border-2 rounded-md text-xs px-2 h-[32px] bg-slate-500/50 border-slate-500',
+                    'flex h-[32px] items-center justify-center rounded-md border-2 border-slate-500 bg-slate-500/50 px-2 text-xs font-bold',
                     {
-                      'opacity-30 cursor-not-allowed': !entryTouched,
+                      'cursor-not-allowed opacity-30': !entryTouched,
                       'cursor-pointer': entryTouched,
-                    }
+                    },
                   )}
                   onClick={() => {
                     setEntryTouched(false);
@@ -208,14 +200,13 @@ export const ScaleSizeTradeComponent = () => {
           </div>
           <div className="w-1/2">
             <div className="flex items-center">
-              <div className="text-right font-bold mr-4">To</div>
+              <div className="mr-4 text-right font-bold">To</div>
               <input
                 type="text"
                 value={to}
-                className={cx(
-                  'text-right w-full bg-dark-bg font-semibold font-mono',
-                  { 'border-blue-500': lastTouched === 'to' }
-                )}
+                className={cx('bg-dark-bg w-full text-right font-mono font-semibold', {
+                  'border-blue-500': lastTouched === 'to',
+                })}
                 onChange={(e) => setTo(e.target.value)}
                 onFocus={() => setLastTouched(LastTouchedInput.To)}
               />
@@ -223,17 +214,16 @@ export const ScaleSizeTradeComponent = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-center mb-2">
+      <div className="mb-2 flex items-center">
         <div className="w-1/4 text-right font-bold">SL</div>
-        <div className="w-3/4 ml-auto pl-4 flex items-center">
+        <div className="ml-auto flex w-3/4 items-center pl-4">
           <div className="w-1/2 pr-8">
             <input
               type="text"
               value={stop}
-              className={cx(
-                'text-right w-full bg-dark-bg font-semibold font-mono',
-                { 'border-blue-500': lastTouched === 'stopLoss' }
-              )}
+              className={cx('bg-dark-bg w-full text-right font-mono font-semibold', {
+                'border-blue-500': lastTouched === 'stopLoss',
+              })}
               required={true}
               disabled={reduceOnly}
               onChange={({ target }) => setStop(target.value)}
@@ -242,14 +232,13 @@ export const ScaleSizeTradeComponent = () => {
           </div>
           <div className="w-1/2">
             <div className="flex items-center">
-              <div className="text-right font-bold mr-4">TP</div>
+              <div className="mr-4 text-right font-bold">TP</div>
               <input
                 type="text"
                 value={takeProfit}
-                className={cx(
-                  'text-right w-full bg-dark-bg font-semibold font-mono',
-                  { 'border-blue-500': lastTouched === 'takeProfit' }
-                )}
+                className={cx('bg-dark-bg w-full text-right font-mono font-semibold', {
+                  'border-blue-500': lastTouched === 'takeProfit',
+                })}
                 required={true}
                 disabled={reduceOnly}
                 onChange={({ target }) => setTakeProfit(target.value)}
@@ -260,10 +249,10 @@ export const ScaleSizeTradeComponent = () => {
         </div>
       </div>
 
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">Side</div>
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Side</div>
         <div className="flex w-3/4">
-          <div className="w-1/2 mr-1">
+          <div className="mr-1 w-1/2">
             <OrderSideButton
               className="w-full"
               side={OrderSide.Buy}
@@ -271,7 +260,7 @@ export const ScaleSizeTradeComponent = () => {
               onClick={() => setSide(OrderSide.Buy)}
             />
           </div>
-          <div className="w-1/2 ml-1">
+          <div className="ml-1 w-1/2">
             <OrderSideButton
               className="w-full"
               side={OrderSide.Sell}
@@ -281,8 +270,8 @@ export const ScaleSizeTradeComponent = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4" />
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold" />
         <div className="flex w-3/4">
           <ToggleInputComponent
             label="REDUCE ONLY"
@@ -292,101 +281,80 @@ export const ScaleSizeTradeComponent = () => {
           />
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">Distribution</div>
-        <div className="flex flex-1 w-3/4">
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Distribution</div>
+        <div className="flex w-3/4 flex-1">
           <Range
             step={0.05}
             min={1}
             max={3}
             values={[easeRatio]}
             renderTrack={({ props, children }) => (
-              <div
-                {...props}
-                className="bg-dark-border-gray-2 w-full h-[3px] rounded-lg"
-              >
+              <div {...props} className="bg-dark-border-gray-2 h-[3px] w-full rounded-lg">
                 {children}
               </div>
             )}
             renderThumb={({ props }) => (
-              <div
-                {...props}
-                className="bg-dark-border-gray-2 w-4 h-4 rounded-full"
-              />
+              <div {...props} className="bg-dark-border-gray-2 h-4 w-4 rounded-full" />
             )}
             onChange={(values) => setEaseRatio(values[0])}
           />
         </div>
-        <div className="ml-4 w-[60px] font-mono text-xs text-dark-text-gray text-center border border-dark-border-gray">
+        <div className="text-dark-text-gray border-dark-border-gray ml-4 w-[60px] border text-center font-mono text-xs">
           {easeRatioToPercent(easeRatio)}
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">Orders Count</div>
-        <div className="flex flex-1 w-3/4">
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Orders Count</div>
+        <div className="flex w-3/4 flex-1">
           <Range
             step={1}
             min={2}
             max={35}
             values={[nbOrders]}
             renderTrack={({ props, children }) => (
-              <div
-                {...props}
-                className="bg-dark-border-gray-2 w-full h-[3px] rounded-lg"
-              >
+              <div {...props} className="bg-dark-border-gray-2 h-[3px] w-full rounded-lg">
                 {children}
               </div>
             )}
             renderThumb={({ props }) => (
-              <div
-                {...props}
-                className="bg-dark-border-gray-2 w-4 h-4 rounded-full"
-              />
+              <div {...props} className="bg-dark-border-gray-2 h-4 w-4 rounded-full" />
             )}
             onChange={(values) => setNbOrders(values[0])}
           />
         </div>
-        <div className="ml-4 w-[60px] font-mono text-xs text-dark-text-gray text-center border border-dark-border-gray">
+        <div className="text-dark-text-gray border-dark-border-gray ml-4 w-[60px] border text-center font-mono text-xs">
           {nbOrders}
         </div>
       </div>
-      <div className="flex items-center my-6">
-        <div className="mr-4 text-right font-bold w-1/4" />
-        <div className="flex-1 w-3/4 pr-1 text-dark-text-gray">
+      <div className="my-6 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold" />
+        <div className="text-dark-text-gray w-3/4 flex-1 pr-1">
           <div className="flex items-center">
             <div className="font-semibold">Size</div>
-            <div className="ml-auto font-mono text-xs">
-              {formatCurrency(sizeInUSD, 'usd')}
-            </div>
+            <div className="ml-auto font-mono text-xs">{formatCurrency(sizeInUSD, 'usd')}</div>
           </div>
           <div className="flex items-center">
             <div className="font-semibold">Avg price</div>
-            <div className="ml-auto font-mono text-xs">
-              {formatCurrency(avgPrice, 'usd')}
-            </div>
+            <div className="ml-auto font-mono text-xs">{formatCurrency(avgPrice, 'usd')}</div>
           </div>
           <div className="flex items-center">
             <div className="font-semibold">Est. loss</div>
             <div className="ml-auto font-mono text-xs">
-              {privacy
-                ? '***'
-                : (estLoss && formatCurrency(estLoss, 'usd')) || '-'}
+              {privacy ? '***' : (estLoss && formatCurrency(estLoss, 'usd')) || '-'}
             </div>
           </div>
           <div className="flex items-center">
             <div className="font-semibold">Est. profit</div>
             <div className="ml-auto font-mono text-xs">
-              {privacy
-                ? '***'
-                : (estProfit && formatCurrency(Math.abs(estProfit), 'usd')) ||
-                  '-'}
+              {privacy ? '***' : (estProfit && formatCurrency(Math.abs(estProfit), 'usd')) || '-'}
             </div>
           </div>
         </div>
       </div>
-      <div className="flex mt-3 w-full">
+      <div className="mt-3 flex w-full">
         <ButtonComponent
-          className="w-full bg-dark-bg flex items-center justify-center uppercase rounded-md"
+          className="bg-dark-bg flex w-full items-center justify-center rounded-md uppercase"
           size="small"
           disabled={disabled}
           loading={loading}
@@ -394,7 +362,7 @@ export const ScaleSizeTradeComponent = () => {
         >
           {side}
           {pFloat(size) > 0 && (
-            <span className="font-mono text-xs ml-2">
+            <span className="ml-2 font-mono text-xs">
               ({size} {selectedSymbol?.replace(/\/.+/, '')})
             </span>
           )}

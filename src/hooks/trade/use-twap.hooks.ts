@@ -8,10 +8,7 @@ import { v4 } from 'uuid';
 import { tickersAtom } from '../../app-state';
 import { fatFingerValueAtom } from '../../atoms/trade.atoms';
 import { fatFingerError } from '../../utils/errors.utils';
-import {
-  addPreventClosePage,
-  removePreventClosePage,
-} from '../../utils/prevent-close.utils';
+import { addPreventClosePage, removePreventClosePage } from '../../utils/prevent-close.utils';
 import { tickerRegex } from '../../utils/ticker-match/ticker-match.utils';
 import { selectedAccountAtom } from '../use-accounts.hooks';
 import { EventName, useAnalytics } from '../use-analytics.hooks';
@@ -58,7 +55,7 @@ class TWAPManager {
   constructor(
     opts: TWAPOpts,
     updateState: (state: TWAPState) => void,
-    placeOrder: (orders: PlaceOrderOpts[]) => Promise<any>
+    placeOrder: (orders: PlaceOrderOpts[]) => Promise<any>,
   ) {
     this.opts = opts;
 
@@ -141,15 +138,9 @@ class TWAPManager {
 
   resume = () => {
     if (this.state.status === TWAPStatus.Paused) {
-      const nextOrderAt =
-        this.state.nextOrderAt > Date.now()
-          ? this.state.nextOrderAt
-          : Date.now();
+      const nextOrderAt = this.state.nextOrderAt > Date.now() ? this.state.nextOrderAt : Date.now();
 
-      this._timeoutId = setTimeout(
-        () => this.start(),
-        nextOrderAt - Date.now()
-      );
+      this._timeoutId = setTimeout(() => this.start(), nextOrderAt - Date.now());
 
       this.updateState({ status: TWAPStatus.Running });
     }
@@ -223,9 +214,10 @@ export const useTwapTrade = () => {
     twapInstances.set(id, twap);
 
     log(
-      `[USER] Start TWAP ${opts.side.toUpperCase()} ${
-        opts.size
-      } ${opts.symbol.replace(tickerRegex, '')}`
+      `[USER] Start TWAP ${opts.side.toUpperCase()} ${opts.size} ${opts.symbol.replace(
+        tickerRegex,
+        '',
+      )}`,
     );
 
     try {

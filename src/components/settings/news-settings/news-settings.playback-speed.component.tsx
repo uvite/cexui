@@ -6,11 +6,11 @@ import { newsText2SpeechPlaybackSpeedAtom } from '../../../hooks/trade/use-news-
 
 export const NewsSettingsPlaybackSpeedComponent = () => {
   const [text2SpeechPlaybackSpeed, setText2SpeechPlaybackSpeed] = useAtom(
-    newsText2SpeechPlaybackSpeedAtom
+    newsText2SpeechPlaybackSpeedAtom,
   );
 
   return (
-    <div className="flex items-center mt-2">
+    <div className="mt-2 flex items-center">
       <div className="mr-8 font-bold">Playback speed</div>
       <div className="flex-1">
         <Range
@@ -19,23 +19,17 @@ export const NewsSettingsPlaybackSpeedComponent = () => {
           max={3}
           values={[text2SpeechPlaybackSpeed]}
           renderTrack={({ props, children }) => (
-            <div
-              {...props}
-              className="bg-dark-border-gray-2 w-full h-[3px] rounded-lg"
-            >
+            <div {...props} className="bg-dark-border-gray-2 h-[3px] w-full rounded-lg">
               {children}
             </div>
           )}
           renderThumb={({ props }) => (
-            <div
-              {...props}
-              className="bg-dark-border-gray-2 w-4 h-4 rounded-full"
-            />
+            <div {...props} className="bg-dark-border-gray-2 h-4 w-4 rounded-full" />
           )}
           onChange={(values) => setText2SpeechPlaybackSpeed(values[0])}
         />
       </div>
-      <div className="ml-4 w-[60px] font-mono text-xs text-dark-text-gray text-center border border-dark-border-gray">
+      <div className="text-dark-text-gray border-dark-border-gray ml-4 w-[60px] border text-center font-mono text-xs">
         x{text2SpeechPlaybackSpeed}
       </div>
     </div>

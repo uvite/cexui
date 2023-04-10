@@ -11,19 +11,19 @@ import { NewsSettingsTreenewsApiComponent } from './news-settings.treenews-api.c
 
 export const NewsSettingsComponent = () => {
   return (
-    <div className="px-6 py-4 mb-4 min-h-[300px]">
+    <div className="mb-4 min-h-[300px] px-6 py-4">
       <NewsSettingsDefaultTickersComponent />
-      <div className="w-full my-4 h-[1px] bg-dark-bg-2" />
+      <div className="bg-dark-bg-2 my-4 h-[1px] w-full" />
       <NewsSettingsCustomWordsComponent />
-      <div className="w-full my-4 h-[1px] bg-dark-bg-2" />
+      <div className="bg-dark-bg-2 my-4 h-[1px] w-full" />
       <NewsSettingsBlockListComponent />
-      <div className="w-full my-4 h-[1px] bg-dark-bg-2" />
+      <div className="bg-dark-bg-2 my-4 h-[1px] w-full" />
       <NewsSettingsOrderTypeComponent />
-      <div className="w-full my-4 h-[1px] bg-dark-bg-2" />
+      <div className="bg-dark-bg-2 my-4 h-[1px] w-full" />
       <NewsSettingsDefaultSizeComponent />
-      <div className="w-full my-4 h-[1px] bg-dark-bg-2" />
+      <div className="bg-dark-bg-2 my-4 h-[1px] w-full" />
       <NewsSettingsTreenewsApiComponent />
-      <div className="w-full my-4 h-[1px] bg-dark-bg-2" />
+      <div className="bg-dark-bg-2 my-4 h-[1px] w-full" />
       <NewsSettingsCheckboxesComponent />
       <NewsSettingsPlaybackSpeedComponent />
     </div>

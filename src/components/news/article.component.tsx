@@ -28,6 +28,7 @@ type ArticleComponentProps = {
   selected?: boolean;
 };
 
+// eslint-disable-next-line react/display-name
 export const ArticleComponent = memo((props: ArticleComponentProps) => {
   const setSelected = useSetAtom(selectedNewsAtom);
 
@@ -35,14 +36,13 @@ export const ArticleComponent = memo((props: ArticleComponentProps) => {
   const exchangeTickers = useAtomValue(orderedTickersAtom);
   const defaultTickers = useAtomValue(newsDefaultTickersAtom);
 
-  const matchedTickers =
-    props.symbols.length > 0 ? props.symbols : defaultTickers;
+  const matchedTickers = props.symbols.length > 0 ? props.symbols : defaultTickers;
 
   const tickers = take(
     matchedTickers
       .map((s) => exchangeTickers.find((t) => t.symbol === s))
       .filter((t) => t) as Ticker[],
-    3
+    3,
   );
 
   if (oldLayout) {
@@ -53,21 +53,19 @@ export const ArticleComponent = memo((props: ArticleComponentProps) => {
     <div className="px-1 py-1" onClick={() => setSelected(props.id)}>
       <div
         className={cx(
-          'border-2 rounded-md p-2 bg-dark-bg-2',
-          props.selected ? 'border-dark-blue' : 'border-dark-border-gray'
+          'bg-dark-bg-2 rounded-md border-2 p-2',
+          props.selected ? 'border-dark-blue' : 'border-dark-border-gray',
         )}
       >
         <div className="break-words">
           {props.author && (
-            <div className="text-pink-300 font-bold uppercase mb-1">
-              {props.author}
-            </div>
+            <div className="mb-1 font-bold uppercase text-pink-300">{props.author}</div>
           )}
-          <span className="text-sm font-medium text-dark-text-white tracking-wider">
+          <span className="text-dark-text-white text-sm font-medium tracking-wider">
             {props.content}
           </span>
         </div>
-        <div className="flex text-[10px] text-dark-border-gray-2 mt-2">
+        <div className="text-dark-border-gray-2 mt-2 flex text-[10px]">
           <a
             className="uppercase hover:underline"
             href={props.link}
@@ -76,7 +74,7 @@ export const ArticleComponent = memo((props: ArticleComponentProps) => {
           >
             Link [{props.source}]
           </a>
-          <div className="ml-auto font-mono text-right">
+          <div className="ml-auto text-right font-mono">
             <div className="flex items-center">
               <AiOutlineSend className="mr-2" />
               <div>{dayjs(props.time).format('hh:mm:ss.SSS A')}</div>

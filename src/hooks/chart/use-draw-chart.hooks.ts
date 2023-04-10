@@ -3,11 +3,7 @@ import type { MutableRefObject } from 'react';
 import { useRef, useEffect } from 'react';
 import useResizeObserver from 'use-resize-observer';
 
-import type {
-  LightweightChart,
-  CandleSeries,
-  VolumeSeries,
-} from './chart.types';
+import type { LightweightChart, CandleSeries, VolumeSeries } from './chart.types';
 
 export const useDrawChart = ({
   container,

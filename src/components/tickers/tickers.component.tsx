@@ -26,10 +26,12 @@ const columns: Array<{ label: string; key?: keyof Ticker }> = [
   { label: '1d', key: 'percentage' },
 ];
 
+// eslint-disable-next-line react/display-name
 const TableComponent = memo((props) => (
   <table {...props} className="text-dark-text-white w-full table-auto" />
 ));
 
+// eslint-disable-next-line react/display-name
 const TableRowComponent = memo(
   (
     props: Record<string, any> & {

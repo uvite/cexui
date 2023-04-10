@@ -68,7 +68,7 @@ const useNewsmakerHistory = () => {
         setMessageHistory(news);
         setLoaded(true);
       },
-    }
+    },
   );
 };
 
@@ -89,7 +89,7 @@ const useNewsmakerWebsocket = () => {
         },
         ({ new: data }) => {
           setLastMessage(transformMessage(data));
-        }
+        },
       )
       .subscribe();
 

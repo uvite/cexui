@@ -19,6 +19,7 @@ const getOrderLabel = (order: Order) => {
   return order.side?.toUpperCase();
 };
 
+// eslint-disable-next-line react/display-name
 export const OrderRowComponent = memo(({ order }: { order: Order }) => {
   const setSelectedSymbol = useSetAtom(selectedSymbolAtom);
   const privacy = useAtomValue(privacyAtom);
@@ -36,46 +37,36 @@ export const OrderRowComponent = memo(({ order }: { order: Order }) => {
     <>
       <td>
         <div
-          className="flex items-center cursor-pointer py-[8px] min-w-[90px]"
+          className="flex min-w-[90px] cursor-pointer items-center py-[8px]"
           onClick={() => setSelectedSymbol(order.symbol)}
         >
-          <span className="rounded-full overflow-hidden w-[16px] h-[16px]">
-            <img
-              alt={symbol}
-              height={16}
-              width={16}
-              src={getTokenURL(order.symbol)}
-            />
+          <span className="h-[16px] w-[16px] overflow-hidden rounded-full">
+            <img alt={symbol} height={16} width={16} src={getTokenURL(order.symbol)} />
           </span>
-          <span className="font-bold text-xs ml-2">{symbol}</span>
+          <span className="ml-2 text-xs font-bold">{symbol}</span>
         </div>
       </td>
       <td>
         <span
-          className={cx(
-            'border-2 rounded-sm p-[3px] font-bold text-[10px] font-mono',
-            {
-              'border-red-500': order.side === 'sell',
-              'border-dark-green': order.side === 'buy',
-            }
-          )}
+          className={cx('rounded-sm border-2 p-[3px] font-mono text-[10px] font-bold', {
+            'border-red-500': order.side === 'sell',
+            'border-dark-green': order.side === 'buy',
+          })}
         >
           {label} {order.reduceOnly ? '(R)' : ''}
         </span>
       </td>
-      <td className="text-right font-mono font-semibold text-xs">
+      <td className="text-right font-mono text-xs font-semibold">
         {order.type === OrderType.TrailingStopLoss ? (
           <span>{order.price}</span>
         ) : (
           <OrdersEditInputComponent order={order} type="price" />
         )}
       </td>
-      <td className="text-right font-mono font-semibold text-xs">
+      <td className="text-right font-mono text-xs font-semibold">
         {privacy && '******'}
         {isPositionSize && !privacy && '-'}
-        {!isPositionSize && !privacy && (
-          <OrdersEditInputComponent order={order} type="amount" />
-        )}
+        {!isPositionSize && !privacy && <OrdersEditInputComponent order={order} type="amount" />}
       </td>
       <td className="text-right">
         <SmallActionButtonComponent

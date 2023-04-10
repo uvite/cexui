@@ -40,79 +40,69 @@ export const tradeEntryOrCurrentPriceAtom = atom((get) => {
 // Saved preferences
 // -----------------
 export const selectedSymbolAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('trading').prop('selectedSymbol')
+  o.prop('trading').prop('selectedSymbol'),
 );
 
-export const tradeSideAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('trading').prop('side')
-);
+export const tradeSideAtom = focusAtom(appSettingsAtom, (o) => o.prop('trading').prop('side'));
 
 export const nbOrdersAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('trading').prop('scaledOrdersCount')
+  o.prop('trading').prop('scaledOrdersCount'),
 );
 
 export const selectedTradeAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('trading').prop('selectedComponent')
+  o.prop('trading').prop('selectedComponent'),
 );
 
-export const maxRiskAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('trading').prop('maxRisk')
-);
+export const maxRiskAtom = focusAtom(appSettingsAtom, (o) => o.prop('trading').prop('maxRisk'));
 
 export const maxMarketSlippageAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('trading').prop('maxMarketSlippage')
+  o.prop('trading').prop('maxMarketSlippage'),
 );
 
-export const riskAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('scaleByRisk').prop('risk')
-);
+export const riskAtom = focusAtom(appSettingsAtom, (o) => o.prop('scaleByRisk').prop('risk'));
 
 export const quantityScaledAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('scaleByRisk').prop('quantityScaled')
+  o.prop('scaleByRisk').prop('quantityScaled'),
 );
 
 export const priceScaleRatioAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('trading').prop('priceScaleRatio')
+  o.prop('trading').prop('priceScaleRatio'),
 );
 
-export const twapLengthAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('twap').prop('length')
-);
+export const twapLengthAtom = focusAtom(appSettingsAtom, (o) => o.prop('twap').prop('length'));
 
 export const twapLotsCountAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('twap').prop('lotsCount')
+  o.prop('twap').prop('lotsCount'),
 );
 
 export const tradeBuyIntoAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('trading').prop('buyInto')
+  o.prop('trading').prop('buyInto'),
 );
 
 export const tradeSellIntoAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('trading').prop('sellInto')
+  o.prop('trading').prop('sellInto'),
 );
 
 export const twapRandomnessAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('twap').prop('randomness')
+  o.prop('twap').prop('randomness'),
 );
 
 export const chasePercentLimitAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('chase').prop('percentLimit')
+  o.prop('chase').prop('percentLimit'),
 );
 
 export const _chaseInfiniteAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('chase').prop('infinite')
+  o.prop('chase').prop('infinite'),
 );
 
-export const _chaseStalkAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('chase').prop('stalk')
-);
+export const _chaseStalkAtom = focusAtom(appSettingsAtom, (o) => o.prop('chase').prop('stalk'));
 
 export const chaseInfiniteAtom = atom(
   (get) => get(_chaseInfiniteAtom),
   (get, set, value: boolean) => {
     set(_chaseInfiniteAtom, value);
     if (get(_chaseStalkAtom) && value) set(_chaseStalkAtom, false);
-  }
+  },
 );
 
 export const chaseStalkAtom = atom(
@@ -120,11 +110,11 @@ export const chaseStalkAtom = atom(
   (get, set, value: boolean) => {
     set(_chaseStalkAtom, value);
     if (get(_chaseInfiniteAtom) && value) set(_chaseInfiniteAtom, false);
-  }
+  },
 );
 
 export const fatFingerProtectionAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('trading').prop('fatFingerProtection')
+  o.prop('trading').prop('fatFingerProtection'),
 );
 
 export const fatFingerValueAtom = atom((get) => {

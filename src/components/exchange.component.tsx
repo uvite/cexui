@@ -1,20 +1,9 @@
 import React from 'react';
 
-import {
-  useExchangeConnector,
-  ConnectorContext,
-} from '../hooks/use-exchange-connector.hooks';
+import { useExchangeConnector, ConnectorContext } from '../hooks/use-exchange-connector.hooks';
 
-export const ExchangeComponent = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const ExchangeComponent = ({ children }: { children: React.ReactNode }) => {
   const connector = useExchangeConnector();
 
-  return (
-    <ConnectorContext.Provider value={connector}>
-      {children}
-    </ConnectorContext.Provider>
-  );
+  return <ConnectorContext.Provider value={connector}>{children}</ConnectorContext.Provider>;
 };

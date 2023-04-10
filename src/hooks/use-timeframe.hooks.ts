@@ -2,10 +2,7 @@ import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 
 export type ChartTF = '1d' | '1h' | '1m' | '3m' | '4h' | '5m' | '15m';
-export const selectedTimeframeAtom = atomWithStorage<ChartTF>(
-  'selectedTimeframe',
-  '5m'
-);
+export const selectedTimeframeAtom = atomWithStorage<ChartTF>('selectedTimeframe', '5m');
 
 export const timeframes: Array<{ label: string; value: ChartTF }> = [
   { label: '1m', value: '1m' },
@@ -21,8 +18,5 @@ export const cycleTimeframeAtom = atom(null, (get, set) => {
   const current = get(selectedTimeframeAtom);
   const currentIdx = timeframes.findIndex((t) => t.value === current);
 
-  set(
-    selectedTimeframeAtom,
-    timeframes[(currentIdx + 1) % timeframes.length].value
-  );
+  set(selectedTimeframeAtom, timeframes[(currentIdx + 1) % timeframes.length].value);
 });

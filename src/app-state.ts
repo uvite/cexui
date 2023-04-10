@@ -15,9 +15,7 @@ export const tickersAtom = focusAtom(appStateAtom, (o) => o.prop('tickers'));
 export const marketsAtom = focusAtom(appStateAtom, (o) => o.prop('markets'));
 export const ordersAtom = focusAtom(appStateAtom, (o) => o.prop('orders'));
 export const optionsAtom = focusAtom(appStateAtom, (o) => o.prop('options'));
-export const positionsAtom = focusAtom(appStateAtom, (o) =>
-  o.prop('positions')
-);
+export const positionsAtom = focusAtom(appStateAtom, (o) => o.prop('positions'));
 
 export const selectedAtom = atom((get) => {
   const app = get(appStateAtom);

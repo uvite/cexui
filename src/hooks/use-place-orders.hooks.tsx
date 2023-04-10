@@ -16,19 +16,14 @@ export const usePlaceOrders = () => {
   const logOrder = useLogOrder();
   const fatFinger = useAtomValue(fatFingerValueAtom);
 
-  return async (
-    input: Array<Omit<PlaceOrderOpts, 'price'> & { price?: number }>
-  ) => {
+  return async (input: Array<Omit<PlaceOrderOpts, 'price'> & { price?: number }>) => {
     if (connector?.placeOrders) {
       const orders = input.map((opts) => {
         const price = opts.price || getTickerPrice(opts.symbol, opts.side);
         return { ...opts, price };
       });
 
-      const totalSize = orders.reduce(
-        (acc, order) => acc + order.price * order.amount,
-        0
-      );
+      const totalSize = orders.reduce((acc, order) => acc + order.price * order.amount, 0);
 
       if (fatFinger && totalSize > fatFinger) {
         fatFingerError();

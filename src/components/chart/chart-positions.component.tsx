@@ -11,11 +11,7 @@ import { toUSD } from '../../utils/to-usd.utils';
 
 import { ChartLineComponent } from './chart-line.component';
 
-export const ChartPositionsComponent = ({
-  candleSeries,
-}: {
-  candleSeries?: CandleSeries;
-}) => {
+export const ChartPositionsComponent = ({ candleSeries }: { candleSeries?: CandleSeries }) => {
   const symbol = useAtomValue(selectedSymbolAtom);
   const positions = useSymbolPositions(symbol);
   const privacy = useAtomValue(privacyAtom);
@@ -26,8 +22,7 @@ export const ChartPositionsComponent = ({
     () =>
       positions.flatMap((position) => {
         const lines: PriceLineOptions[] = [];
-        const { entryPrice, side, contracts, unrealizedPnl, liquidationPrice } =
-          position;
+        const { entryPrice, side, contracts, unrealizedPnl, liquidationPrice } = position;
 
         if (liquidationPrice > 0) {
           const priceDiff =
@@ -66,7 +61,7 @@ export const ChartPositionsComponent = ({
         return lines;
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [positionsChecksum, privacy]
+    [positionsChecksum, privacy],
   );
 
   return (

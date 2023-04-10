@@ -5,75 +5,72 @@ import { appSettingsAtom } from '../../app-settings';
 import { messageHistoryAtom } from '../../atoms/app.atoms';
 
 export const newsTradeTypeAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('news').prop('orderType')
+  o.prop('news').prop('orderType'),
 );
 
 export const newsTradeTwapSettingsAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('news').prop('orderTwapSettings')
+  o.prop('news').prop('orderTwapSettings'),
 );
 
 export const newsTradeLimitSettingsAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('news').prop('orderLimitSettings')
+  o.prop('news').prop('orderLimitSettings'),
 );
 
 export const newsTradeMarketSettingsAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('news').prop('orderMarketSettings')
+  o.prop('news').prop('orderMarketSettings'),
 );
 
 export const tickerTradeSizeMapAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('news').prop('sizeMap')
+  o.prop('news').prop('sizeMap'),
 );
 
 export const newsDefaultTradeSizeAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('news').prop('defaultSize')
+  o.prop('news').prop('defaultSize'),
 );
 
 export const newsDefaultTickersAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('news').prop('defaultTickers')
+  o.prop('news').prop('defaultTickers'),
 );
 
 export const newsOldLayoutAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('news').prop('oldLayout')
+  o.prop('news').prop('oldLayout'),
 );
 
 export const newsBlocklistAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('news').prop('wordsBlocklist')
+  o.prop('news').prop('wordsBlocklist'),
 );
 
 export const newsDisplayDotsAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('news').prop('displayDots')
+  o.prop('news').prop('displayDots'),
 );
 
 export const newsAutoSelectTickerAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('news').prop('autoSelectTicker')
+  o.prop('news').prop('autoSelectTicker'),
 );
 
 export const newsTradeShortcutsEnabledAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('news').prop('tradeShortcutsEnabled')
+  o.prop('news').prop('tradeShortcutsEnabled'),
 );
 
 export const treeNewsKeyAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('news').prop('treeNewsKey')
+  o.prop('news').prop('treeNewsKey'),
 );
 
 export const newsDisabledSourcesAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('news').prop('disabledSources')
+  o.prop('news').prop('disabledSources'),
 );
 
 export const newsText2SpeechAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('news').prop('text2Speech')
+  o.prop('news').prop('text2Speech'),
 );
 
-export const newsText2SpeechPlaybackSpeedAtom = focusAtom(
-  appSettingsAtom,
-  (o) => o.prop('news').prop('text2SpeechPlaybackSpeed')
+export const newsText2SpeechPlaybackSpeedAtom = focusAtom(appSettingsAtom, (o) =>
+  o.prop('news').prop('text2SpeechPlaybackSpeed'),
 );
 
 export const useTickerTradeSizeMap = (symbol: string) => {
   const defaultSize = useAtomValue(newsDefaultTradeSizeAtom);
-  const [tickerTradeSizeMap, setTickerTradeSizeMap] = useAtom(
-    tickerTradeSizeMapAtom
-  );
+  const [tickerTradeSizeMap, setTickerTradeSizeMap] = useAtom(tickerTradeSizeMapAtom);
 
   const size =
     typeof tickerTradeSizeMap[symbol] === 'undefined'

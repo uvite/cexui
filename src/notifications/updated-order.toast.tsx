@@ -14,8 +14,7 @@ export const updatedOrderToast = (opts: UpdateOrderOpts) => {
 
   toast(
     <div className="font-mono text-sm">
-      {labels[opts.order.type]}:<br /> <span className="capitalize">{key}</span>{' '}
-      updated to{' '}
+      {labels[opts.order.type]}:<br /> <span className="capitalize">{key}</span> updated to{' '}
       <strong>
         {key === 'price' ? '$' : ''}
         {value}
@@ -23,6 +22,6 @@ export const updatedOrderToast = (opts: UpdateOrderOpts) => {
     </div>,
     {
       type: 'success',
-    }
+    },
   );
 };

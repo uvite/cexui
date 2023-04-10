@@ -69,21 +69,15 @@ export const OrdersEditInputComponent = ({
         <input
           ref={$input}
           type="text"
-          className="bg-transparent text-right w-[100px]"
+          className="w-[100px] bg-transparent text-right"
           value={inputValue}
           onChange={(e) => setInputValue(e.currentTarget.value)}
           onKeyDown={handleKeyDown}
         />
-        <span
-          className="bg-dark-green p-0.5 rounded-sm ml-1 cursor-pointer"
-          onClick={handleUpdate}
-        >
+        <span className="bg-dark-green ml-1 cursor-pointer rounded-sm p-0.5" onClick={handleUpdate}>
           <FaCheck />
         </span>
-        <span
-          className="bg-red-500 p-0.5 rounded-sm ml-1 cursor-pointer"
-          onClick={handleBlur}
-        >
+        <span className="ml-1 cursor-pointer rounded-sm bg-red-500 p-0.5" onClick={handleBlur}>
           <FaTimes />
         </span>
       </span>
@@ -92,12 +86,10 @@ export const OrdersEditInputComponent = ({
 
   return (
     <span
-      className="cursor-text underline underline-offset-4 decoration-dotted"
+      className="cursor-text underline decoration-dotted underline-offset-4"
       onClick={handleClick}
     >
-      {type === 'amount' && order.filled > 0
-        ? `${order.filled}/${value}`
-        : `${value}`}
+      {type === 'amount' && order.filled > 0 ? `${order.filled}/${value}` : `${value}`}
     </span>
   );
 };

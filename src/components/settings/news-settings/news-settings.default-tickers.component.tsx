@@ -11,8 +11,8 @@ export const NewsSettingsDefaultTickersComponent = () => {
 
   return (
     <>
-      <div className="font-bold text-lg">Default tickers</div>
-      <p className="text-dark-text-gray text-sm py-2">
+      <div className="text-lg font-bold">Default tickers</div>
+      <p className="text-dark-text-gray py-2 text-sm">
         If not tickers match the news, those will be used.
         <br />
         For readibilty reasons, only 3 tickers can be picked.
@@ -20,7 +20,7 @@ export const NewsSettingsDefaultTickersComponent = () => {
       <Select
         id="news-default-tickers"
         instanceId="news-default-tickers"
-        className="react-select-container w-full z-[100]"
+        className="react-select-container z-[100] w-full"
         classNamePrefix="react-select"
         value={defaultTickers.map((t) => ({ value: t, label: t }))}
         options={tickers.map((t) => ({ value: t, label: t }))}

@@ -57,30 +57,28 @@ const IndexPage = ({
   );
 };
 
-export async function getServerSideProps({
-  res,
-  req,
-}: GetServerSidePropsContext) {
-  const session = {"accessToken":"123123","event":"session","data":{"trigger":"getSession"},"timestamp":1680976484}
-    //await getServerSession(req, res, authOptions);
+export async function getServerSideProps({ res, req }: GetServerSidePropsContext) {
+  const session = {
+    accessToken: '123123',
+    event: 'session',
+    data: { trigger: 'getSession' },
+    timestamp: 1680976484,
+  };
+  //await getServerSession(req, res, authOptions);
   const supabase = createSupabaseClient({ accessToken: session?.accessToken });
 
-  const [{ data: tickersWordsMapping }, { data: tickersWordsCommon }] =
-    await Promise.all([
-      supabase.from('tickers_words_mapping').select('word, tickers'),
-      supabase.from('tickers_words_common').select('word'),
-    ]);
+  const [{ data: tickersWordsMapping }, { data: tickersWordsCommon }] = await Promise.all([
+    supabase.from('tickers_words_mapping').select('word, tickers'),
+    supabase.from('tickers_words_common').select('word'),
+  ]);
 
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=300, stale-while-revalidate=900'
-  );
+  res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=900');
 
   return {
     props: {
       tickersWordsCommon: tickersWordsCommon?.map((item) => item.word) || [],
       tickersWordsMapping: Object.fromEntries(
-        tickersWordsMapping?.map((item) => [item.word, item.tickers]) || []
+        tickersWordsMapping?.map((item) => [item.word, item.tickers]) || [],
       ),
     },
   };

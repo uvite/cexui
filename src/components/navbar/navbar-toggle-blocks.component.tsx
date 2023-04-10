@@ -29,20 +29,20 @@ export const NavbarToggleBlocksComponent = () => {
   };
 
   return (
-    <div className="w-14 h-[45px] mr-4">
+    <div className="mr-4 h-[45px] w-14">
       <button
         ref={ref}
         type="button"
         className={cx(
-          'flex flex-col items-center justify-center border rounded-sm w-full h-full cursor-pointer select-none last:mr-0 border-dark-border-gray-2 text-dark-border-gray-2 hover:border-dark-blue hover:text-dark-blue',
-          { 'border-dark-blue': isOpen }
+          'border-dark-border-gray-2 text-dark-border-gray-2 hover:border-dark-blue hover:text-dark-blue flex h-full w-full cursor-pointer select-none flex-col items-center justify-center rounded-sm border last:mr-0',
+          { 'border-dark-blue': isOpen },
         )}
         {...anchorProps}
       >
         <div className="text-2xl">
           <TbAppWindow />
         </div>
-        <div className="font-mono text-[10px] uppercase text-center font-semibold">
+        <div className="text-center font-mono text-[10px] font-semibold uppercase">
           <div>Layout</div>
         </div>
       </button>
@@ -59,34 +59,24 @@ export const NavbarToggleBlocksComponent = () => {
         }}
       >
         {Object.entries(AppBlock).map(([key, value]) => (
-          <MenuItem
-            key={key}
-            className="hover:bg-dark-bg-2 px-4"
-            onClick={toggleBlock(value)}
-          >
-            <div className="flex items-center w-full">
+          <MenuItem key={key} className="hover:bg-dark-bg-2 px-4" onClick={toggleBlock(value)}>
+            <div className="flex w-full items-center">
               <div className="flex-1 ">
-                <span className="capitalize mr-8">
-                  {labels[value] || value}
-                </span>
+                <span className="mr-8 capitalize">{labels[value] || value}</span>
               </div>
               <div>
                 <Switch
                   className={cx(
-                    hiddenBlocks.includes(value)
-                      ? 'bg-dark-blue/50'
-                      : 'bg-dark-blue',
-                    'relative inline-flex h-[19px] w-[37px] shrink-0 cursor-pointer rounded-full border-[1px] border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-[1px]  focus-visible:ring-white focus-visible:ring-opacity-75'
+                    hiddenBlocks.includes(value) ? 'bg-dark-blue/50' : 'bg-dark-blue',
+                    'relative inline-flex h-[19px] w-[37px] shrink-0 cursor-pointer rounded-full border-[1px] border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-[1px]  focus-visible:ring-white focus-visible:ring-opacity-75',
                   )}
                 >
                   <span className="sr-only">Use setting</span>
                   <span
                     aria-hidden="true"
                     className={cx(
-                      !hiddenBlocks.includes(value)
-                        ? 'translate-x-[1.125rem]'
-                        : 'translate-x-0',
-                      'pointer-events-none inline-block h-[17px] w-[17px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out'
+                      !hiddenBlocks.includes(value) ? 'translate-x-[1.125rem]' : 'translate-x-0',
+                      'pointer-events-none inline-block h-[17px] w-[17px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out',
                     )}
                   />
                 </Switch>

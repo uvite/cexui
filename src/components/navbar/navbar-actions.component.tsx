@@ -5,11 +5,7 @@ import { BiVolumeFull, BiVolumeMute } from 'react-icons/bi';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { MdOutlinePublic, MdOutlinePublicOff } from 'react-icons/md';
 
-import {
-  displayPreviewTradeAtom,
-  privacyAtom,
-  soundAtom,
-} from '../../atoms/app.atoms';
+import { displayPreviewTradeAtom, privacyAtom, soundAtom } from '../../atoms/app.atoms';
 
 import { NavbarNukeButton } from './navbar-nuke.component';
 import { NavbarToggleBlocksComponent } from './navbar-toggle-blocks.component';
@@ -28,15 +24,15 @@ const NavbarActionButton = ({
   return (
     <div
       className={cx(
-        'flex flex-col items-center justify-center border rounded-sm w-14 cursor-pointer select-none mr-4 last:mr-0',
+        'mr-4 flex w-14 cursor-pointer select-none flex-col items-center justify-center rounded-sm border last:mr-0',
         value
           ? 'border-dark-blue text-dark-blue'
-          : 'border-dark-border-gray-2 text-dark-border-gray-2'
+          : 'border-dark-border-gray-2 text-dark-border-gray-2',
       )}
       onClick={() => toggle(!value)}
     >
       <div className="text-2xl">{value ? <Icon /> : <IconActive />}</div>
-      <div className="font-mono text-[10px] uppercase text-center font-semibold">
+      <div className="text-center font-mono text-[10px] font-semibold uppercase">
         <div>{value ? titleOn : titleOff}</div>
       </div>
     </div>
@@ -50,7 +46,7 @@ export const NavbarActionsComponent = () => {
 
   return (
     <div className="flex">
-      <div className="mx-4 h-[45px] w-[1px] bg-dark-border-gray" />
+      <div className="bg-dark-border-gray mx-4 h-[45px] w-[1px]" />
       <NavbarActionButton
         title={['preview', 'preview']}
         icons={[BsEye, BsEyeSlash]}

@@ -6,11 +6,7 @@ import { afterDecimal } from '../../utils/after-decimal.utils';
 import { pFloat } from '../../utils/parse-float.utils';
 import { toPercentage } from '../../utils/percentage.utils';
 
-import type {
-  CandleSeries,
-  LightweightChart,
-  VolumeSeries,
-} from './chart.types';
+import type { CandleSeries, LightweightChart, VolumeSeries } from './chart.types';
 
 type OHLC = {
   open: number;
@@ -42,9 +38,7 @@ export const displayHOLCAtom = atom((get) => {
   };
 });
 
-export const displayVolumeAtom = atom(
-  (get) => get(hoveredVolumeAtom) || get(lastVolumeAtom)
-);
+export const displayVolumeAtom = atom((get) => get(hoveredVolumeAtom) || get(lastVolumeAtom));
 
 export const useHOLC = ({
   chart,
@@ -60,12 +54,7 @@ export const useHOLC = ({
 
   useEffect(() => {
     const listener = (data: any) => {
-      if (
-        data === undefined ||
-        data.time === undefined ||
-        data.point.x < 0 ||
-        data.point.y < 0
-      ) {
+      if (data === undefined || data.time === undefined || data.point.x < 0 || data.point.y < 0) {
         setHoveredOHLC(null);
         return;
       }

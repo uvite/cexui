@@ -38,7 +38,7 @@ export const useDragOrders = ({ chart }: { chart?: IChartApi }) => {
         }
       }
     },
-    [exchange, markets, orders]
+    [exchange, markets, orders],
   );
 
   useEffect(() => {

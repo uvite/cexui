@@ -39,8 +39,8 @@ type AppPropsWithSession = AppProps & {
 };
 
 const jitsuClient = createClient({
-  key: "js.gtgdkfm8c76ohbgku4g6b0.se5w7jhiozjs5otwic3r",
-  tracking_host: "https://t.jitsu.com"
+  key: 'js.gtgdkfm8c76ohbgku4g6b0.se5w7jhiozjs5otwic3r',
+  tracking_host: 'https://t.jitsu.com',
 });
 
 const MyApp = ({ Component, pageProps: { session, ...pageProps } }: AppPropsWithSession) => {

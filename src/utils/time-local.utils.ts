@@ -8,7 +8,7 @@ export const timeToLocal = (originalTime: number) => {
       d.getHours(),
       d.getMinutes(),
       d.getSeconds(),
-      d.getMilliseconds()
+      d.getMilliseconds(),
     ) / 1000
   );
 };

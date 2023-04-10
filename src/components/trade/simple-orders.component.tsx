@@ -106,10 +106,7 @@ export const TradeSimpleOrdersComponent = () => {
   };
 
   const handleChangeSizeInUSD = (value: string) => {
-    const amount = floorStep(
-      pFloat(value) / (ticker?.last || 1),
-      market?.precision?.amount ?? 0
-    );
+    const amount = floorStep(pFloat(value) / (ticker?.last || 1), market?.precision?.amount ?? 0);
 
     setSize(amount.toString());
     setSizeUSD(value);
@@ -140,10 +137,7 @@ export const TradeSimpleOrdersComponent = () => {
       return;
     }
 
-    const orderType =
-      type === OrderType.StopLoss && trailing
-        ? OrderType.TrailingStopLoss
-        : type;
+    const orderType = type === OrderType.StopLoss && trailing ? OrderType.TrailingStopLoss : type;
 
     const order: PlaceOrderOpts = {
       symbol,
@@ -157,9 +151,7 @@ export const TradeSimpleOrdersComponent = () => {
     if (type === OrderType.Market && maxSlippage > 0) {
       const priceDistance = (maxSlippage * ticker.last) / 100;
       const orderPrice =
-        side === OrderSide.Buy
-          ? ticker.last + priceDistance
-          : ticker.last - priceDistance;
+        side === OrderSide.Buy ? ticker.last + priceDistance : ticker.last - priceDistance;
 
       order.type = OrderType.Limit;
       order.price = orderPrice;
@@ -200,13 +192,13 @@ export const TradeSimpleOrdersComponent = () => {
   }, []);
 
   return (
-    <div className="px-2 py-3 text-sm h-full">
-      <div className="grid grid-cols-2 gap-1 mb-4">
+    <div className="h-full px-2 py-3 text-sm">
+      <div className="mb-4 grid grid-cols-2 gap-1">
         {types.map(([newType, label]) => (
           <ActionButtonComponent
             key={newType}
-            className={cx('uppercase bg-dark-bg rounded-md', {
-              'text-blue-300 border-blue-300 opacity-100': newType === type,
+            className={cx('bg-dark-bg rounded-md uppercase', {
+              'border-blue-300 text-blue-300 opacity-100': newType === type,
             })}
             onClick={() => handleTypechange(newType)}
           >
@@ -215,24 +207,20 @@ export const TradeSimpleOrdersComponent = () => {
         ))}
       </div>
       {isTPOrSL && disabledBuy && disabledSell && (
-        <div className="text-center text-orange-500 mb-4 border-2 border-orange-500 rounded-md py-2 font-bold">
+        <div className="mb-4 rounded-md border-2 border-orange-500 py-2 text-center font-bold text-orange-500">
           You need to have an open position to use this order type
         </div>
       )}
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">Price</div>
-        <div className="flex items-center flex-1 w-3/4">
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Price</div>
+        <div className="flex w-3/4 flex-1 items-center">
           <div className="flex-1">
             <input
               type="text"
               value={price || ''}
-              className={cx(
-                'text-right w-full bg-dark-bg font-semibold font-mono',
-                {
-                  'border-blue-500':
-                    lastTouched === 'entry' && type !== OrderType.Market,
-                }
-              )}
+              className={cx('bg-dark-bg w-full text-right font-mono font-semibold', {
+                'border-blue-500': lastTouched === 'entry' && type !== OrderType.Market,
+              })}
               disabled={type === OrderType.Market}
               onFocus={() => {
                 setLastTouched(LastTouchedInput.Entry);
@@ -247,11 +235,11 @@ export const TradeSimpleOrdersComponent = () => {
             <button
               type="button"
               className={cx(
-                'flex items-center justify-center font-bold border-2 rounded-md text-xs px-2 h-[32px] bg-slate-500/50 border-slate-500',
+                'flex h-[32px] items-center justify-center rounded-md border-2 border-slate-500 bg-slate-500/50 px-2 text-xs font-bold',
                 {
-                  'opacity-30 cursor-not-allowed': !isEntryTouched,
+                  'cursor-not-allowed opacity-30': !isEntryTouched,
                   'cursor-pointer': isEntryTouched,
-                }
+                },
               )}
               onClick={() => {
                 setEntryTouched(false);
@@ -263,65 +251,59 @@ export const TradeSimpleOrdersComponent = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">Quantity</div>
-        <div className="flex flex-1 w-3/4">
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Quantity</div>
+        <div className="flex w-3/4 flex-1">
           <input
             type="text"
             value={size}
-            className="text-right w-full bg-dark-bg font-semibold font-mono"
+            className="bg-dark-bg w-full text-right font-mono font-semibold"
             disabled={[OrderType.StopLoss, OrderType.TakeProfit].includes(type)}
             onChange={(e) => handleChangeQuantity(e.target.value)}
           />
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">Size in USD</div>
-        <div className="flex flex-1 w-3/4">
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Size in USD</div>
+        <div className="flex w-3/4 flex-1">
           <input
             type="text"
             value={displayedSizeInUSD || ''}
-            className="text-right w-full bg-dark-bg font-semibold font-mono"
+            className="bg-dark-bg w-full text-right font-mono font-semibold"
             disabled={[OrderType.StopLoss, OrderType.TakeProfit].includes(type)}
             onChange={(e) => handleChangeSizeInUSD(e.target.value)}
           />
         </div>
       </div>
       {type === OrderType.Market && (
-        <div className="flex items-center mb-2">
-          <div className="mr-4 text-right font-bold w-1/4">Max slippage</div>
-          <div className="flex flex-1 w-3/4">
+        <div className="mb-2 flex items-center">
+          <div className="mr-4 w-1/4 text-right font-bold">Max slippage</div>
+          <div className="flex w-3/4 flex-1">
             <Range
               step={0.05}
               min={0}
               max={5}
               values={[maxSlippage]}
               renderTrack={({ props, children }) => (
-                <div
-                  {...props}
-                  className="bg-dark-border-gray-2 w-full h-[3px] rounded-lg"
-                >
+                <div {...props} className="bg-dark-border-gray-2 h-[3px] w-full rounded-lg">
                   {children}
                 </div>
               )}
               renderThumb={({ props }) => (
-                <div
-                  {...props}
-                  className="bg-dark-border-gray-2 w-4 h-4 rounded-full"
-                />
+                <div {...props} className="bg-dark-border-gray-2 h-4 w-4 rounded-full" />
               )}
               onChange={(values) => setMaxSlippage(values[0])}
             />
           </div>
-          <div className="ml-4 w-[60px] font-mono text-xs text-dark-text-gray text-center border border-dark-border-gray">
+          <div className="text-dark-text-gray border-dark-border-gray ml-4 w-[60px] border text-center font-mono text-xs">
             {maxSlippage > 0 ? `${maxSlippage.toFixed(2)}%` : `∞`}
           </div>
         </div>
       )}
       {!isTPOrSL && (
-        <div className="flex items-center mb-2">
-          <div className="mr-4 text-right font-bold w-1/4" />
-          <div className="flex flex-1 w-3/4">
+        <div className="mb-2 flex items-center">
+          <div className="mr-4 w-1/4 text-right font-bold" />
+          <div className="flex w-3/4 flex-1">
             <ToggleInputComponent
               label="REDUCE ONLY"
               oneButton={true}
@@ -332,9 +314,9 @@ export const TradeSimpleOrdersComponent = () => {
         </div>
       )}
       {type === OrderType.StopLoss && (
-        <div className="flex items-center mb-2">
-          <div className="mr-4 text-right font-bold w-1/4" />
-          <div className="flex flex-1 w-3/4">
+        <div className="mb-2 flex items-center">
+          <div className="mr-4 w-1/4 text-right font-bold" />
+          <div className="flex w-3/4 flex-1">
             <ToggleInputComponent
               label="TRAILING STOP"
               oneButton={true}
@@ -344,29 +326,27 @@ export const TradeSimpleOrdersComponent = () => {
           </div>
         </div>
       )}
-      <div className="flex mt-4">
+      <div className="mt-4 flex">
         <div className="w-1/4" />
-        <div className="ml-6 w-3/4 grid grid-cols-2 gap-2">
+        <div className="ml-6 grid w-3/4 grid-cols-2 gap-2">
           <ActionButtonComponent
-            className="text-dark-white border-dark-green rounded-md bg-dark-green/50"
+            className="text-dark-white border-dark-green bg-dark-green/50 rounded-md"
             disabled={disabled || disabledBuy}
             onClick={handleSubmit(OrderSide.Buy)}
           >
             <div className="uppercase">{submitLabels[OrderSide.Buy][type]}</div>
-            <div className="h-[1px] bg-dark-text-white my-1" />
+            <div className="bg-dark-text-white my-1 h-[1px]" />
             <div className="font-mono">
               {buySize || '0.00'} @ {price || '0.00'}
             </div>
           </ActionButtonComponent>
           <ActionButtonComponent
-            className="text-dark-white border-red-500 rounded-md bg-red-500/50"
+            className="text-dark-white rounded-md border-red-500 bg-red-500/50"
             disabled={disabled || disabledSell}
             onClick={handleSubmit(OrderSide.Sell)}
           >
-            <div className="uppercase">
-              {submitLabels[OrderSide.Sell][type]}
-            </div>
-            <div className="h-[1px] bg-dark-text-white my-1" />
+            <div className="uppercase">{submitLabels[OrderSide.Sell][type]}</div>
+            <div className="bg-dark-text-white my-1 h-[1px]" />
             <div className="font-mono">
               {sellSize || '0.00'} @ {price || '0.00'}
             </div>

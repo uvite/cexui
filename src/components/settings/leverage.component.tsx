@@ -38,11 +38,7 @@ export const LeverageSettingsComponent = () => {
         await connector.setAllLeverage(value);
         successToast('Leverage applied to all instruments!');
       } catch (err: any) {
-        errorToast(
-          err?.response?.data?.msg ||
-            err?.message ||
-            'Failed to update leverage'
-        );
+        errorToast(err?.response?.data?.msg || err?.message || 'Failed to update leverage');
       } finally {
         setLoading(false);
         setTouched(false);
@@ -51,49 +47,39 @@ export const LeverageSettingsComponent = () => {
   };
 
   return (
-    <div className="px-6 py-4 mb-4 min-h-[300px]">
+    <div className="mb-4 min-h-[300px] px-6 py-4">
       <div className="mb-4">
-        <div className="font-bold text-lg">Leverage</div>
-        <p className="text-dark-text-gray text-sm py-2">
-          This slider allows you to change leverage on every instruments per
-          account.
+        <div className="text-lg font-bold">Leverage</div>
+        <p className="text-dark-text-gray py-2 text-sm">
+          This slider allows you to change leverage on every instruments per account.
           <br />
           <br />
-          If you select a leverage above the maximum leverage allowed by your
-          exchange on a specific instrument, it will set it to the maximum
-          allowed.
+          If you select a leverage above the maximum leverage allowed by your exchange on a specific
+          instrument, it will set it to the maximum allowed.
           <br />
           <br />
-          <strong>
-            This will update {markets.length} instruments, please be patient...
-          </strong>
+          <strong>This will update {markets.length} instruments, please be patient...</strong>
         </p>
-        <div className="flex items-center mt-4">
+        <div className="mt-4 flex items-center">
           <Range
             step={step}
             min={min}
             max={max}
             values={[value]}
             renderTrack={({ props, children }) => (
-              <div
-                {...props}
-                className="bg-dark-border-gray-2 w-full h-[3px] rounded-lg"
-              >
+              <div {...props} className="bg-dark-border-gray-2 h-[3px] w-full rounded-lg">
                 {children}
               </div>
             )}
             renderThumb={({ props }) => (
-              <div
-                {...props}
-                className="bg-dark-border-gray-2 w-4 h-4 rounded-full"
-              />
+              <div {...props} className="bg-dark-border-gray-2 h-4 w-4 rounded-full" />
             )}
             onChange={([newValue]) => {
               setValue(newValue);
               setTouched(true);
             }}
           />
-          <div className="ml-4 w-[65px] font-mono text-xs text-dark-text-gray text-center border border-dark-border-gray">
+          <div className="text-dark-text-gray border-dark-border-gray ml-4 w-[65px] border text-center font-mono text-xs">
             {value}x
           </div>
         </div>

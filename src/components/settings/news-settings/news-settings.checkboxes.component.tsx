@@ -17,12 +17,8 @@ export const NewsSettingsCheckboxesComponent = () => {
   const [dot, setDot] = useAtom(newsDisplayDotsAtom);
   const [autoSelect, setAutoSelect] = useAtom(newsAutoSelectTickerAtom);
   const [text2Speech, setText2Speech] = useAtom(newsText2SpeechAtom);
-  const [tradeShortcutsEnabled, setTradeShortcutsEnabled] = useAtom(
-    newsTradeShortcutsEnabledAtom
-  );
-  const [disabledSources, setDisabledSources] = useAtom(
-    newsDisabledSourcesAtom
-  );
+  const [tradeShortcutsEnabled, setTradeShortcutsEnabled] = useAtom(newsTradeShortcutsEnabledAtom);
+  const [disabledSources, setDisabledSources] = useAtom(newsDisabledSourcesAtom);
 
   const toggleSource = (source: NewsSources) => () => {
     if (disabledSources.includes(source)) {
@@ -60,7 +56,7 @@ export const NewsSettingsCheckboxesComponent = () => {
         <div key={label} className="flex items-center">
           <CheckboxComponent checked={value} onChange={setValue} />
           <div
-            className="font-bold ml-4 mt-1.5 cursor-pointer select-none"
+            className="ml-4 mt-1.5 cursor-pointer select-none font-bold"
             onClick={() => setValue(!value)}
           >
             {label}

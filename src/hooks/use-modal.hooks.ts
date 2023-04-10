@@ -9,9 +9,7 @@ export const useIsModalOpen = () => {
   const account = useAtomValue(selectedAccountAtom);
   const { data: session } = useSession();
 
-  return Boolean(
-    (session && router.query.modal === 'settings') || (session && !account)
-  );
+  return Boolean((session && router.query.modal === 'settings') || (session && !account));
 };
 
 export const useOpenModal = () => {

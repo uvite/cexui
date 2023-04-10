@@ -16,9 +16,7 @@ export const useNews = () => {
   // reset history on exchange change
   // we might have different symbols / price on different exchanges
   useEffect(() => {
-    if (
-      currentExchange.current !== `${account?.exchange}_${account?.testnet}`
-    ) {
+    if (currentExchange.current !== `${account?.exchange}_${account?.testnet}`) {
       setMessages([]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

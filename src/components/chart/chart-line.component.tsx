@@ -18,7 +18,7 @@ export const ChartLineComponent = ({
   // create or update line
   useEffect(() => {
     if (candleSeries && priceLine.current) {
-      priceLine.current.applyOptions(priceLineOpts);
+      priceLine.current?.applyOptions(priceLineOpts);
     } else if (candleSeries && !priceLine.current) {
       priceLine.current = candleSeries.createPriceLine(priceLineOpts);
     }

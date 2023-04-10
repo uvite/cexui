@@ -9,16 +9,15 @@ export const NewsSettingsDefaultSizeComponent = () => {
 
   return (
     <>
-      <div className="font-bold text-lg">Default size</div>
-      <p className="text-dark-text-gray text-sm py-2">
+      <div className="text-lg font-bold">Default size</div>
+      <p className="text-dark-text-gray py-2 text-sm">
         Default size in USD to be pre-filled in the BUY/SELL input.
         <br />
-        When you update the size from news feed directly, it will be saved per
-        tokens.
+        When you update the size from news feed directly, it will be saved per tokens.
       </p>
       <input
         type="text"
-        className="w-1/4 font-mono text-center mr-1"
+        className="mr-1 w-1/4 text-center font-mono"
         value={`${defaultSize}`}
         onChange={(e) => {
           if (!isNaN(pFloat(e.target.value))) {

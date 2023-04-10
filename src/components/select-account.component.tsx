@@ -19,9 +19,7 @@ export const SelectAccountComponent = () => {
       ? { value: selectedAccount.name, label: selectedAccount.name }
       : undefined;
 
-  const handleChange = (
-    event: SingleValue<{ value: string; label: string }>
-  ) => {
+  const handleChange = (event: SingleValue<{ value: string; label: string }>) => {
     if (event) {
       track(EventName.SwitchAccount, undefined);
       setSelectedAccount(event.value);
@@ -32,18 +30,14 @@ export const SelectAccountComponent = () => {
     <Select
       id="select-account"
       instanceId="select-account"
-      className="react-select-container flex-1 w-[180px] z-50"
+      className="react-select-container z-50 w-[180px] flex-1"
       classNamePrefix="react-select"
       name="select-account"
       isClearable={false}
       blurInputOnSelect={true}
       isSearchable={false}
       value={value}
-      options={
-        session
-          ? accounts.map((acc) => ({ value: acc.name, label: acc.name }))
-          : []
-      }
+      options={session ? accounts.map((acc) => ({ value: acc.name, label: acc.name })) : []}
       onChange={handleChange}
     />
   );

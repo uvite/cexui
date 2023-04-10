@@ -11,23 +11,11 @@ import { toUSD } from '../../utils/to-usd.utils';
 
 import { ChartLineComponent } from './chart-line.component';
 
-const tpOrSLTypes = [
-  OrderType.StopLoss,
-  OrderType.TakeProfit,
-  OrderType.TrailingStopLoss,
-];
+const tpOrSLTypes = [OrderType.StopLoss, OrderType.TakeProfit, OrderType.TrailingStopLoss];
 
-const draggableOrderTypes = [
-  OrderType.StopLoss,
-  OrderType.TakeProfit,
-  OrderType.Limit,
-];
+const draggableOrderTypes = [OrderType.StopLoss, OrderType.TakeProfit, OrderType.Limit];
 
-export const ChartOrdersComponent = ({
-  candleSeries,
-}: {
-  candleSeries?: CandleSeries;
-}) => {
+export const ChartOrdersComponent = ({ candleSeries }: { candleSeries?: CandleSeries }) => {
   const { orders, positions } = useAtomValue(selectedAtom);
   const privacy = useAtomValue(privacyAtom);
 
@@ -42,9 +30,7 @@ export const ChartOrdersComponent = ({
           : p.side === PositionSide.Long;
       }
 
-      return OrderSide.Buy
-        ? p.side === PositionSide.Long
-        : p.side === PositionSide.Short;
+      return OrderSide.Buy ? p.side === PositionSide.Long : p.side === PositionSide.Short;
     });
 
     return { order, position };
@@ -53,13 +39,7 @@ export const ChartOrdersComponent = ({
   const checkSum = ordersWithPosition
     .map(
       ({ order: o, position: p }) =>
-        o.id +
-        o.type +
-        o.amount +
-        o.price +
-        o.side +
-        (p?.entryPrice || 0) +
-        (p?.contracts || 0)
+        o.id + o.type + o.amount + o.price + o.side + (p?.entryPrice || 0) + (p?.contracts || 0),
     )
     .join('__');
 
@@ -89,10 +69,7 @@ export const ChartOrdersComponent = ({
           }
         }
 
-        if (
-          order.type === OrderType.StopLoss ||
-          order.type === OrderType.TrailingStopLoss
-        ) {
+        if (order.type === OrderType.StopLoss || order.type === OrderType.TrailingStopLoss) {
           const amount = position?.contracts || order.amount;
 
           textA = order.type === OrderType.StopLoss ? 'SL' : 'TSL';
@@ -135,19 +112,15 @@ export const ChartOrdersComponent = ({
         };
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [checkSum, privacy]
+    [checkSum, privacy],
   );
 
   const chartLines = useMemo(
     () =>
       lines.map((line) => (
-        <ChartLineComponent
-          key={line.id}
-          line={line}
-          candleSeries={candleSeries}
-        />
+        <ChartLineComponent key={line.id} line={line} candleSeries={candleSeries} />
       )),
-    [candleSeries, lines]
+    [candleSeries, lines],
   );
 
   return <>{chartLines}</>;

@@ -91,8 +91,7 @@ export const useScaledInSizeTrade = () => {
   const placeOrders = usePlaceOrders();
 
   const symbol = useAtomValue(selectedSymbolAtom);
-  const { orders, side, size, avgPrice, stopLoss, takeProfit } =
-    useAtomValue(scaleInSizeAtom);
+  const { orders, side, size, avgPrice, stopLoss, takeProfit } = useAtomValue(scaleInSizeAtom);
 
   const scaleIn = async () => {
     const orderIds = await placeOrders(
@@ -105,7 +104,7 @@ export const useScaledInSizeTrade = () => {
         takeProfit: order.takeProfit,
         stopLoss: order.stopLoss,
         reduceOnly: order.reduceOnly,
-      }))
+      })),
     );
 
     if (orderIds.length > 0) {

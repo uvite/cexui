@@ -6,11 +6,7 @@ import { useDrawChart } from './use-draw-chart.hooks';
 import { useDrawKline } from './use-draw-kline.hooks';
 import { useHOLC } from './use-ohlc.hooks';
 
-export const useChart = ({
-  container,
-}: {
-  container: MutableRefObject<HTMLDivElement | null>;
-}) => {
+export const useChart = ({ container }: { container: MutableRefObject<HTMLDivElement | null> }) => {
   const { chart, candleSeries, volumeSeries } = useDrawChart({ container });
 
   useDrawKline({ candleSeries, volumeSeries, chart });

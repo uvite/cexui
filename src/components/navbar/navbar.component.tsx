@@ -39,22 +39,18 @@ export const NavbarComponent = () => {
       {/*)}*/}
       {process.env.STAGE !== 'dev' && hasNewVersion && (
         <div
-          className="bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 text-white text-center py-2 cursor-pointer border-b-2"
+          className="cursor-pointer border-b-2 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 py-2 text-center text-white"
           onClick={() => (window as any).location.reload(true)}
         >
-          A new version of <strong>tuleep.trade</strong> is available, click
-          here to reload your page.
+          A new version of <strong>tuleep.trade</strong> is available, click here to reload your
+          page.
         </div>
       )}
-      <div className="border-b border-dark-border-gray bg-dark-bg text-dark-text-white ">
-        <div className="py-3 md:py-2 px-4">
+      <div className="border-dark-border-gray bg-dark-bg text-dark-text-white border-b ">
+        <div className="px-4 py-3 md:py-2">
           <div className="flex items-center">
-            <h1 className="font-bold tracking-widest text-2xl text-dark-text-white">
-              <img
-                src="/assets/images/logo.svg"
-                alt="gvm"
-                className="mr-2 inline w-[30px]"
-              />
+            <h1 className="text-dark-text-white text-2xl font-bold tracking-widest">
+              <img src="/assets/images/logo.svg" alt="gvm" className="mr-2 inline w-[30px]" />
               <span>Gvm bot</span>
             </h1>
             {session && (
@@ -69,7 +65,7 @@ export const NavbarComponent = () => {
                   <div className="ml-auto">
                     <div className="flex items-center">
                       <div
-                        className="text-2xl mr-4 text-dark-text-gray hover:text-dark-text-white transition-colors cursor-pointer"
+                        className="text-dark-text-gray hover:text-dark-text-white mr-4 cursor-pointer text-2xl transition-colors"
                         onClick={() => openSettingsModal()}
                       >
                         <AiFillSetting />
@@ -93,7 +89,7 @@ export const NavbarComponent = () => {
                 </>
               )}
               <a
-                className="ml-2 text-3xl text-dark-text-gray hover:text-dark-text-white transition-colors cursor-pointer"
+                className="text-dark-text-gray hover:text-dark-text-white ml-2 cursor-pointer text-3xl transition-colors"
                 href="https://docs.tuleep.trade"
                 target="_blank"
                 rel="noreferrer"

@@ -23,7 +23,7 @@ export const useReversePositions = () => {
 
       return Promise.all(promises);
     },
-    [reducePositions]
+    [reducePositions],
   );
 
   return reversePositions;

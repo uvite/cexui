@@ -9,18 +9,14 @@ export const NewsSettingsBlockListComponent = () => {
 
   return (
     <>
-      <div className="font-bold text-lg">Words block list</div>
-      <p className="text-dark-text-gray text-sm py-2">
+      <div className="text-lg font-bold">Words block list</div>
+      <p className="text-dark-text-gray py-2 text-sm">
         News containing those words will be ignored.
         <br />
         Ex: If you want to remove Elon Musk tweets from the news feed.
       </p>
       <div>
-        <Tags
-          className="tags-input"
-          value={blocklist}
-          onChange={(words) => setBlocklist(words)}
-        />
+        <Tags className="tags-input" value={blocklist} onChange={(words) => setBlocklist(words)} />
       </div>
     </>
   );

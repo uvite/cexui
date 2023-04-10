@@ -13,8 +13,10 @@ import { LoadingComponent } from '../ui/loading.component';
 
 import { OrderRowComponent } from './order-row.component';
 
+// eslint-disable-next-line react/display-name
 const TableComponent = memo((props) => <table {...props} className="w-full table-auto" />);
 
+// eslint-disable-next-line react/display-name
 const TableRowComponent = memo((props) => <tr {...props} className="text-dark-text-white" />);
 
 export const OrdersComponent = () => {

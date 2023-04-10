@@ -48,8 +48,7 @@ export const fakeData = [
   {
     symbols: [],
     news: {
-      title:
-        'BINANCE.ORG BLOG: BNB Chain Launches Developer Education Initiative with Patika',
+      title: 'BINANCE.ORG BLOG: BNB Chain Launches Developer Education Initiative with Patika',
       source: 'Blogs',
       url: 'https://www.binance.org/en/blog/bnb-chain-launches-developer-education-initiative-with-patika/',
       time: 1671103782024,
@@ -65,8 +64,7 @@ export const fakeData = [
   {
     symbols: [],
     news: {
-      title:
-        'COINTELEGRAPH: AnySwap announces official rebranding as Multichain',
+      title: 'COINTELEGRAPH: AnySwap announces official rebranding as Multichain',
       source: 'Blogs',
       url: 'https://cointelegraph.com/press-releases/anyswap-announces-official-rebranding-as-multichain',
       time: 1671103690682,

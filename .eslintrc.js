@@ -16,6 +16,8 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'next/core-web-vitals',
     'plugin:prettier/recommended',
+     "next",
+    "prettier"
   ],
   plugins: ['@typescript-eslint'],
   rules: {
@@ -23,6 +25,8 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off"
   },
   ignorePatterns: ['**/*.d.ts', '**/__generated__/', '**/*.generated.ts'],
 };

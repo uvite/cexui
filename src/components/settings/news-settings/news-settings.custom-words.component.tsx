@@ -14,9 +14,7 @@ export const NewsSettingsCustomWordsComponent = () => {
   const [newWord, setNewWord] = useState('');
   const [newWordTickers, setNewWordTickers] = useState<string[]>([]);
 
-  const tickers = useAtomValue(marketsAtom).map((m) =>
-    m.symbol.replace(tickerRegex, '')
-  );
+  const tickers = useAtomValue(marketsAtom).map((m) => m.symbol.replace(tickerRegex, ''));
 
   const [customWords, setCustomWords] = useAtom(customTickerWordsMappingAtom);
   const asArray = orderBy(Object.entries(customWords), ['0'], ['asc']);
@@ -43,13 +41,13 @@ export const NewsSettingsCustomWordsComponent = () => {
 
   return (
     <>
-      <div className="font-bold text-lg">Custom words</div>
-      <p className="text-dark-text-gray text-sm py-2">
+      <div className="text-lg font-bold">Custom words</div>
+      <p className="text-dark-text-gray py-2 text-sm">
         Those words would be used to match a ticker in the news.
         <br />
         (Changing this setting will take effect on future news).
       </p>
-      <table className="table table-auto w-full">
+      <table className="table w-full table-auto">
         <thead>
           <tr>
             <th className="text-left">Word</th>
@@ -60,13 +58,13 @@ export const NewsSettingsCustomWordsComponent = () => {
         <tbody>
           {asArray.map(([word, wordTickers]) => (
             <tr key={word}>
-              <td className="text-left text-dark-text-gray">{word}</td>
-              <td className="text-right font-mono text-sm text-dark-text-gray">
+              <td className="text-dark-text-gray text-left">{word}</td>
+              <td className="text-dark-text-gray text-right font-mono text-sm">
                 {wordTickers.join(', ')}
               </td>
               <td className="text-right">
                 <FaTimesCircle
-                  className="inline text-red-500 cursor-pointer"
+                  className="inline cursor-pointer text-red-500"
                   onClick={() => removeWord(word)}
                 />
               </td>
@@ -74,26 +72,26 @@ export const NewsSettingsCustomWordsComponent = () => {
           ))}
           {asArray.length === 0 && (
             <tr>
-              <td colSpan={3} className="text-left text-dark-text-gray italic">
+              <td colSpan={3} className="text-dark-text-gray text-left italic">
                 No custom words
               </td>
             </tr>
           )}
         </tbody>
       </table>
-      <div className="flex items-center mt-4">
+      <div className="mt-4 flex items-center">
         <input
           type="text"
-          className="py-1.5 w-1/5 mr-1"
+          className="mr-1 w-1/5 py-1.5"
           value={newWord}
           placeholder="Word"
           onChange={onInputChange}
         />
-        <div className="w-3/5 mx-1">
+        <div className="mx-1 w-3/5">
           <Select
             id="news-custom-tickers"
             instanceId="news-custom-tickers"
-            className="react-select-container w-full z-[90]"
+            className="react-select-container z-[90] w-full"
             classNamePrefix="react-select"
             value={newWordTickers.map((t) => ({ value: t, label: t }))}
             options={tickers.map((t) => ({ value: t, label: t }))}
@@ -103,10 +101,7 @@ export const NewsSettingsCustomWordsComponent = () => {
             onChange={(data) => setNewWordTickers(data.map((d) => d.value))}
           />
         </div>
-        <ButtonComponent
-          className="ml-1 w-1/5 h-[40px] rounded-md"
-          onClick={addWord}
-        >
+        <ButtonComponent className="ml-1 h-[40px] w-1/5 rounded-md" onClick={addWord}>
           <span className="relative -top-0.5">Submit</span>
         </ButtonComponent>
       </div>

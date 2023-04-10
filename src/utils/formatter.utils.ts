@@ -44,10 +44,7 @@ const getSmallCurrencyIntl = (currency: AvailableCurrencies) => {
   });
 };
 
-export const formatCurrency = (
-  value: number | string,
-  currency: AvailableCurrencies = 'usd'
-) => {
+export const formatCurrency = (value: number | string, currency: AvailableCurrencies = 'usd') => {
   const v = typeof value === 'string' ? pFloat(value) : value;
   if (Math.abs(v) > 1) return getCurrencyIntl(currency).format(v);
   return getSmallCurrencyIntl(currency).format(v);
@@ -55,7 +52,7 @@ export const formatCurrency = (
 
 export const formatPercent = (value: number | string) => {
   const percent = abbreviateNumber(
-    Math.round((typeof value === 'string' ? pFloat(value) : value) * 10e3) / 100
+    Math.round((typeof value === 'string' ? pFloat(value) : value) * 10e3) / 100,
   );
   return `${percent}%`;
 };
@@ -78,7 +75,7 @@ export const hashFormatter = (hash: string) => {
 export function formatNumber(
   value: number | string,
   dataKey: string,
-  currency?: AvailableCurrencies
+  currency?: AvailableCurrencies,
 ) {
   if (['usd', 'price'].some((v) => dataKey.toLowerCase().includes(v))) {
     return formatCurrency(value, currency);

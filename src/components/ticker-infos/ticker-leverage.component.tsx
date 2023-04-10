@@ -44,9 +44,7 @@ export const TickerLeverageComponent = ({
       try {
         await connector.setLeverage(symbol, updatedValue);
         setPositions((prev) =>
-          prev.map((p) =>
-            p.symbol === symbol ? { ...p, leverage: updatedValue } : p
-          )
+          prev.map((p) => (p.symbol === symbol ? { ...p, leverage: updatedValue } : p)),
         );
       } finally {
         setLoading(false);
@@ -56,47 +54,36 @@ export const TickerLeverageComponent = ({
     }
   };
 
-  const displayedValue =
-    touched && updatedValue !== null ? updatedValue : positionLeverage;
+  const displayedValue = touched && updatedValue !== null ? updatedValue : positionLeverage;
 
   return (
     <div>
-      <div className="flex items-center mt-3">
+      <div className="mt-3 flex items-center">
         <div className="mr-4 font-bold">Leverage</div>
-        <div className="flex-1 w-3/4 pr-1">
+        <div className="w-3/4 flex-1 pr-1">
           <Range
             step={step}
             min={1}
             max={Math.max(maxLeverage, displayedValue)}
             values={[displayedValue]}
             renderTrack={({ props, children }) => (
-              <div
-                {...props}
-                className="bg-dark-border-gray-2 w-full h-[3px] rounded-lg"
-              >
+              <div {...props} className="bg-dark-border-gray-2 h-[3px] w-full rounded-lg">
                 {children}
               </div>
             )}
             renderThumb={({ props }) => (
-              <div
-                {...props}
-                className="bg-dark-border-gray-2 w-4 h-4 rounded-full"
-              />
+              <div {...props} className="bg-dark-border-gray-2 h-4 w-4 rounded-full" />
             )}
             onChange={([value]) => handleChange(value)}
           />
         </div>
-        <div className="ml-4 w-[65px] font-mono text-xs text-dark-text-gray text-center border border-dark-border-gray">
+        <div className="text-dark-text-gray border-dark-border-gray ml-4 w-[65px] border text-center font-mono text-xs">
           {displayedValue}x
         </div>
       </div>
       {touched && (
         <div className="text-right">
-          <ButtonComponent
-            size="xsmall"
-            loading={loading}
-            onClick={handleUpdate}
-          >
+          <ButtonComponent size="xsmall" loading={loading} onClick={handleUpdate}>
             UPDATE
           </ButtonComponent>
         </div>

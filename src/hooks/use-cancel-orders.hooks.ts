@@ -20,7 +20,7 @@ export const useCancelOrders = () => {
         side: order.side,
         price: order.price,
         amount: order.amount,
-      })
+      }),
     );
 
     await connector?.cancelOrders?.(orders);

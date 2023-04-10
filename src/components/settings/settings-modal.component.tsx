@@ -81,7 +81,13 @@ export const SettingsModalComponent = () => {
       isOpen={isOpen}
       style={modalStyles}
       shouldCloseOnOverlayClick={false}
-      onRequestClose={account ? onRequestClose : () => {}}
+      onRequestClose={
+        account
+          ? onRequestClose
+          : () => {
+              return false;
+            }
+      }
     >
       <div className="bg-dark-bg w-[80vw] max-w-[800px]">
         <div className="border-dark-bg border-2">

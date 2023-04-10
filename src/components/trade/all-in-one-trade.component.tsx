@@ -42,8 +42,7 @@ export const AllInOneTradeComponent = () => {
   const [takeProfit, setTakeProfit] = useAtom(tradeTakeProfitAtom);
   const setLastTouched = useSetAtom(tradeLastTouchedAtom);
 
-  const { totalQuantity, estimatedLoss, estimatedProfit, price } =
-    useAtomValue(aioTradeAtom);
+  const { totalQuantity, estimatedLoss, estimatedProfit, price } = useAtomValue(aioTradeAtom);
 
   const trade = useAIOTrade();
 
@@ -72,11 +71,11 @@ export const AllInOneTradeComponent = () => {
   }, [selectedSymbol]);
 
   return (
-    <div className="px-2 py-3 text-sm h-full">
-      <div className="flex items-center mb-4">
-        <div className="mr-4 text-right font-bold w-1/4">Side</div>
-        <div className="flex flex-1 w-3/4">
-          <div className="w-1/2 mr-1">
+    <div className="h-full px-2 py-3 text-sm">
+      <div className="mb-4 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Side</div>
+        <div className="flex w-3/4 flex-1">
+          <div className="mr-1 w-1/2">
             <OrderSideButton
               className="w-full"
               side={OrderSide.Buy}
@@ -84,7 +83,7 @@ export const AllInOneTradeComponent = () => {
               onClick={setSide}
             />
           </div>
-          <div className="w-1/2 ml-1">
+          <div className="ml-1 w-1/2">
             <OrderSideButton
               className="w-full"
               side={OrderSide.Sell}
@@ -94,15 +93,15 @@ export const AllInOneTradeComponent = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">Size</div>
-        <div className="w-3/4 flex flex-wrap">
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Size</div>
+        <div className="flex w-3/4 flex-wrap">
           {sizes.map(({ value, label }, idx) => (
             // eslint-disable-next-line react/no-array-index-key
-            <div key={idx} className="w-1/2 odd:pr-1 odd:pl-1 even:pl-1 mb-2">
+            <div key={idx} className="mb-2 w-1/2 odd:pl-1 odd:pr-1 even:pl-1">
               <ActionButtonComponent
                 className={cx('bg-dark-bg w-full rounded-md', {
-                  'opacity-100 border-dark-blue': selectedSize === value,
+                  'border-dark-blue opacity-100': selectedSize === value,
                 })}
                 onClick={() => setSelectedSize(value)}
               >
@@ -112,8 +111,8 @@ export const AllInOneTradeComponent = () => {
           ))}
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">Order</div>
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Order</div>
         <div className="flex flex-1 items-center">
           {aioOrderTypes.map(({ value, label }) => (
             <div
@@ -122,7 +121,7 @@ export const AllInOneTradeComponent = () => {
             >
               <ActionButtonComponent
                 className={cx('bg-dark-bg w-full rounded-md', {
-                  'opacity-100 border-dark-blue': orderType === value,
+                  'border-dark-blue opacity-100': orderType === value,
                 })}
                 onClick={() => setOrderType(value)}
               >
@@ -132,8 +131,8 @@ export const AllInOneTradeComponent = () => {
           ))}
         </div>
       </div>
-      <div className="flex items-center mb-4">
-        <div className="mr-4 text-right font-bold w-1/4">Opts</div>
+      <div className="mb-4 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Opts</div>
         <div className="flex flex-1 items-center">
           {aioOrderSubTypes[orderType].map(({ value, label }) => (
             <div
@@ -142,7 +141,7 @@ export const AllInOneTradeComponent = () => {
             >
               <ActionButtonComponent
                 className={cx('bg-dark-bg w-full rounded-md', {
-                  'opacity-100 border-dark-blue': orderSubType === value,
+                  'border-dark-blue opacity-100': orderSubType === value,
                 })}
                 onClick={() => setOrderSubType(value)}
               >
@@ -152,35 +151,35 @@ export const AllInOneTradeComponent = () => {
           ))}
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">SL</div>
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">SL</div>
         <div className="w-3/4">
           <input
             type="text"
             value={stop}
-            className="text-right w-full bg-dark-bg font-semibold font-mono"
+            className="bg-dark-bg w-full text-right font-mono font-semibold"
             required={true}
             onChange={({ target }) => setStop(target.value)}
             onFocus={() => setLastTouched(LastTouchedInput.To)}
           />
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">TP</div>
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">TP</div>
         <div className="w-3/4">
           <input
             type="text"
             value={takeProfit}
-            className="text-right w-full bg-dark-bg font-semibold font-mono"
+            className="bg-dark-bg w-full text-right font-mono font-semibold"
             required={true}
             onChange={({ target }) => setTakeProfit(target.value)}
             onFocus={() => setLastTouched(LastTouchedInput.TakeProfit)}
           />
         </div>
       </div>
-      <div className="flex items-center my-6">
-        <div className="mr-4 text-right font-bold w-1/4" />
-        <div className="flex-1 w-3/4 pr-1 text-dark-text-gray">
+      <div className="my-6 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold" />
+        <div className="text-dark-text-gray w-3/4 flex-1 pr-1">
           <div className="flex items-center">
             <div className="font-semibold">Quantity</div>
             <div className="ml-auto font-mono text-xs">{totalQuantity}</div>
@@ -203,9 +202,9 @@ export const AllInOneTradeComponent = () => {
           </div>
         </div>
       </div>
-      <div className="flex mt-3 w-full">
+      <div className="mt-3 flex w-full">
         <ButtonComponent
-          className="w-full bg-dark-bg flex items-center justify-center rounded-md"
+          className="bg-dark-bg flex w-full items-center justify-center rounded-md"
           size="small"
           disabled={totalQuantity === 0}
           loading={loading}
@@ -213,7 +212,7 @@ export const AllInOneTradeComponent = () => {
         >
           {side}
           {totalQuantity > 0 && (
-            <span className="font-mono text-xs ml-2">
+            <span className="ml-2 font-mono text-xs">
               ({totalQuantity} {selectedSymbol?.replace(/\/.+/, '')})
             </span>
           )}

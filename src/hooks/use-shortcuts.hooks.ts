@@ -4,11 +4,7 @@ import { pick } from 'lodash';
 
 import { appSettingsAtom, defaultSettings } from '../app-settings';
 import { TradeComponentType } from '../app.types';
-import {
-  togglePreviewAtom,
-  privacyAtom,
-  toggleSoundAtom,
-} from '../atoms/app.atoms';
+import { togglePreviewAtom, privacyAtom, toggleSoundAtom } from '../atoms/app.atoms';
 import { selectedTradeAtom } from '../atoms/trade.atoms';
 
 import {
@@ -19,23 +15,16 @@ import {
 import { toggleSelectedSymbolAsFavorite } from './use-favorites.hooks';
 import { useKeyBindings } from './use-keybindings.hooks';
 import { useIsModalOpen, useOpenModal } from './use-modal.hooks';
-import {
-  setNextPositionAtom,
-  setPreviousPositionAtom,
-} from './use-positions.hooks';
+import { setNextPositionAtom, setPreviousPositionAtom } from './use-positions.hooks';
 import { cycleTimeframeAtom } from './use-timeframe.hooks';
 
 const defaultShortcuts = defaultSettings.shortcuts;
-export const shortcutsBaseAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('shortcuts')
-);
+export const shortcutsBaseAtom = focusAtom(appSettingsAtom, (o) => o.prop('shortcuts'));
 
 export const shortcutsAtom = atom(
   (get) => {
     const shortcuts = get(shortcutsBaseAtom);
-    const missing = Object.keys(defaultShortcuts).filter(
-      (key) => !(key in shortcuts)
-    );
+    const missing = Object.keys(defaultShortcuts).filter((key) => !(key in shortcuts));
 
     return {
       ...shortcuts,
@@ -45,7 +34,7 @@ export const shortcutsAtom = atom(
   (get, set, action: Partial<typeof defaultShortcuts>) => {
     const prev = get(shortcutsBaseAtom);
     set(shortcutsBaseAtom, { ...prev, ...action });
-  }
+  },
 );
 
 export const useAppShortcuts = () => {
@@ -94,8 +83,7 @@ export const useAppShortcuts = () => {
       {
         keys: shortcuts.searchFocus,
         onEvent: (event) => {
-          const $input =
-            document.querySelector<HTMLInputElement>('#tickers-search');
+          const $input = document.querySelector<HTMLInputElement>('#tickers-search');
 
           if ($input) {
             event.preventDefault();
@@ -202,6 +190,6 @@ export const useAppShortcuts = () => {
         },
       },
     ],
-    shortcutsEnabled
+    shortcutsEnabled,
   );
 };

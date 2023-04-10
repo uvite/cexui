@@ -3,11 +3,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useCallback } from 'react';
 import { v4 } from 'uuid';
 
-import {
-  isMutedAtom,
-  messageHistoryAtom,
-  setMessageHistoryAtom,
-} from '../../atoms/app.atoms';
+import { isMutedAtom, messageHistoryAtom, setMessageHistoryAtom } from '../../atoms/app.atoms';
 import { selectedSymbolAtom } from '../../atoms/trade.atoms';
 import { playNewsAlertSound } from '../../sounds';
 import { formatNews } from '../../utils/format-news.utils';
@@ -48,7 +44,7 @@ export const useHandleMessage = () => {
       const news = formatNews(message);
 
       const exists = messageHistory.some(
-        (n) => n.news.content === news.content && n.news.author === news.author
+        (n) => n.news.content === news.content && n.news.author === news.author,
       );
 
       // play sound if news is new and not muted in settings
@@ -90,7 +86,7 @@ export const useHandleMessage = () => {
       setSelectedNews,
       setSelectedSymbol,
       text2Speech,
-    ]
+    ],
   );
 
   return handleMessage;

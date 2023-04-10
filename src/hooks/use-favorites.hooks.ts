@@ -5,9 +5,7 @@ import { useCallback } from 'react';
 import { appSettingsAtom } from '../app-settings';
 import { selectedSymbolAtom } from '../atoms/trade.atoms';
 
-export const favoriteSymbolsAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('favorites')
-);
+export const favoriteSymbolsAtom = focusAtom(appSettingsAtom, (o) => o.prop('favorites'));
 
 export const toggleFavAtom = atom(null, (get, set, symbol: string) => {
   const prev = get(favoriteSymbolsAtom);
@@ -28,10 +26,7 @@ export const useFavorites = () => {
   const favorites = useAtomValue(favoriteSymbolsAtom);
   const toggleFav = useSetAtom(toggleFavAtom);
 
-  const isFav = useCallback(
-    (symbol: string) => favorites.includes(symbol),
-    [favorites]
-  );
+  const isFav = useCallback((symbol: string) => favorites.includes(symbol), [favorites]);
 
   return { favorites, toggleFav, isFav };
 };

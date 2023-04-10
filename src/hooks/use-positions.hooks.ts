@@ -17,33 +17,23 @@ const defaultOrderDirectionAttr: Record<string, OrderDirectionPositions> = {
 export const _orderByPositionsAtom =
   atomWithStorage<`${OrderByPositions}:${OrderDirectionPositions}`>(
     'orderByPositions',
-    'notional:desc'
+    'notional:desc',
   );
 
 export const orderByPositionsAtom = atom(
-  (get) =>
-    get(_orderByPositionsAtom).split(':') as [
-      OrderByPositions,
-      OrderDirectionPositions
-    ]
+  (get) => get(_orderByPositionsAtom).split(':') as [OrderByPositions, OrderDirectionPositions],
 );
 
-export const orderPositionsFnAtom = atom(
-  null,
-  (get, set, orderByAttr: OrderByPositions) => {
-    const [currOrderByAttr, orderDirection] = get(orderByPositionsAtom);
+export const orderPositionsFnAtom = atom(null, (get, set, orderByAttr: OrderByPositions) => {
+  const [currOrderByAttr, orderDirection] = get(orderByPositionsAtom);
 
-    if (currOrderByAttr === orderByAttr) {
-      set(
-        _orderByPositionsAtom,
-        `${currOrderByAttr}:${orderDirection === 'asc' ? 'desc' : 'asc'}`
-      );
-    } else {
-      const defaultOrder = defaultOrderDirectionAttr[orderByAttr] || 'desc';
-      set(_orderByPositionsAtom, `${orderByAttr}:${defaultOrder}`);
-    }
+  if (currOrderByAttr === orderByAttr) {
+    set(_orderByPositionsAtom, `${currOrderByAttr}:${orderDirection === 'asc' ? 'desc' : 'asc'}`);
+  } else {
+    const defaultOrder = defaultOrderDirectionAttr[orderByAttr] || 'desc';
+    set(_orderByPositionsAtom, `${orderByAttr}:${defaultOrder}`);
   }
-);
+});
 
 export const orderedPositionsAtom = atom((get) => {
   const positions = get(positionsAtom).filter((p) => p.contracts !== 0);
@@ -70,7 +60,7 @@ export const setNextPositionAtom = atom(null, (get, set) => {
       selectedSymbolAtom,
       nextPositionIdx > positions.length - 1
         ? positions[0].symbol
-        : positions[nextPositionIdx].symbol
+        : positions[nextPositionIdx].symbol,
     );
   }
 });
@@ -87,7 +77,7 @@ export const setPreviousPositionAtom = atom(null, (get, set) => {
       selectedSymbolAtom,
       nextPositionIdx < 0
         ? positions[positions.length - 1].symbol
-        : positions[nextPositionIdx].symbol
+        : positions[nextPositionIdx].symbol,
     );
   }
 });
@@ -97,12 +87,12 @@ export const positionsStatsAtom = atom((get) => {
 
   const longExposure = sumBy(
     positions.filter((p) => p.side === PositionSide.Long),
-    (p) => p.notional + p.unrealizedPnl
+    (p) => p.notional + p.unrealizedPnl,
   );
 
   const shortExposure = sumBy(
     positions.filter((p) => p.side === PositionSide.Short),
-    (p) => p.notional + p.unrealizedPnl
+    (p) => p.notional + p.unrealizedPnl,
   );
 
   const totalExposure = longExposure + shortExposure;

@@ -8,13 +8,13 @@ export const NavbarNukeButton = () => {
 
   return (
     <div
-      className="flex flex-col items-center justify-center border rounded-sm w-14 cursor-pointer select-none last:mr-0 border-dark-border-gray-2 text-dark-border-gray-2 hover:border-red-500 hover:text-red-500"
+      className="border-dark-border-gray-2 text-dark-border-gray-2 flex w-14 cursor-pointer select-none flex-col items-center justify-center rounded-sm border last:mr-0 hover:border-red-500 hover:text-red-500"
       onClick={nuke}
     >
       <div className="text-2xl">
         <TbRadioactive />
       </div>
-      <div className="font-mono text-[10px] uppercase text-center font-semibold">
+      <div className="text-center font-mono text-[10px] font-semibold uppercase">
         <div>Nuke</div>
       </div>
     </div>

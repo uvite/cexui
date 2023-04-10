@@ -17,6 +17,6 @@ export const filledOrderToast = (order: OrderFillEvent, isMuted: boolean) => {
     {
       type: 'success',
       onOpen: () => !isMuted && playOrderFilledSound(),
-    }
+    },
   );
 };

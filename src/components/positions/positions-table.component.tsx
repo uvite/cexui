@@ -27,8 +27,10 @@ const columns: Array<{ label: string; key?: keyof Position }> = [
   { label: 'Mark price' },
 ];
 
+// eslint-disable-next-line react/display-name
 const TableComponent = memo((props) => <table {...props} className="w-full table-auto" />);
 
+// eslint-disable-next-line react/display-name
 const TableRowComponent = memo(
   (
     props: Record<string, any> & {

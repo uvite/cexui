@@ -74,8 +74,8 @@ export const selectedAccountAtom = atom(
     if (account) {
       set(
         accountsAtom,
-        accounts.map((acc) => ({ ...acc, selected: acc.name === accountName }))
+        accounts.map((acc) => ({ ...acc, selected: acc.name === accountName })),
       );
     }
-  }
+  },
 );

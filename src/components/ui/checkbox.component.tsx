@@ -14,17 +14,13 @@ export const CheckboxComponent = ({
   return (
     <div className={className}>
       <span
-        className={cx('cursor-pointer select-none text-4xl -ml-2', {
+        className={cx('-ml-2 cursor-pointer select-none text-4xl', {
           'text-dark-text-white': checked,
           'text-dark-text-white/50': !checked,
         })}
         onClick={() => onChange(!checked)}
       >
-        {checked ? (
-          <BiCheckboxChecked className="inline" />
-        ) : (
-          <BiCheckbox className="inline" />
-        )}
+        {checked ? <BiCheckboxChecked className="inline" /> : <BiCheckbox className="inline" />}
       </span>
     </div>
   );

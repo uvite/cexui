@@ -30,15 +30,12 @@ type AIOOrderSubType = {
   }>;
 };
 
-export const aioTradesSizesAtom = atomWithStorage<AIOTradeSize[]>(
-  'aioTradeSizes',
-  [
-    { value: 1000, label: '$1,000' },
-    { value: 2500, label: '$2,500' },
-    { value: 5000, label: '$5,000' },
-    { value: 10000, label: '$10,000' },
-  ]
-);
+export const aioTradesSizesAtom = atomWithStorage<AIOTradeSize[]>('aioTradeSizes', [
+  { value: 1000, label: '$1,000' },
+  { value: 2500, label: '$2,500' },
+  { value: 5000, label: '$5,000' },
+  { value: 10000, label: '$10,000' },
+]);
 
 export const aioOrderTypes: AIOOrderType[] = [
   { value: 'market', label: 'Market' },
@@ -71,23 +68,21 @@ export const aioSelectedSizeAtom = atom(
     const selectedSize = get(_aioSelectedSizeAtom);
     const sizes = get(aioTradesSizesAtom);
 
-    return sizes.find((size) => size.value === selectedSize)
-      ? selectedSize
-      : sizes[0].value;
+    return sizes.find((size) => size.value === selectedSize) ? selectedSize : sizes[0].value;
   },
   (_get, set, value: AIOTradeSize['value']) => {
     set(_aioSelectedSizeAtom, value);
-  }
+  },
 );
 
 export const _aioSelectedOrderTypeAtom = atomWithStorage(
   'aioSelectedOrderType',
-  aioOrderTypes[0].value
+  aioOrderTypes[0].value,
 );
 
 export const _aioSelectedOrderSubTypeAtom = atomWithStorage<number | string>(
   'aioSelectedOrderSubType',
-  aioOrderSubTypes.market[0].value
+  aioOrderSubTypes.market[0].value,
 );
 
 export const aioSelectedOrderTypeAtom = atom(
@@ -103,7 +98,7 @@ export const aioSelectedOrderTypeAtom = atom(
 
     set(_aioSelectedOrderTypeAtom, value);
     set(_aioSelectedOrderSubTypeAtom, subOrderType);
-  }
+  },
 );
 
 export const aioSelectedOrderSubTypeAtom = atom(
@@ -112,16 +107,14 @@ export const aioSelectedOrderSubTypeAtom = atom(
     const selectedOrderSubType = get(_aioSelectedOrderSubTypeAtom);
 
     const exist = aioOrderSubTypes[selectedOrderType].find(
-      ({ value }) => value === selectedOrderSubType
+      ({ value }) => value === selectedOrderSubType,
     );
 
-    return exist
-      ? selectedOrderSubType
-      : aioOrderSubTypes[selectedOrderType][0].value;
+    return exist ? selectedOrderSubType : aioOrderSubTypes[selectedOrderType][0].value;
   },
   (_get, set, value: number | string) => {
     set(_aioSelectedOrderSubTypeAtom, value);
-  }
+  },
 );
 
 // eslint-disable-next-line complexity
@@ -138,10 +131,7 @@ export const aioTradeAtom = atom((get) => {
 
   const { ticker, market } = get(selectedAtom);
 
-  const totalQuantity = floorStep(
-    size / (ticker?.last ?? 0),
-    market?.precision?.amount ?? 0
-  );
+  const totalQuantity = floorStep(size / (ticker?.last ?? 0), market?.precision?.amount ?? 0);
 
   let price = ticker ? ticker.last! : 0;
   const bestBid = ticker ? ticker.bid : 0;
@@ -180,16 +170,12 @@ export const aioTradeAtom = atom((get) => {
         side,
         symbol,
         price: orderPrice,
-        amount: floorStep(
-          totalQuantity / nbOrders,
-          market?.precision?.amount || 0
-        ),
+        amount: floorStep(totalQuantity / nbOrders, market?.precision?.amount || 0),
         type: OrderType.Limit,
-      }))
+      })),
     );
 
-    const entryOrder =
-      side === OrderSide.Buy ? maxBy(orders, 'price') : minBy(orders, 'price');
+    const entryOrder = side === OrderSide.Buy ? maxBy(orders, 'price') : minBy(orders, 'price');
 
     if (entryOrder) {
       entryOrder.price = bestPrice;
@@ -206,18 +192,14 @@ export const aioTradeAtom = atom((get) => {
   }
 
   const estimatedLoss = stop ? (price - pFloat(stop)) * totalQuantity : 0;
-  const estimatedProfit = takeProfit
-    ? (pFloat(takeProfit) - price) * totalQuantity
-    : 0;
+  const estimatedProfit = takeProfit ? (pFloat(takeProfit) - price) * totalQuantity : 0;
 
   const isValidStop =
-    (side === OrderSide.Buy ? price > pFloat(stop) : price < pFloat(stop)) ||
-    !stop;
+    (side === OrderSide.Buy ? price > pFloat(stop) : price < pFloat(stop)) || !stop;
 
   const isValidTakeProfit =
-    (side === OrderSide.Buy
-      ? price < pFloat(takeProfit)
-      : price > pFloat(takeProfit)) || !takeProfit;
+    (side === OrderSide.Buy ? price < pFloat(takeProfit) : price > pFloat(takeProfit)) ||
+    !takeProfit;
 
   const isValid = isValidStop && isValidTakeProfit;
 
@@ -231,13 +213,9 @@ export const aioTradeAtom = atom((get) => {
     orderType,
     orderSubType,
     totalQuantity: isValid ? totalQuantity : 0,
-    estimatedLoss:
-      (isValid && (side === OrderSide.Sell ? estimatedLoss : -estimatedLoss)) ||
-      0,
+    estimatedLoss: (isValid && (side === OrderSide.Sell ? estimatedLoss : -estimatedLoss)) || 0,
     estimatedProfit:
-      (isValid &&
-        (side === OrderSide.Buy ? estimatedProfit : -estimatedProfit)) ||
-      0,
+      (isValid && (side === OrderSide.Buy ? estimatedProfit : -estimatedProfit)) || 0,
   };
 });
 
@@ -252,7 +230,7 @@ export const useAIOTrade = () => {
     if (opts.orders.length > 0 && connector) {
       const totalSize = opts.orders.reduce(
         (acc, order) => acc + (order.price ?? 0) * order.amount,
-        0
+        0,
       );
 
       if (fatFinger && totalSize > fatFinger) {

@@ -8,8 +8,8 @@ export const NewsSettingsTreenewsApiComponent = () => {
 
   return (
     <>
-      <div className="font-bold text-lg">TreeNews API Key</div>
-      <p className="text-dark-text-gray text-sm py-2">
+      <div className="text-lg font-bold">TreeNews API Key</div>
+      <p className="text-dark-text-gray py-2 text-sm">
         This is for paid subscribers of TreeNews.
         <br />
         Get your API key here:{' '}

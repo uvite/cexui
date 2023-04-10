@@ -1,7 +1,7 @@
 import { useJitsu } from '@jitsu/nextjs';
 import { useAtomValue, useSetAtom } from 'jotai';
 
-import { crypt } from '../utils/crypt.utils';
+import { crypt } from '../utils/crypt';
 
 import { selectedAccountAtom } from './use-accounts.hooks';
 import { logsAtom } from './use-logs.hooks';
@@ -63,10 +63,7 @@ type Track = {
   (evt: EventName.CancelOrder, props: CancelOrderEvent): void;
   (evt: EventName.UpdateLeverage, props: UpdateLeverageEvent): void;
   (evt: EventName.UpdateAllLeverage, props: UpdateAllLeverageEvent): void;
-  (
-    evt: EventName.AddExchangeAccountError,
-    props: AddExchangeAccountErrorEvent
-  ): void;
+  (evt: EventName.AddExchangeAccountError, props: AddExchangeAccountErrorEvent): void;
   (
     evt:
       | EventName.CancelAllOrders
@@ -74,7 +71,7 @@ type Track = {
       | EventName.RemoveExchangeAccount
       | EventName.SignOut
       | EventName.SwitchAccount,
-    props: undefined
+    props: undefined,
   ): void;
 };
 
@@ -98,9 +95,7 @@ export const useAnalytics = () => {
       // we want to filter those from orders volume and trades count
       // as they are really less significant that the real ones
       eventPropsWithStage.testnet = account?.testnet;
-      eventPropsWithStage.order = crypt(
-        JSON.stringify(eventPropsWithStage.order)
-      );
+      eventPropsWithStage.order = crypt(JSON.stringify(eventPropsWithStage.order));
     }
 
     if (process.env.STAGE !== 'dev') {
@@ -116,7 +111,7 @@ export const useAnalytics = () => {
         `[ANALYTICS] ${JSON.stringify({
           eventName,
           eventProps: eventPropsWithStage,
-        })}`
+        })}`,
       );
     }
   };

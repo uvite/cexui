@@ -12,28 +12,25 @@ export const ChaseRowComponent = ({ chase }: { chase: ChaseManager }) => {
   const privacy = useAtomValue(privacyAtom);
 
   return (
-    <div className="flex items-center h-[20px] mb-1.5 last:mb-0">
+    <div className="mb-1.5 flex h-[20px] items-center last:mb-0">
       <div
         className={cx('h-full w-[4px]', {
           'bg-red-500': chase.opts.side === OrderSide.Sell,
           'bg-dark-green': chase.opts.side === OrderSide.Buy,
         })}
       />
-      <div className="font-bold ml-2 flex items-center">
+      <div className="ml-2 flex items-center font-bold">
         <span>{chase.opts.symbol.replace(tickerRegex, '')}</span>
-        {chase.opts.stalk && <span className="text-xs ml-1">[STALK]</span>}
+        {chase.opts.stalk && <span className="ml-1 text-xs">[STALK]</span>}
         {chase.opts.max === Infinity && !chase.opts.stalk && (
-          <span className="text-xs ml-1">[INFINITE]</span>
+          <span className="ml-1 text-xs">[INFINITE]</span>
         )}
       </div>
-      <div className="flex-1 text-center font-mono font-bold animate-pulse">
+      <div className="flex-1 animate-pulse text-center font-mono font-bold">
         {privacy ? '*****' : `${chase.opts.size} @ $${chase.price}`}
       </div>
       <div className="ml-auto">
-        <span
-          className="text-red-500 cursor-pointer"
-          onClick={() => chase.stop()}
-        >
+        <span className="cursor-pointer text-red-500" onClick={() => chase.stop()}>
           <FaTimes />
         </span>
       </div>

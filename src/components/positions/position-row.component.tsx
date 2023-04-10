@@ -15,6 +15,7 @@ import { toUSD } from '../../utils/to-usd.utils';
 import { getTokenURL } from '../../utils/token-image.utils';
 import { PositionsActionsComponent } from '../positions-actions.component';
 
+// eslint-disable-next-line react/display-name
 export const PositionRowComponent = memo(({ position }: { position: Position }) => {
   const selectedSymbol = useAtomValue(selectedSymbolAtom);
   const setSize = useSetAtom(tradeSizeAtom);

@@ -17,9 +17,9 @@ export const DebugComponent = () => {
   };
 
   return (
-    <div className="px-6 py-4 mb-4 min-h-[300px]">
-      <div className="font-bold text-lg">Debug informations</div>
-      <p className="text-dark-text-gray text-sm py-4">
+    <div className="mb-4 min-h-[300px] px-6 py-4">
+      <div className="text-lg font-bold">Debug informations</div>
+      <p className="text-dark-text-gray py-4 text-sm">
         Only share these debug informations to @iam4x if asked to do so.
       </p>
       <ButtonComponent onClick={onClick}>Download `debug.json`</ButtonComponent>

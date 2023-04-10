@@ -24,13 +24,13 @@ export const ToggleInputComponent = ({
         type="button"
         disabled={disabled}
         className={cx(
-          'flex items-center justify-center font-bold uppercase border-2 rounded-md transition-opacity px-2 bg-slate-500/50 border-slate-500 w-full',
+          'flex w-full items-center justify-center rounded-md border-2 border-slate-500 bg-slate-500/50 px-2 font-bold uppercase transition-opacity',
           {
             'opacity-100': value,
             'opacity-30': !value,
             'cursor-pointer': !disabled,
             'cursor-not-allowed': disabled,
-          }
+          },
         )}
         onClick={() => onChange(!value)}
       >
@@ -41,7 +41,7 @@ export const ToggleInputComponent = ({
 
   return (
     <div
-      className={cx('grid grid-cols-2 gap-2 w-full', {
+      className={cx('grid w-full grid-cols-2 gap-2', {
         'opacity-30': disabled,
       })}
     >
@@ -49,11 +49,11 @@ export const ToggleInputComponent = ({
         type="button"
         disabled={disabled}
         className={cx(
-          'flex items-center justify-center font-bold uppercase border-2 rounded-md hover:opacity-100 transition-opacity cursor-pointer px-2 bg-slate-500/50 border-slate-500',
+          'flex cursor-pointer items-center justify-center rounded-md border-2 border-slate-500 bg-slate-500/50 px-2 font-bold uppercase transition-opacity hover:opacity-100',
           {
             'opacity-100': value,
             'opacity-30': !value,
-          }
+          },
         )}
         onClick={() => onChange(true)}
       >
@@ -63,11 +63,11 @@ export const ToggleInputComponent = ({
         type="button"
         disabled={disabled}
         className={cx(
-          'flex items-center justify-center font-bold uppercase border-2 rounded-md hover:opacity-100 transition-opacity cursor-pointer px-2 bg-slate-500/50 border-slate-500',
+          'flex cursor-pointer items-center justify-center rounded-md border-2 border-slate-500 bg-slate-500/50 px-2 font-bold uppercase transition-opacity hover:opacity-100',
           {
             'opacity-100': !value,
             'opacity-30': value,
-          }
+          },
         )}
         onClick={() => onChange(false)}
       >

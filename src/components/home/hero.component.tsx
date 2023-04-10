@@ -54,10 +54,7 @@ export const HomeHeroComponent = () => {
     scramble: 2,
     seed: 2,
     onAnimationEnd: () => {
-      timeoutId.current = setTimeout(
-        () => setIdx((idx + 1) % tagLines.length),
-        5000
-      );
+      timeoutId.current = setTimeout(() => setIdx((idx + 1) % tagLines.length), 5000);
     },
   });
 
@@ -70,77 +67,60 @@ export const HomeHeroComponent = () => {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto mt-12 sm:mt-24 px-8">
+    <div className="mx-auto mt-12 max-w-7xl px-8 sm:mt-24">
       <div className="flex items-center">
-        <div className="max-w-[650px] mx-auto lg:mx-0 sm:shrink-0">
+        <div className="mx-auto max-w-[650px] sm:shrink-0 lg:mx-0">
           <h1
-            className="text-2xl sm:text-4xl font-black h-[96px] sm:h-[80px] tracking-wider overflow-hidden"
+            className="h-[96px] overflow-hidden text-2xl font-black tracking-wider sm:h-[80px] sm:text-4xl"
             ref={ref}
           >
             {tagLines[0]}
           </h1>
-          <p className="mt-8 mb-12 text-sm sm:text-base tracking-wide leading-relaxed">
-            Our trading terminal is your gateway to success in the fast-paced
-            world of cryptocurrency news trading, with innovative tools and
-            features to help you stay ahead of the curve.
+          <p className="mb-12 mt-8 text-sm leading-relaxed tracking-wide sm:text-base">
+            Our trading terminal is your gateway to success in the fast-paced world of
+            cryptocurrency news trading, with innovative tools and features to help you stay ahead
+            of the curve.
           </p>
-          <div className="grid sm:grid-cols-2 gap-y-8">
+          <div className="grid gap-y-8 sm:grid-cols-2">
             {features.map((feature) => (
               <div key={feature.title} className="flex items-center">
                 <feature.Icon className="text-4xl" />
                 <div className="ml-4">
                   <div className="font-semibold">{feature.title}</div>
-                  <div className="text-sm text-dark-text-gray">
-                    {feature.description}
-                  </div>
+                  <div className="text-dark-text-gray text-sm">{feature.description}</div>
                 </div>
               </div>
             ))}
           </div>
         </div>
         <div className="ml-auto hidden lg:block">
-          <Image
-            alt="tuleep.trade preview"
-            src="/mac.png"
-            width={630}
-            height={399}
-          />
+          <Image alt="tuleep.trade preview" src="/mac.png" width={630} height={399} />
         </div>
       </div>
       <div className="mt-12 sm:mt-16">
-        <div className="text-dark-text-white font-bold font-mono uppercase tracking-widest text-sm">
+        <div className="text-dark-text-white font-mono text-sm font-bold uppercase tracking-widest">
           # Suported exchanges
         </div>
-        <div className="flex items-center mt-4">
+        <div className="mt-4 flex items-center">
           <a
             href={exchangesRef.binance.link}
             className="relative left-[-6px] top-[3px] mr-4 opacity-70 transition-opacity hover:opacity-100"
             target="_blank"
             rel="noreferrer"
           >
-            <Image
-              alt="binance"
-              src="/binance.png"
-              width={996 / 5}
-              height={217 / 5}
-            />
+            <Image alt="binance" src="/binance.png" width={996 / 5} height={217 / 5} />
           </a>
           <a
             href={exchangesRef.bybit.link}
-            className="opacity-70 transition-opacity mr-5 hover:opacity-100"
+            className="mr-5 opacity-70 transition-opacity hover:opacity-100"
             target="_blank"
             rel="noreferrer"
           >
-            <Image
-              alt="bybit"
-              src="/bybit.png"
-              width={2091 / 20}
-              height={776 / 20}
-            />
+            <Image alt="bybit" src="/bybit.png" width={2091 / 20} height={776 / 20} />
           </a>
           <a
             href={exchangesRef.woo.link}
-            className="relative opacity-70 top-[3px] transition-opacity hover:opacity-100"
+            className="relative top-[3px] opacity-70 transition-opacity hover:opacity-100"
             target="_blank"
             rel="noreferrer"
           >

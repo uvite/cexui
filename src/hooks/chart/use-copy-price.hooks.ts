@@ -10,10 +10,7 @@ import {
   tradeTakeProfitAtom,
 } from '../../atoms/trade.atoms';
 import { floorStep } from '../../utils/floor-step.utils';
-import {
-  scaleFromAtom,
-  scaleToAtom,
-} from '../trade/use-scale-size-trade.hooks';
+import { scaleFromAtom, scaleToAtom } from '../trade/use-scale-size-trade.hooks';
 import { simpleTradeEntryAtom } from '../trade/use-simple-orders-trade.hooks';
 
 import type { CandleSeries, LightweightChart } from './chart.types';

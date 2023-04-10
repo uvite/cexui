@@ -30,10 +30,7 @@ export const TwapRowComponent = ({
   const market = markets.find((m) => m.symbol === twap.symbol);
 
   const remainingTime = dayjs(twap.nextOrderAt).diff(dayjs(), 'milliseconds');
-  const executedSize = floorStep(
-    twap.sizeExecuted,
-    market?.precision?.amount ?? 0
-  );
+  const executedSize = floorStep(twap.sizeExecuted, market?.precision?.amount ?? 0);
 
   const decimalsCount = afterDecimal(market?.precision?.price || 0);
 
@@ -45,22 +42,18 @@ export const TwapRowComponent = ({
   }
 
   return (
-    <div className="flex items-center h-[20px] mb-1.5 last:mb-0">
+    <div className="mb-1.5 flex h-[20px] items-center last:mb-0">
       <div
         className={cx('h-full w-[4px]', {
           'bg-red-500': twap.side === OrderSide.Sell,
           'bg-dark-green': twap.side === OrderSide.Buy,
         })}
       />
-      <div className="font-bold ml-2">
-        {twap.symbol.replace(tickerRegex, '')}
+      <div className="ml-2 font-bold">{twap.symbol.replace(tickerRegex, '')}</div>
+      <div className="flex-1 text-center font-mono text-xs font-bold">
+        {privacy ? '*****' : `${executedSize}/${twap.size.toFixed(decimalsCount)}`}
       </div>
-      <div className="font-mono font-bold text-xs flex-1 text-center">
-        {privacy
-          ? '*****'
-          : `${executedSize}/${twap.size.toFixed(decimalsCount)}`}
-      </div>
-      <div className="flex items-center ml-auto">
+      <div className="ml-auto flex items-center">
         <div className="font-mono text-xs">
           {privacy ? '*****' : `${twap.lotsExecuted}/${twap.lotsCount}`}
         </div>
@@ -69,27 +62,18 @@ export const TwapRowComponent = ({
             ({dayjs.duration(remainingTime, 'milliseconds').format(format)})
           </div>
         )}
-        <div className="text-lg flex items-center ml-3">
+        <div className="ml-3 flex items-center text-lg">
           {twap.status === TWAPStatus.Running && (
-            <span
-              className="text-yellow-500 cursor-pointer"
-              onClick={() => pause(twap.id)}
-            >
+            <span className="cursor-pointer text-yellow-500" onClick={() => pause(twap.id)}>
               <BiPause />
             </span>
           )}
           {twap.status === TWAPStatus.Paused && (
-            <span
-              className="text-dark-green cursor-pointer"
-              onClick={() => resume(twap.id)}
-            >
+            <span className="text-dark-green cursor-pointer" onClick={() => resume(twap.id)}>
               <BiPlay />
             </span>
           )}
-          <span
-            className="text-red-500 cursor-pointer"
-            onClick={() => stop(twap.id)}
-          >
+          <span className="cursor-pointer text-red-500" onClick={() => stop(twap.id)}>
             <BiStop />
           </span>
         </div>

@@ -105,9 +105,7 @@ export const useScaledInRiskTrade = () => {
   const placeOrders = usePlaceOrders();
 
   const symbol = useAtomValue(selectedSymbolAtom);
-  const { orders, side, totalQty, avgPrice } = useAtomValue(
-    scaledInRiskTradeAtom
-  );
+  const { orders, side, totalQty, avgPrice } = useAtomValue(scaledInRiskTradeAtom);
 
   const scaleIn = async () => {
     const orderIds = await placeOrders(
@@ -119,7 +117,7 @@ export const useScaledInRiskTrade = () => {
         type: OrderType.Limit,
         takeProfit: order.takeProfit,
         stopLoss: order.stopLoss,
-      }))
+      })),
     );
 
     if (orderIds.length) {

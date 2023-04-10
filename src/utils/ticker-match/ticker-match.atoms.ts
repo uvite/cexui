@@ -14,7 +14,7 @@ export type TickersWordsCommon = string[];
 export const tickersWordsMappingAtom = atom<TickersWordsMapping>({});
 export const tickersWordsCommonAtom = atom<TickersWordsCommon>([]);
 export const customTickerWordsMappingAtom = focusAtom(appSettingsAtom, (o) =>
-  o.prop('news').prop('customTickerWordsMapping')
+  o.prop('news').prop('customTickerWordsMapping'),
 );
 
 export const allTickerWordsMappingAtom = atom((get) => {
@@ -30,6 +30,6 @@ export const matchTickersAtom = atom((get) => {
 
   return memoize(
     matchTickers({ tickersWordsMapping, tickersWordsCommon, tickers }),
-    (message: News) => ('body' in message ? message.body : message.title)
+    (message: News) => ('body' in message ? message.body : message.title),
   );
 });

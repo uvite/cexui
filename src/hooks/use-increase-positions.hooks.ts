@@ -15,13 +15,7 @@ export const useIncreasePositions = () => {
   const tickers = useAtomValue(tickersAtom);
 
   const increasePositions = useCallback(
-    async ({
-      positions,
-      factor = 1,
-    }: {
-      positions: Position[];
-      factor?: number;
-    }) => {
+    async ({ positions, factor = 1 }: { positions: Position[]; factor?: number }) => {
       const ordersAndTrackEvents = positions.map((position) => {
         const ticker = tickers.find((t) => t.symbol === position.symbol);
 
@@ -55,9 +49,7 @@ export const useIncreasePositions = () => {
         return { event, order };
       });
 
-      const orderIds = await placeOrders(
-        ordersAndTrackEvents.map((o) => o.order)
-      );
+      const orderIds = await placeOrders(ordersAndTrackEvents.map((o) => o.order));
 
       if (orderIds.length > 0) {
         ordersAndTrackEvents.forEach(({ event }) => {
@@ -65,7 +57,7 @@ export const useIncreasePositions = () => {
         });
       }
     },
-    [placeOrders, tickers, track]
+    [placeOrders, tickers, track],
   );
 
   return increasePositions;

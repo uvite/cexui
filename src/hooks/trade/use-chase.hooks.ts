@@ -3,22 +3,14 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useContext, useEffect, useRef } from 'react';
 import type { Exchange } from 'safe-cex/dist/exchanges/base';
 import type { Order, Position, Store } from 'safe-cex/dist/types';
-import {
-  OrderTimeInForce,
-  OrderType,
-  OrderSide,
-  PositionSide,
-} from 'safe-cex/dist/types';
+import { OrderTimeInForce, OrderType, OrderSide, PositionSide } from 'safe-cex/dist/types';
 import { v4 } from 'uuid';
 
 import { TradeComponentType } from '../../app.types';
 import { fatFingerValueAtom, selectedTradeAtom } from '../../atoms/trade.atoms';
 import { fatFingerError } from '../../utils/errors.utils';
 import { floorStep } from '../../utils/floor-step.utils';
-import {
-  addPreventClosePage,
-  removePreventClosePage,
-} from '../../utils/prevent-close.utils';
+import { addPreventClosePage, removePreventClosePage } from '../../utils/prevent-close.utils';
 import { tickerRegex } from '../../utils/ticker-match/ticker-match.utils';
 import { selectedAccountAtom } from '../use-accounts.hooks';
 import { EventName, useAnalytics } from '../use-analytics.hooks';
@@ -55,12 +47,7 @@ export class ChaseManager {
 
   minTicksDistance = 1;
 
-  constructor(
-    id: string,
-    opts: ChaseOpts,
-    exchange: Exchange,
-    fatFinger: number
-  ) {
+  constructor(id: string, opts: ChaseOpts, exchange: Exchange, fatFinger: number) {
     this.id = id;
     this.opts = opts;
     this.exchange = exchange;
@@ -68,13 +55,9 @@ export class ChaseManager {
   }
 
   get price() {
-    const market = this.exchange.store.markets.find(
-      (m) => m.symbol === this.opts.symbol
-    );
+    const market = this.exchange.store.markets.find((m) => m.symbol === this.opts.symbol);
 
-    const ticker = this.exchange.store.tickers.find(
-      (t) => t.symbol === this.opts.symbol
-    );
+    const ticker = this.exchange.store.tickers.find((t) => t.symbol === this.opts.symbol);
 
     if (!ticker || !market) {
       throw new Error(`No ticker/market found for ${this.opts.symbol}`);
@@ -88,17 +71,15 @@ export class ChaseManager {
         this.opts.side === OrderSide.Buy
           ? sidePrice - pPrice * this.minTicksDistance
           : sidePrice + pPrice * this.minTicksDistance,
-        pPrice
+        pPrice,
       );
     }
 
     const distanceInUsd = (sidePrice * this.opts.distance) / 100;
 
     return floorStep(
-      this.opts.side === OrderSide.Sell
-        ? sidePrice + distanceInUsd
-        : sidePrice - distanceInUsd,
-      pPrice
+      this.opts.side === OrderSide.Sell ? sidePrice + distanceInUsd : sidePrice - distanceInUsd,
+      pPrice,
     );
   }
 
@@ -142,9 +123,7 @@ export class ChaseManager {
   };
 
   onExchangeStoreUpdate = (update: Store) => {
-    const orders = update.orders.filter((o) =>
-      this.watchedOrderIds.includes(o.id)
-    );
+    const orders = update.orders.filter((o) => this.watchedOrderIds.includes(o.id));
 
     if (orders.length) {
       this.adjustOrders(orders);
@@ -188,9 +167,7 @@ export class ChaseManager {
 
   stop = () => {
     this.exchange.cancelOrders(
-      this.exchange.store.orders.filter((o) =>
-        this.watchedOrderIds.includes(o.id)
-      )
+      this.exchange.store.orders.filter((o) => this.watchedOrderIds.includes(o.id)),
     );
     this.handleChaseFinished();
   };
@@ -228,9 +205,10 @@ export const useChaseTrade = () => {
         addPreventClosePage();
 
         log(
-          `[USER] Start CHASE ${opts.side.toUpperCase()} ${
-            opts.size
-          } ${opts.symbol.replace(tickerRegex, '')}`
+          `[USER] Start CHASE ${opts.side.toUpperCase()} ${opts.size} ${opts.symbol.replace(
+            tickerRegex,
+            '',
+          )}`,
         );
 
         track(EventName.Trade, {
@@ -281,13 +259,7 @@ export const useChasePositions = () => {
   const { startChase } = useChaseTrade();
   const setSelectedTrade = useSetAtom(selectedTradeAtom);
 
-  const chasePosition = async ({
-    position,
-    factor,
-  }: {
-    position: Position;
-    factor: number;
-  }) => {
+  const chasePosition = async ({ position, factor }: { position: Position; factor: number }) => {
     const reduceOnly = factor < 0;
     const side = reduceOnly ? rSide[position.side] : iSide[position.side];
 

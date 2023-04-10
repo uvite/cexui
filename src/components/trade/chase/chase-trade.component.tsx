@@ -74,46 +74,46 @@ export const ChaseTradeComponent = () => {
   };
 
   return (
-    <div className="px-2 py-3 text-sm h-full">
+    <div className="h-full px-2 py-3 text-sm">
       {chases.length === 0 && (
-        <p className="text-blue-500 border-2 border-blue-500 rounded-md p-1.5 bg-blue-500/10 font-bold mb-3">
-          You need to keep this tab open and connected to this account, but you
-          can change tickers and continue trading as usual.
+        <p className="mb-3 rounded-md border-2 border-blue-500 bg-blue-500/10 p-1.5 font-bold text-blue-500">
+          You need to keep this tab open and connected to this account, but you can change tickers
+          and continue trading as usual.
         </p>
       )}
       {chases.length > 0 && (
-        <div className="mb-3 border-2 border-dark-bg rounded-md p-1.5 bg-dark-bg/20">
+        <div className="border-dark-bg bg-dark-bg/20 mb-3 rounded-md border-2 p-1.5">
           {chases.map(({ id, chase }) => (
             <ChaseRowComponent key={id} chase={chase} />
           ))}
         </div>
       )}
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">Quantity</div>
-        <div className="flex flex-1 w-3/4">
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Quantity</div>
+        <div className="flex w-3/4 flex-1">
           <input
             type="text"
             value={size}
-            className="text-right w-full bg-dark-bg font-semibold font-mono"
+            className="bg-dark-bg w-full text-right font-mono font-semibold"
             onChange={(e) => handleChangeSize(e.target.value)}
           />
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">Size in USD</div>
-        <div className="flex flex-1 w-3/4">
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Size in USD</div>
+        <div className="flex w-3/4 flex-1">
           <input
             type="text"
             value={sizeUSD}
-            className="text-right w-full bg-dark-bg font-semibold font-mono"
+            className="bg-dark-bg w-full text-right font-mono font-semibold"
             onChange={(e) => handleChangeSizeUSD(e.target.value)}
           />
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4">Side</div>
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold">Side</div>
         <div className="flex w-3/4">
-          <div className="w-1/2 mr-1">
+          <div className="mr-1 w-1/2">
             <OrderSideButton
               className="w-full"
               side={OrderSide.Buy}
@@ -121,7 +121,7 @@ export const ChaseTradeComponent = () => {
               onClick={() => setSide(OrderSide.Buy)}
             />
           </div>
-          <div className="w-1/2 ml-1">
+          <div className="ml-1 w-1/2">
             <OrderSideButton
               className="w-full"
               side={OrderSide.Sell}
@@ -131,8 +131,8 @@ export const ChaseTradeComponent = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4" />
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold" />
         <div className="flex w-3/4">
           <ToggleInputComponent
             label="REDUCE ONLY"
@@ -142,8 +142,8 @@ export const ChaseTradeComponent = () => {
           />
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4" />
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold" />
         <div className="flex w-3/4">
           <ToggleInputComponent
             label="INFINITE CHASE"
@@ -153,8 +153,8 @@ export const ChaseTradeComponent = () => {
           />
         </div>
       </div>
-      <div className="flex items-center mb-2">
-        <div className="mr-4 text-right font-bold w-1/4" />
+      <div className="mb-2 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold" />
         <div className="flex w-3/4">
           <ToggleInputComponent
             label="STALK MODE"
@@ -164,16 +164,16 @@ export const ChaseTradeComponent = () => {
           />
         </div>
       </div>
-      <div className="flex items-center mb-2">
+      <div className="mb-2 flex items-center">
         <div
-          className={cx('mr-4 text-right font-bold w-1/4', {
+          className={cx('mr-4 w-1/4 text-right font-bold', {
             'opacity-20': infinite,
           })}
         >
           {stalk ? `Stalk distance` : `Distance limit`}
         </div>
         <div
-          className={cx('flex flex-1 w-3/4', {
+          className={cx('flex w-3/4 flex-1', {
             'opacity-20': infinite,
           })}
         >
@@ -184,46 +184,36 @@ export const ChaseTradeComponent = () => {
             values={[limit]}
             disabled={infinite}
             renderTrack={({ props, children }) => (
-              <div
-                {...props}
-                className="bg-dark-border-gray-2 w-full h-[3px] rounded-lg"
-              >
+              <div {...props} className="bg-dark-border-gray-2 h-[3px] w-full rounded-lg">
                 {children}
               </div>
             )}
             renderThumb={({ props }) => (
-              <div
-                {...props}
-                className="bg-dark-border-gray-2 w-4 h-4 rounded-full"
-              />
+              <div {...props} className="bg-dark-border-gray-2 h-4 w-4 rounded-full" />
             )}
             onChange={(values) => setLimit(values[0])}
           />
         </div>
-        <div className="ml-4 w-[60px] font-mono text-xs text-dark-text-gray text-center border border-dark-border-gray">
+        <div className="text-dark-text-gray border-dark-border-gray ml-4 w-[60px] border text-center font-mono text-xs">
           {infinite ? `∞` : `${limit}%`}
         </div>
       </div>
-      <div className="flex items-center my-4">
-        <div className="mr-4 text-right font-bold w-1/4" />
-        <div className="flex-1 w-3/4 pr-1 text-dark-text-gray">
+      <div className="my-4 flex items-center">
+        <div className="mr-4 w-1/4 text-right font-bold" />
+        <div className="text-dark-text-gray w-3/4 flex-1 pr-1">
           <div className="flex items-center">
             <div className="font-semibold">Min price</div>
-            <div className="ml-auto font-mono text-xs">
-              {infinite || stalk ? `∞` : `$${min}`}
-            </div>
+            <div className="ml-auto font-mono text-xs">{infinite || stalk ? `∞` : `$${min}`}</div>
           </div>
           <div className="flex items-center">
             <div className="font-semibold">Max price</div>
-            <div className="ml-auto font-mono text-xs">
-              {infinite || stalk ? `∞` : `$${max}`}
-            </div>
+            <div className="ml-auto font-mono text-xs">{infinite || stalk ? `∞` : `$${max}`}</div>
           </div>
         </div>
       </div>
-      <div className="flex mt-2 w-full">
+      <div className="mt-2 flex w-full">
         <ButtonComponent
-          className="w-full bg-dark-bg flex items-center justify-center uppercase rounded-md"
+          className="bg-dark-bg flex w-full items-center justify-center rounded-md uppercase"
           size="small"
           disabled={disabled}
           loading={loading}
@@ -231,7 +221,7 @@ export const ChaseTradeComponent = () => {
         >
           CHASE {side}
           {pFloat(size) > 0 && (
-            <span className="font-mono text-xs ml-1">
+            <span className="ml-1 font-mono text-xs">
               ({size} {symbol?.replace(tickerRegex, '')})
             </span>
           )}

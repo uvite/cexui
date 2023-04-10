@@ -40,67 +40,58 @@ export const SubscribeModalComponent = ({
 }) => {
   return (
     <Modal isOpen={isOpen} style={modalStyles} onRequestClose={onRequestClose}>
-      <div className="w-[80vw] max-w-[800px] bg-dark-bg px-8 py-6">
-        <h1 className="text-center text-3xl font-bold mb-8">
-          Subscribe to news trading
-        </h1>
+      <div className="bg-dark-bg w-[80vw] max-w-[800px] px-8 py-6">
+        <h1 className="mb-8 text-center text-3xl font-bold">Subscribe to news trading</h1>
         <p className="text-left">
-          News trading is a type of strategy used by financial traders who try
-          to capitalize on market movements caused by events or news releases.
+          News trading is a type of strategy used by financial traders who try to capitalize on
+          market movements caused by events or news releases.
           <br />
           <br />
-          The goal of news trading is to take advantage of short-term price
-          movements that can occur in response to news events.
+          The goal of news trading is to take advantage of short-term price movements that can occur
+          in response to news events.
           <br />
           <br />
-          We are tracking in real-time, identifying the correspondant ticker,
-          and re-distributing the news directly into the terminal.
+          We are tracking in real-time, identifying the correspondant ticker, and re-distributing
+          the news directly into the terminal.
         </p>
         <ul className="my-6 pl-4">
           {included.map((item) => (
             <li key={item} className="flex items-center">
               <TiTick className="text-dark-green text-xl" />
-              <span className="font-semibold ml-2 text-lg">{item}</span>
+              <span className="ml-2 text-lg font-semibold">{item}</span>
             </li>
           ))}
         </ul>
         <div className="flex">
-          <div className="border border-dark-border-gray rounded-md bg-dark-bg-2 w-1/3 py-3 px-2 mr-1">
+          <div className="border-dark-border-gray bg-dark-bg-2 mr-1 w-1/3 rounded-md border px-2 py-3">
             <h2 className="text-xl font-bold">Trial</h2>
             <p className="text-dark-text-gray">Start a 7-Day trial</p>
-            <div className="text-center mt-6">
-              <ButtonComponent className="rounded-md bg-dark-bg">
+            <div className="mt-6 text-center">
+              <ButtonComponent className="bg-dark-bg rounded-md">
                 Get started for $9
               </ButtonComponent>
             </div>
           </div>
-          <div className="border border-dark-border-gray rounded-md bg-dark-bg-2 w-1/3 py-3 px-2 mx-1">
+          <div className="border-dark-border-gray bg-dark-bg-2 mx-1 w-1/3 rounded-md border px-2 py-3">
             <h2 className="text-xl font-bold">Monthly</h2>
             <p className="text-dark-text-gray">Pay as you go</p>
-            <div className="text-center mt-6">
-              <ButtonComponent className="rounded-md bg-dark-bg">
-                Subscribe for $49
-              </ButtonComponent>
+            <div className="mt-6 text-center">
+              <ButtonComponent className="bg-dark-bg rounded-md">Subscribe for $49</ButtonComponent>
             </div>
           </div>
-          <div className="border border-dark-border-gray rounded-md bg-dark-bg-2 w-1/3 py-3 px-2 ml-1">
+          <div className="border-dark-border-gray bg-dark-bg-2 ml-1 w-1/3 rounded-md border px-2 py-3">
             <h2 className="text-xl font-bold">
               Founder
-              <span className="text-xs relative ml-2 -top-0.5">(limited)</span>
+              <span className="relative -top-0.5 ml-2 text-xs">(limited)</span>
             </h2>
             <p className="text-dark-text-gray">Everything included forever</p>
-            <div className="text-center mt-6">
-              <ButtonComponent className="rounded-md bg-dark-bg">
-                One time $499
-              </ButtonComponent>
+            <div className="mt-6 text-center">
+              <ButtonComponent className="bg-dark-bg rounded-md">One time $499</ButtonComponent>
             </div>
           </div>
         </div>
-        <div className="text-center mt-4">
-          <span
-            className="text-dark-text-gray underline cursor-pointer"
-            onClick={onRequestClose}
-          >
+        <div className="mt-4 text-center">
+          <span className="text-dark-text-gray cursor-pointer underline" onClick={onRequestClose}>
             Maybe later
           </span>
         </div>

@@ -7,10 +7,7 @@ import { v4 } from 'uuid';
 import { setMessageHistoryAtom } from '../../atoms/app.atoms';
 import { formatNews } from '../../utils/format-news.utils';
 import { matchTickersAtom } from '../../utils/ticker-match/ticker-match.atoms';
-import {
-  newsBlocklistAtom,
-  treeNewsKeyAtom,
-} from '../trade/use-news-trade.hooks';
+import { newsBlocklistAtom, treeNewsKeyAtom } from '../trade/use-news-trade.hooks';
 import { selectedAccountAtom } from '../use-accounts.hooks';
 import { logsAtom, LogSeverity } from '../use-logs.hooks';
 import { useSupabase } from '../use-supabase.hooks';
@@ -59,7 +56,7 @@ const useMadnewsHistory = () => {
         setMessageHistory(news);
         setLoaded(true);
       },
-    }
+    },
   );
 
   return loaded;
@@ -70,17 +67,14 @@ const useMadnewsWebsocket = () => {
   const apiKey = useAtomValue(treeNewsKeyAtom);
   const handleMessage = useHandleMessage();
 
-  const { lastMessage, sendMessage, readyState } = useWebSocket(
-    `wss://news.treeofalpha.com/ws`,
-    {
-      shouldReconnect: () => true,
-      onMessage: () => log('[TREENEWS] Received new message'),
-      onOpen: () => log('[TREENEWS] Connected to data stream'),
-      onClose: () => {
-        log('[TREENEWS] Disconnected from data stream', LogSeverity.Warning);
-      },
-    }
-  );
+  const { lastMessage, sendMessage, readyState } = useWebSocket(`wss://news.treeofalpha.com/ws`, {
+    shouldReconnect: () => true,
+    onMessage: () => log('[TREENEWS] Received new message'),
+    onOpen: () => log('[TREENEWS] Connected to data stream'),
+    onClose: () => {
+      log('[TREENEWS] Disconnected from data stream', LogSeverity.Warning);
+    },
+  });
 
   useEffect(() => {
     if (readyState === WebSocket.OPEN && apiKey && apiKey.length === 64) {

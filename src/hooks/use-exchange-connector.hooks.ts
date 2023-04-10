@@ -25,7 +25,7 @@ export const useExchangeConnector = () => {
 
   const throtledSetAppState = useMemo(
     () => throttle(setAppState, 100, { trailing: true }),
-    [setAppState]
+    [setAppState],
   );
 
   // THIS IS A REALLY UGLY HACK
@@ -46,7 +46,7 @@ export const useExchangeConnector = () => {
       log(
         `[EXCHANGE] Loading account [${account.name}] on [${account.exchange}${
           account.testnet ? ' testnet' : ''
-        }]`
+        }]`,
       );
 
       _connector = createExchange(account.exchange, {
@@ -67,7 +67,7 @@ export const useExchangeConnector = () => {
         log(
           `[EXCHANGE] ${order.side === OrderSide.Buy ? 'Bought' : 'Sold'} ${
             order.amount
-          } ${order.symbol.replace(/USDT$|BUSD$/, '')} @ ${order.price}`
+          } ${order.symbol.replace(/USDT$|BUSD$/, '')} @ ${order.price}`,
         );
       });
 

@@ -65,9 +65,7 @@ export const useReducePositions = () => {
         return { order, event };
       });
 
-      const orderIds = await placeOrders(
-        ordersAndTrackEvents.map((o) => o.order)
-      );
+      const orderIds = await placeOrders(ordersAndTrackEvents.map((o) => o.order));
 
       if (orderIds.length > 0) {
         ordersAndTrackEvents.forEach(({ event }) => {
@@ -75,7 +73,7 @@ export const useReducePositions = () => {
         });
       }
     },
-    [placeOrders, tickers, track]
+    [placeOrders, tickers, track],
   );
 
   return reducePositions;

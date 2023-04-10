@@ -59,47 +59,39 @@ export const ApeButtonsComponent = ({
         },
       },
     ],
-    selected && shortcutsEnabled
+    selected && shortcutsEnabled,
   );
 
   return (
-    <div ref={el} className="flex items-center mt-1 select-none first:mt-0">
+    <div ref={el} className="mt-1 flex select-none items-center first:mt-0">
       <div
         className={cx(
-          'rounded-full overflow-hidden w-[12px] h-[12px] mr-2',
-          lg ? 'block' : 'hidden'
+          'mr-2 h-[12px] w-[12px] overflow-hidden rounded-full',
+          lg ? 'block' : 'hidden',
         )}
       >
-        <img
-          alt={ticker.symbol}
-          height={16}
-          width={16}
-          src={getTokenURL(ticker.symbol)}
-        />
+        <img alt={ticker.symbol} height={16} width={16} src={getTokenURL(ticker.symbol)} />
       </div>
       <div
-        className="flex items-center cursor-pointer w-[30px]"
+        className="flex w-[30px] cursor-pointer items-center"
         onClick={() => setSelected(ticker.symbol)}
       >
-        <div className="font-semibold font-mono text-xs">
+        <div className="font-mono text-xs font-semibold">
           {ticker.symbol.replace(tickerRegex, '')}
         </div>
       </div>
       <div
-        className="flex-1 text-center text-[10px] cursor-pointer"
+        className="flex-1 cursor-pointer text-center text-[10px]"
         onClick={() => setSelected(ticker.symbol)}
       >
         <div className="font-mono font-bold">
-          $
-          {ticker.last.toFixed(
-            afterDecimal(market?.precision?.price || ticker.last)
-          )}
+          ${ticker.last.toFixed(afterDecimal(market?.precision?.price || ticker.last))}
         </div>
         <div>
           <span
             className={cx(
               'font-mono font-semibold',
-              ticker.percentage < 0 ? 'text-red-500' : 'text-dark-green'
+              ticker.percentage < 0 ? 'text-red-500' : 'text-dark-green',
             )}
           >
             {ticker.percentage < 0 ? '-' : '+'}
@@ -107,33 +99,29 @@ export const ApeButtonsComponent = ({
           </span>
         </div>
       </div>
-      <div className="flex items-center ml-auto">
+      <div className="ml-auto flex items-center">
         <div className="mr-4">
-          <span className="font-bold mr-1">$</span>
+          <span className="mr-1 font-bold">$</span>
           <input
-            className="w-[65px] text-xs font-semibold text-right font-mono"
+            className="w-[65px] text-right font-mono text-xs font-semibold"
             type="text"
             value={size}
             onChange={(e) => setSize(e.target.value)}
           />
         </div>
         <OrderSideButton
-          className="mr-2 h-100 text-sm"
+          className="h-100 mr-2 text-sm"
           selected={true}
           side={OrderSide.Buy}
           label={lg ? 'BUY' : 'B'}
-          onClick={() =>
-            apeNews({ side: OrderSide.Buy, symbol: ticker.symbol })
-          }
+          onClick={() => apeNews({ side: OrderSide.Buy, symbol: ticker.symbol })}
         />
         <OrderSideButton
           className="h-100 text-sm"
           selected={true}
           side={OrderSide.Sell}
           label={lg ? 'SELL' : 'S'}
-          onClick={() =>
-            apeNews({ side: OrderSide.Sell, symbol: ticker.symbol })
-          }
+          onClick={() => apeNews({ side: OrderSide.Sell, symbol: ticker.symbol })}
         />
       </div>
     </div>

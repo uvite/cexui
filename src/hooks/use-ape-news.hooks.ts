@@ -62,7 +62,7 @@ export const useApeNews = () => {
     const size = pFloat(
       typeof tickerTradeSizeMap[opts.symbol] === 'undefined'
         ? defaultSize.toString()
-        : tickerTradeSizeMap[opts.symbol]
+        : tickerTradeSizeMap[opts.symbol],
     );
 
     if (size === 0 || Number.isNaN(size)) {
@@ -100,10 +100,7 @@ export const useApeNews = () => {
       });
     }
 
-    if (
-      tradeType === NewsTradeType.Market ||
-      tradeType === NewsTradeType.Limit
-    ) {
+    if (tradeType === NewsTradeType.Market || tradeType === NewsTradeType.Limit) {
       const order: PlaceOrderOpts = {
         symbol: ticker.symbol,
         type: tradeTypeOrderTypeMap[tradeType],
@@ -114,22 +111,15 @@ export const useApeNews = () => {
       if (tradeType === NewsTradeType.Limit && limitSettings.distance !== 0) {
         const priceDistance = (limitSettings.distance * ticker.last) / 100;
         const orderPrice =
-          opts.side === OrderSide.Buy
-            ? ticker.last - priceDistance
-            : ticker.last + priceDistance;
+          opts.side === OrderSide.Buy ? ticker.last - priceDistance : ticker.last + priceDistance;
 
         order.price = orderPrice;
       }
 
-      if (
-        tradeType === NewsTradeType.Market &&
-        marketSettings.maxSlippage > 0
-      ) {
+      if (tradeType === NewsTradeType.Market && marketSettings.maxSlippage > 0) {
         const priceDistance = (marketSettings.maxSlippage * ticker.last) / 100;
         const orderPrice =
-          opts.side === OrderSide.Buy
-            ? ticker.last + priceDistance
-            : ticker.last - priceDistance;
+          opts.side === OrderSide.Buy ? ticker.last + priceDistance : ticker.last - priceDistance;
 
         order.type = OrderType.Limit;
         order.price = orderPrice;
