@@ -90,7 +90,7 @@ export const NavbarComponent = () => {
               )}
               <a
                 className="text-dark-text-gray hover:text-dark-text-white ml-2 cursor-pointer text-3xl transition-colors"
-                href="https://docs.tuleep.trade"
+                href=""
                 target="_blank"
                 rel="noreferrer"
               >

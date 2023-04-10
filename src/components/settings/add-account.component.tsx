@@ -124,16 +124,16 @@ export const AddAccountComponent = ({ onBack }: { onBack: () => void }) => {
           />
         </div>
       </div>
-      <div className="mb-5 text-center">
-        <a
-          className="border-dark-blue bg-dark-blue/30 inline-flex items-center rounded-md border-2 p-2 text-sm font-bold underline underline-offset-4"
-          href={exchangesRef[selectedExchange].help}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <BiInfoCircle className="mr-2 text-2xl" /> How to get your API keys
-        </a>
-      </div>
+      {/*<div className="mb-5 text-center">*/}
+      {/*  <a*/}
+      {/*    className="border-dark-blue bg-dark-blue/30 inline-flex items-center rounded-md border-2 p-2 text-sm font-bold underline underline-offset-4"*/}
+      {/*    href={exchangesRef[selectedExchange].help}*/}
+      {/*    target="_blank"*/}
+      {/*    rel="noreferrer"*/}
+      {/*  >*/}
+      {/*    <BiInfoCircle className="mr-2 text-2xl" /> How to get your API keys*/}
+      {/*  </a>*/}
+      {/*</div>*/}
       <form className="mx-auto w-1/2 font-mono" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-2 w-full text-sm">
           <input
@@ -224,20 +224,20 @@ export const AddAccountComponent = ({ onBack }: { onBack: () => void }) => {
             Connect
           </ButtonComponent>
         </div>
-        <div className="mt-6 text-center">
-          <a
-            className="border-b border-dotted text-sm font-semibold"
-            href={exchangesRef[selectedExchange].link}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Create an account on{' '}
-            <span className="capitalize">{exchangesLabel[selectedExchange]}</span>
-          </a>
-          <div className="text-dark-text-gray mt-2 text-xs">
-            ({exchangesRef[selectedExchange].label})
-          </div>
-        </div>
+        {/*<div className="mt-6 text-center">*/}
+        {/*  <a*/}
+        {/*    className="border-b border-dotted text-sm font-semibold"*/}
+        {/*    href={exchangesRef[selectedExchange].link}*/}
+        {/*    target="_blank"*/}
+        {/*    rel="noreferrer"*/}
+        {/*  >*/}
+        {/*    Create an account on{' '}*/}
+        {/*    <span className="capitalize">{exchangesLabel[selectedExchange]}</span>*/}
+        {/*  </a>*/}
+        {/*  <div className="text-dark-text-gray mt-2 text-xs">*/}
+        {/*    ({exchangesRef[selectedExchange].label})*/}
+        {/*  </div>*/}
+        {/*</div>*/}
       </form>
     </div>
   );

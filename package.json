@@ -18,6 +18,7 @@
   "dependencies": {
     "@apollo/client": "^3.7.3",
     "@apollo/server": "^4.3.0",
+    "@arco-design/web-react": "^2.46.3",
     "@as-integrations/next": "^1.2.0",
     "@bugsnag/js": "^7.20.0",
     "@bugsnag/plugin-aws-lambda": "^7.19.0",
@@ -61,7 +62,6 @@
     "howler": "^2.2.3",
     "jotai": "^2.0.3",
     "jotai-optics": "^0.3.0",
-
     "lodash": "^4.17.21",
     "lodash.orderby": "^4.6.0",
     "mousetrap": "^1.6.5",

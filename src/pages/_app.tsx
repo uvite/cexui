@@ -12,8 +12,11 @@ import { Flip, ToastContainer } from 'react-toastify';
 
 import { seoConfig } from '../seo-config';
 import { startBugSnag } from '../utils/bugsnag';
+import '@arco-design/web-react/dist/css/arco.css';
 
 import '../styles/globals.scss';
+import '../styles/app.css';
+
 import 'react-grid-layout/css/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
 import '@szhsin/react-menu/dist/index.css';

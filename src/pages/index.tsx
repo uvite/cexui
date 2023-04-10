@@ -37,7 +37,7 @@ const IndexPage = ({
         {
           id: v4(),
           timestamp: Date.now(),
-          message: `tuleep.trade v${pkg.version} env:${process.env.STAGE}`,
+          message: `Gvm Bot v${pkg.version} env:${process.env.STAGE}`,
           type: LogSeverity.Info,
         },
       ],
@@ -50,7 +50,7 @@ const IndexPage = ({
         id="https://tuleep.trade"
         description={seoConfig.description}
         lastReviewed="2023-02-28T18:45:00.000Z"
-        reviewedBy={{ name: 'tuleep.trade', type: 'Organization' }}
+        reviewedBy={{ name: 'gvmbot', type: 'Organization' }}
       />
       <AppComponent />
     </>
